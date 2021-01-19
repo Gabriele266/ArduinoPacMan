@@ -28,6 +28,11 @@ public:
     /// Aggiunge un pacchetto alla lista e lo visualizza nel controllo
     void addPackage(Package *pack);
 
+    /// Inizializza il gestore
+    void init();
+
+    /// Determina se il tab selezionato è un pacchetto o qualcos altro
+    bool isCurrentPackage();
 
 private slots:
     void on_surfaceManager_currentChanged(int index);
