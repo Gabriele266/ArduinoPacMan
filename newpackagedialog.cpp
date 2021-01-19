@@ -42,11 +42,13 @@ NewPackageDialog::NewPackageDialog(QWidget *parent) :
     no_chars.append('>');
 
     // Imposto il colore e lo stato di visualizzazione degli elementi per il controllo errori automatico
-    ui->errorLabel->setVisible(true);
+    // Nascondo tutto
+    ui->errorLabel->setVisible(false);
     ui->correctLabel->setVisible(false);
-    ui->pathIncorrect->show();
+    ui->pathIncorrect->hide();
     ui->pathCorrect->hide();
 
+    // Imposto gli stili per le caselle
     ui->errorLabel->setStyleSheet("QLabel {"
                                     "color : red;}");
     ui->correctLabel->setStyleSheet("QLabel {"
@@ -57,14 +59,16 @@ NewPackageDialog::NewPackageDialog(QWidget *parent) :
 
     ui->pathCorrect->setStyleSheet("QLabel {"
                                     "color : green;}");
-    // Inizializzo il controllo giusto
-    ui->errorLabel->setText("Nessun nome inserito. ");
 
     // Ottengo il pulsante per andare avanti
     continue_button = ui->buttonBox->button(QDialogButtonBox::Ok);
 
     // Disabilito il pulsante per andare avanti
     continue_button->setEnabled(false);
+
+    // Avvio la autocorrezione
+    on_packageName_textChanged(ui->packageName->text());
+    on_packagePath_textChanged(ui->packagePath->text());
 }
 
 NewPackageDialog::~NewPackageDialog()

@@ -7,10 +7,16 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    // Rimuovo il secondo tab
-    ui->packageManager->removeTab(1);
 
-    manager.setUiElement(ui->packageManager);
+    // Aggiungo il widget per la gestione dei pacchetti
+    ui->verticalLayout->addWidget(packageManager);
+
+    // Aggiorno le informazioni del titolo
+//    setWindowTitle("ArduinoPacMan");
+}
+
+void MainWindow::updateTitleInfo(){
+
 }
 
 MainWindow::~MainWindow()
@@ -41,6 +47,13 @@ void MainWindow::on_actionNuovo_pacchetto_triggered()
         package->setSavePath(dialog->getPackagePath());
         package->create();
 
-        manager.addPackage(package);
+        // Aggiungo il pacchetto al gestore
+        packageManager->addPackage(package);
     }
+}
+
+void MainWindow::on_packageManager_currentChanged(int index)
+{
+    // Aggiorno il titolo
+    updateTitleInfo();
 }

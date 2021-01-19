@@ -36,6 +36,12 @@ public:
     /// Restituisce il numero di librerie presenti
     int getLibraryCount();
 
+    /// Imposta i tag del pacchetto
+    void setTags(QString tags){tag = tags;}
+
+    /// Restituisce i tag del pacchetto
+    QString getTags() {return tag;}
+
     /// Aggiunge una libreria
     /// \arg lib un puntatore alla libreria da aggiungere
     /// \return true se l'operazione ha avuto successo
@@ -78,6 +84,8 @@ private:
     QList<Library*> libraries;
     // Percorso del file di descrizione del pacchetto
     QString description_path;
+    // Tag del pacchetto
+    QString tag;
 };
 
 #endif // PACKAGE_H

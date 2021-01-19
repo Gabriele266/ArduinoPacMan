@@ -9,6 +9,14 @@ PackageTab::PackageTab(Package *package, QWidget *parent) :
     this->package = package;
 }
 
+void PackageTab::setTags(QString tags){
+    tag = tags;
+}
+
+QString PackageTab::getTags(){
+    return tag;
+}
+
 PackageTab::~PackageTab()
 {
     delete ui;

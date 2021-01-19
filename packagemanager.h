@@ -32,6 +32,21 @@ public:
 
     /// Imposta il gestore dei tab
     void setUiElement(QTabWidget *manager);
+
+    /// Restituisce il numero di pacchetti aperti
+    unsigned int getOpenedPackages();
+
+    /// Restituisce il pacchetto in uso correntemente
+    Package* getCurrentPackage();
+
+    /// Effettua una ricerca tra le schede aperte
+    bool searchTab(QString text);
+
+    /// Restituisce l'indice della scheda home, se esiste
+    unsigned int getHomeIndexIfExists();
+
+    /// Determina se la scheda corrente è la home
+    bool isHomeCurrent();
 private:
     // Gestore dei tab
     QTabWidget *widget_manager;
@@ -41,6 +56,8 @@ private:
 
     // Lista dei pacchetti
     QList<Package* > packages;
+
+    Package *currentPackage;
 };
 
 #endif // PACKAGEMANAGER_H
