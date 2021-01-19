@@ -38,7 +38,6 @@ bool PackageManager::isCurrentPackage(){
         }
         return false;
     }
-
 }
 
 void PackageManager::init(){

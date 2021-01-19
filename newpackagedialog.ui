@@ -97,7 +97,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>/home/gabriele/MEGA/Informatica/Arduino/Progetti/ArduinoPacMan/ArduinoPacMan</string>
+    <string>/home/gabriele/MEGA/Informatica/Arduino/Progetti/ArduinoPacMan/ProveEsecuzioni</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_4">
