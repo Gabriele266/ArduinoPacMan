@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>815</width>
+    <height>503</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QTabWidget" name="packageManager">
+      <property name="tabPosition">
+       <enum>QTabWidget::West</enum>
+      </property>
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <property name="tabsClosable">
+       <bool>true</bool>
+      </property>
+      <property name="movable">
+       <bool>true</bool>
+      </property>
+      <property name="tabBarAutoHide">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Home</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Tab 2</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>815</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionNuovo_pacchetto"/>
+    <addaction name="actionApri_pacchetto"/>
+    <addaction name="separator"/>
+    <addaction name="actionSalva"/>
+    <addaction name="actionSalva_con_nome"/>
+    <addaction name="separator"/>
+    <addaction name="actionEsci"/>
+    <addaction name="actionNuova_finestra"/>
+   </widget>
+   <widget class="QMenu" name="menuGestione">
+    <property name="title">
+     <string>Gestione</string>
+    </property>
+    <addaction name="actionImporta_libreria"/>
+    <addaction name="actionEsporta_libreria"/>
+    <addaction name="actionRimuovi_libreria"/>
+    <addaction name="separator"/>
+    <addaction name="actionEsporta_pacchetto"/>
+    <addaction name="actionImpostazioni_esportazione"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuGestione"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionNuovo_pacchetto">
+   <property name="text">
+    <string>Nuovo pacchetto</string>
+   </property>
+  </action>
+  <action name="actionApri_pacchetto">
+   <property name="text">
+    <string>Apri pacchetto</string>
+   </property>
+  </action>
+  <action name="actionSalva">
+   <property name="text">
+    <string>Salva</string>
+   </property>
+  </action>
+  <action name="actionSalva_con_nome">
+   <property name="text">
+    <string>Salva con nome</string>
+   </property>
+  </action>
+  <action name="actionImporta_libreria">
+   <property name="text">
+    <string>Importa libreria</string>
+   </property>
+  </action>
+  <action name="actionEsporta_libreria">
+   <property name="text">
+    <string>Esporta libreria</string>
+   </property>
+  </action>
+  <action name="actionRimuovi_libreria">
+   <property name="text">
+    <string>Rimuovi libreria</string>
+   </property>
+  </action>
+  <action name="actionEsporta_pacchetto">
+   <property name="text">
+    <string>Esporta pacchetto</string>
+   </property>
+  </action>
+  <action name="actionImpostazioni_esportazione">
+   <property name="text">
+    <string>Impostazioni esportazione</string>
+   </property>
+  </action>
+  <action name="actionEsci">
+   <property name="text">
+    <string>Esci</string>
+   </property>
+  </action>
+  <action name="actionNuova_finestra">
+   <property name="text">
+    <string>Nuova finestra</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
