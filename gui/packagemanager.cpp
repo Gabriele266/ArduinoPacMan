@@ -29,15 +29,19 @@ bool PackageManager::isCurrentPackage(){
     // Indice del tab corrente
     int cur = ui->surfaceManager->currentIndex();
     if(cur >= 0){
-        auto tab = static_cast<PackageTab*>( ui->surfaceManager->widget(cur));
-        qInfo() << "Tags: " << tab->getTags();
-        // Controllo il suo tag
-        if(tab->getTags() == "<package>"){
-            // Si tratta di un pacchetto
-            return true;
+        // Controllo se è stato aggiunto almeno un pacchetto
+        if(packages.count() > 0){
+            auto tab = static_cast<PackageTab*>( ui->surfaceManager->widget(cur));
+            qInfo() << "Tags: " << tab->getTags();
+            // Controllo il suo tag
+            if(tab->getTags() == "<package>"){
+                // Si tratta di un pacchetto
+                return true;
+            }
         }
         return false;
     }
+    return false;
 }
 
 void PackageManager::init(){
