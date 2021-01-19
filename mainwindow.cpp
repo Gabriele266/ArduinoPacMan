@@ -11,8 +11,8 @@ MainWindow::MainWindow(QWidget *parent)
     // Aggiungo il widget per la gestione dei pacchetti
     ui->verticalLayout->addWidget(packageManager);
 
-    // Aggiorno le informazioni del titolo
-//    setWindowTitle("ArduinoPacMan");
+    // Inizializzo il gestore dei pacchetti
+    packageManager->init();
 }
 
 void MainWindow::updateTitleInfo(){
