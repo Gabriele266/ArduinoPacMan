@@ -65,4 +65,31 @@ static QString formatPathForOs(QString base, QStringList additions){
     return path;
 }
 
+/// Rimuove tutti gli elementi che indicano percorsi ridondanti
+static QStringList removeRedundant(QStringList list){
+    QStringList result;
+    for(int x = 0; x < list.count(); x++){
+        if(list[x] != ".." && list[x] != "."){
+            result.append(list[x]);
+        }
+    }
+    return result;
+}
+
+static QChar getOSSeparator(){
+    // Versione del sistema operativo ospite
+    auto version = QOperatingSystemVersion::current();
+    // Carattere da usare come separatore
+    QChar separator_for_os;
+    if(version >= QOperatingSystemVersion::Windows7){
+        // Utilizzo separatori windows
+        separator_for_os = '\\';
+    }
+    else{
+        // Utilizzo separatori linux like
+        separator_for_os = '/';
+    }
+    return separator_for_os;
+}
+
 #endif
