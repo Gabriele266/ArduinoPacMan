@@ -37,7 +37,7 @@ NewPackageDialog::NewPackageDialog(QWidget *parent) :
     no_chars.append(':');
     no_chars.append(',');
     no_chars.append(';');
-    no_chars.append('-');
+    no_chars.append('.');
     no_chars.append('<');
     no_chars.append('>');
 
@@ -69,6 +69,9 @@ NewPackageDialog::NewPackageDialog(QWidget *parent) :
     // Avvio la autocorrezione
     on_packageName_textChanged(ui->packageName->text());
     on_packagePath_textChanged(ui->packagePath->text());
+
+    // Imposto il titolo della finestra
+    setWindowTitle("Creazione nuovo pacchetto");
 }
 
 NewPackageDialog::~NewPackageDialog()
@@ -120,11 +123,34 @@ void NewPackageDialog::on_packageName_textChanged(const QString &arg1)
         disableContinueWithNameError();
     }
     else{
-        ui->errorLabel->setVisible(false);
-        ui->correctLabel->setText("Nome accettabile");
-        ui->correctLabel->setVisible(true);
-        name_errors = false;
-        enableContinue();
+        // Controllo che non esista alcuna cartella con quel nome
+        if(!path_errors){
+            // Formatto il percorso
+            QDir pt(formatPathForOs(ui->packagePath->text(), QStringList(ui->packageName->text())));
+            // Controllo se esiste
+            if(!pt.exists()){
+                // Va tutto bene
+                ui->errorLabel->setVisible(false);
+                ui->correctLabel->setText("Nome accettabile");
+                ui->correctLabel->setVisible(true);
+                name_errors = false;
+                enableContinue();
+            }
+            else{
+                ui->errorLabel->setText("Esiste già un pacchetto o una cartella \ncon questo nome in questa cartella. ");
+                ui->errorLabel->setVisible(true);
+                ui->correctLabel->setVisible(false);
+                name_errors = true;
+                disableContinueWithNameError();
+            }
+        }
+        else{
+            ui->errorLabel->setVisible(false);
+            ui->correctLabel->setText("Nome accettabile");
+            ui->correctLabel->setVisible(true);
+            name_errors = false;
+            enableContinue();
+        }
     }
 }
 
@@ -183,4 +209,47 @@ void NewPackageDialog::on_packagePath_textChanged(const QString &arg1)
         path_errors = false;
         enableContinue();
     }
+}
+
+void NewPackageDialog::on_sfoglia_clicked()
+{
+    QString dir = QFileDialog::getExistingDirectory(this, "Scegliere il percorso dei sorgenti");
+
+    if(dir != ""){
+        ui->sourcesPath->setText(dir);
+
+        // Cerco un file principale
+        QStringList div = dir.split(getOSSeparator());
+
+        // Percorso di un possibile file base
+        QString base = formatPathForOs(dir, QStringList(div.last() + ".ino"));
+
+        if(QFile::exists(base)){
+            ui->mainFile->setText(base);
+        }
+    }
+}
+
+QString NewPackageDialog::getMainFilePath(){
+    return formatPathForOs(ui->sourcesPath->text(), QStringList(ui->mainFile->text()));
+}
+
+QString NewPackageDialog::getSourcesPath(){
+    return ui->sourcesPath->text();
+}
+
+void NewPackageDialog::on_change_clicked()
+{
+    // Prendo un file
+    QString file = QFileDialog::getOpenFileName(this, "Selezionare il file principale del progetto", ui->sourcesPath->text());
+
+    if(file != ""){
+        // Prendo solo il nome del file
+        QFileInfo info(file);
+        ui->mainFile->setText(info.fileName());
+    }
+}
+
+void NewPackageDialog::on_buttonBox_accepted(){
+
 }
