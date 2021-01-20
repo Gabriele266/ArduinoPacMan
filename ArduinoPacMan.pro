@@ -9,31 +9,41 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    gui/generalstatusbar.cpp \
     gui/packagemanager.cpp \
     gui/packagetab.cpp \
-    library.cpp \
+	packages/library.cpp \
     main.cpp \
     mainwindow.cpp \
     newpackagedialog.cpp \
-    package.cpp \
+	packages/package.cpp \
     pacman_info.h \
-    utils.cpp \
-    version.cpp
+	searchpathmanager.cpp \
+	threads/librariesloader.cpp \
+	threads/sourcesloader.cpp \
+	utils/utils.cpp \
+	packages/version.cpp
 
 HEADERS += \
+    gui/generalstatusbar.h \
     gui/packagemanager.h \
     gui/packagetab.h \
-    library.h \
+	packages/library.h \
     mainwindow.h \
     newpackagedialog.h \
-    package.h \
-    version.h
+	packages/package.h \
+	packages/version.h \
+	searchpathmanager.h \
+	threads/librariesloader.h \
+	threads/sourcesloader.h
 
 FORMS += \
+    gui/generalstatusbar.ui \
     gui/packagemanager.ui \
     gui/packagetab.ui \
     mainwindow.ui \
-    newpackagedialog.ui
+    newpackagedialog.ui \
+    searchpathmanager.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
