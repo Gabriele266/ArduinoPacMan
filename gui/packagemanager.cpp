@@ -12,7 +12,7 @@ void PackageManager::addPackage(Package *pack){
     // Controllo che non sia un puntatore nullo
     if(pack != nullptr){
         // Imposto l'indice del pacchetto
-        pack->setTags(QString::number(packages.count() - 1));
+        pack->setTags(QString::number(packages.count()));
         // Aggiungo il pacchetto
         packages.append(pack);
 
@@ -22,26 +22,57 @@ void PackageManager::addPackage(Package *pack){
         tab->setTags("<package>");
         // Aggiungo
         ui->surfaceManager->addTab(tab, pack->getName());
+
+        // Carico i suoi sorgenti
+        auto *loader = new SourcesLoader();
+        loader->setDestination(tab->getFileBrowser());
+        loader->setSearchPath(pack->getSourcesPath());
+
+        // Avvio il thread
+        loader->start(QThread::HighPriority);
     }
 }
 
 bool PackageManager::isCurrentPackage(){
     // Indice del tab corrente
     int cur = ui->surfaceManager->currentIndex();
-    if(cur >= 0){
-        // Controllo se è stato aggiunto almeno un pacchetto
-        if(packages.count() > 0){
-            auto tab = static_cast<PackageTab*>( ui->surfaceManager->widget(cur));
-            qInfo() << "Tags: " << tab->getTags();
-            // Controllo il suo tag
-            if(tab->getTags() == "<package>"){
-                // Si tratta di un pacchetto
-                return true;
-            }
+
+    // Scorro tutti i pacchetti e controllo i loro tag per sapere se si tratta di un tab-pacchetto
+    for(int x = 0; x < packages.count(); x++){
+        if(packages[x]->getTags().toInt() == cur){
+            return true;
         }
-        return false;
     }
     return false;
+}
+
+Package* PackageManager::getCurrentPackage(){
+    // Determino se il tab corrente è un pacchetto
+    // Prendo l'indice corrente
+    int current = ui->surfaceManager->currentIndex();
+
+    // Scorro tutti i pacchetti e controllo i loro tag per sapere se si tratta di un tab-pacchetto
+    for(int x = 0; x < packages.count(); x++){
+        if(packages[x]->getTags().toInt() == current){
+            return packages[x];
+        }
+    }
+    return nullptr;
+}
+
+unsigned int PackageManager::getPackagesCount(){
+    return packages.count();
+}
+
+bool PackageManager::hasPackages(){
+    return getPackagesCount() != 0;
+}
+
+unsigned int PackageManager::getCurrentPackageIndex(){
+    // Controllo se il tab corrente è un pacchetto
+    if(isCurrentPackage()){
+
+    }
 }
 
 void PackageManager::init(){
@@ -58,4 +89,7 @@ void PackageManager::on_surfaceManager_currentChanged(int index)
 {
     qInfo() << "Cambiato tab in package manager. \n";
     qInfo() << "Tab corrente è un pacchetto?: " << isCurrentPackage();
+
+    // Emetto il segnale di cambio tab
+    emit tabChanged(index);
 }
