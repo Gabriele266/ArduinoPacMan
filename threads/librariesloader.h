@@ -34,6 +34,7 @@ public:
 
     /// Imposta la lista a cui devono essere aggiunte le librerie trovate
     void setLibrariesDestination(QList<Library*> *libraries);
+
 private:
     // Percorso in cui cercare
     QString path;

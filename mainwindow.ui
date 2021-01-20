@@ -39,8 +39,11 @@
     <addaction name="actionSalva"/>
     <addaction name="actionSalva_con_nome"/>
     <addaction name="separator"/>
-    <addaction name="actionEsci"/>
+    <addaction name="actionPacchetti_recenti"/>
+    <addaction name="actionFile_recenti"/>
+    <addaction name="separator"/>
     <addaction name="actionNuova_finestra"/>
+    <addaction name="actionEsci"/>
    </widget>
    <widget class="QMenu" name="menuGestione">
     <property name="title">
@@ -51,10 +54,42 @@
     <addaction name="actionRimuovi_libreria"/>
     <addaction name="separator"/>
     <addaction name="actionEsporta_pacchetto"/>
-    <addaction name="actionImpostazioni_esportazione"/>
+   </widget>
+   <widget class="QMenu" name="menuImpostazioni">
+    <property name="title">
+     <string>Impostazioni</string>
+    </property>
+    <addaction name="actionPercorsi_ricerca_librerie"/>
+    <addaction name="actionRicerca_keywords"/>
+    <addaction name="actionRicerca_esempi"/>
+    <addaction name="actionAutocorrezione_errori"/>
+    <addaction name="actionRicerca_propriet_libreria"/>
+    <addaction name="separator"/>
+    <addaction name="actionAmbiente"/>
+    <addaction name="actionEsportazione"/>
+    <addaction name="actionImportazione"/>
+   </widget>
+   <widget class="QMenu" name="menuPacchetto">
+    <property name="title">
+     <string>Pacchetto</string>
+    </property>
+    <addaction name="actionApri_nel_gestore_dei_file"/>
+    <addaction name="actionApri_nel_terminale"/>
+    <addaction name="actionVisualizza_informazioni"/>
+    <addaction name="separator"/>
+    <addaction name="actionModifica_attributi"/>
+    <addaction name="actionRinomina"/>
+    <addaction name="separator"/>
+    <addaction name="actionModifica_versione"/>
+    <addaction name="actionNuova_versione"/>
+    <addaction name="actionAbilita_versioni"/>
+    <addaction name="separator"/>
+    <addaction name="actionApri_file_di_progetto"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuGestione"/>
+   <addaction name="menuImpostazioni"/>
+   <addaction name="menuPacchetto"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionNuovo_pacchetto">
@@ -125,6 +160,106 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Alt+N</string>
+   </property>
+  </action>
+  <action name="actionPercorsi_ricerca_librerie">
+   <property name="text">
+    <string>Percorsi ricerca librerie</string>
+   </property>
+  </action>
+  <action name="actionRicerca_keywords">
+   <property name="text">
+    <string>Ricerca keywords</string>
+   </property>
+  </action>
+  <action name="actionRicerca_esempi">
+   <property name="text">
+    <string>Ricerca esempi</string>
+   </property>
+  </action>
+  <action name="actionAutocorrezione_errori">
+   <property name="text">
+    <string>Autocorrezione errori</string>
+   </property>
+  </action>
+  <action name="actionRicerca_propriet_libreria">
+   <property name="text">
+    <string>Ricerca proprietà libreria</string>
+   </property>
+  </action>
+  <action name="actionAmbiente">
+   <property name="text">
+    <string>Ambiente</string>
+   </property>
+  </action>
+  <action name="actionApri_nel_gestore_dei_file">
+   <property name="text">
+    <string>Apri nel gestore dei file</string>
+   </property>
+  </action>
+  <action name="actionApri_nel_terminale">
+   <property name="text">
+    <string>Apri nel terminale</string>
+   </property>
+  </action>
+  <action name="actionVisualizza_informazioni">
+   <property name="text">
+    <string>Visualizza informazioni</string>
+   </property>
+  </action>
+  <action name="actionModifica_attributi">
+   <property name="text">
+    <string>Modifica attributi</string>
+   </property>
+  </action>
+  <action name="actionModifica_versione">
+   <property name="text">
+    <string>Modifica versione</string>
+   </property>
+  </action>
+  <action name="actionRinomina">
+   <property name="text">
+    <string>Rinomina</string>
+   </property>
+  </action>
+  <action name="actionNuova_versione">
+   <property name="text">
+    <string>Nuova versione</string>
+   </property>
+  </action>
+  <action name="actionAbilita_versioni">
+   <property name="text">
+    <string>Abilita versioni</string>
+   </property>
+  </action>
+  <action name="actionApri_file_di_progetto">
+   <property name="text">
+    <string>Apri file di pacchetto</string>
+   </property>
+  </action>
+  <action name="actionApri_file_ricerca_librerie">
+   <property name="text">
+    <string>Apri file ricerca librerie</string>
+   </property>
+  </action>
+  <action name="actionPacchetti_recenti">
+   <property name="text">
+    <string>Pacchetti recenti</string>
+   </property>
+  </action>
+  <action name="actionFile_recenti">
+   <property name="text">
+    <string>File recenti</string>
+   </property>
+  </action>
+  <action name="actionEsportazione">
+   <property name="text">
+    <string>Esportazione</string>
+   </property>
+  </action>
+  <action name="actionImportazione">
+   <property name="text">
+    <string>Importazione</string>
    </property>
   </action>
  </widget>
