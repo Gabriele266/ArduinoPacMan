@@ -7,8 +7,9 @@
 
 #include <QWidget>
 #include <QString>
+#include <QTreeWidget>
 
-#include "package.h"
+#include "../packages/package.h"
 
 namespace Ui {
 class PackageTab;
@@ -31,6 +32,11 @@ public:
     /// Determina se il tab è visibile o no
     bool isVisible() {return opened;}
 
+    /// Restituisce l'indirizzo del pacchetto a cui si riferisce
+    Package* getPackage();
+
+    // Restituisce l'indirizzo del browser dei file
+    QTreeWidget* getFileBrowser();
 private:
     Ui::PackageTab *ui;
     // Pacchetto che rappresenta il tab

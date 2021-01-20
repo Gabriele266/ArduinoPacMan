@@ -17,6 +17,14 @@ QString PackageTab::getTags(){
     return tag;
 }
 
+QTreeWidget* PackageTab::getFileBrowser(){
+    return ui->fileBrowser;
+}
+
+Package* PackageTab::getPackage(){
+    return package;
+}
+
 PackageTab::~PackageTab()
 {
     delete ui;
