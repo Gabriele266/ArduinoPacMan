@@ -6,10 +6,11 @@
 #include <QTextStream>
 #include <QLabel>
 
-#include "library.h"
+#include "packages/library.h"
 #include "newpackagedialog.h"
 #include "gui/packagemanager.h"
-#include "package.h"
+#include "gui/generalstatusbar.h"
+#include "packages/package.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -25,6 +26,9 @@ public:
     /// Aggiorna le informazioni del titolo in base al tab corrente
     void updateTitleInfo();
 
+    // Aggiorna la barra di stato
+    void updateStatusBar();
+
 private slots:
     void on_actionNuova_finestra_triggered();
 
@@ -34,11 +38,15 @@ private slots:
 
     void on_packageManager_currentChanged(int index);
 
+    void onPackageManagerTabChange(unsigned int newTab);
 private:
     Ui::MainWindow *ui;
     QString endl = "\n";
 
     // Gestore dei paccchetti
     PackageManager *packageManager = new PackageManager();
+
+    // Creo una status bar
+    GeneralStatusBar *statusBar = new GeneralStatusBar();
 };
 #endif // MAINWINDOW_H
