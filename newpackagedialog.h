@@ -8,7 +8,7 @@
 #include <QChar>
 #include <QFileDialog>
 
-#include "utils.cpp"
+#include "utils/utils.cpp"
 
 namespace Ui {
 class NewPackageDialog;
@@ -28,6 +28,10 @@ public:
     /// Restituisce il percorso del pacchetto
     QString getPackagePath();
 
+    QString getSourcesPath();
+
+    QString getMainFilePath();
+
 private slots:
 
 
@@ -36,6 +40,12 @@ private slots:
     void on_pushButton_clicked();
 
     void on_packagePath_textChanged(const QString &arg1);
+
+    void on_sfoglia_clicked();
+
+    void on_change_clicked();
+
+    void on_buttonBox_accepted();
 
 private:
     Ui::NewPackageDialog *ui;

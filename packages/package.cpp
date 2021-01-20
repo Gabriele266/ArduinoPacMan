@@ -21,6 +21,27 @@ QString Package::getSavePath(){
     return this->path;
 }
 
+QString Package::getCompletePath(){
+    return formatPathForOs(this->path, QStringList(name));
+}
+
+void Package::setMainFilePath(QString file){
+    // Prendo il nome del file
+    main_file = path;
+}
+
+QString Package::getMainFilePath(){
+    return main_file;
+}
+
+void Package::setSourcesPath(QString path){
+    sources_path = path;
+}
+
+QString Package::getSourcesPath(){
+    return sources_path;
+}
+
 int Package::getLibraryCount(){
     return libraries.count();
 }

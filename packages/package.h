@@ -13,7 +13,7 @@
 
 #include "library.h"
 #include "pacman_info.h"
-#include "utils.cpp"
+#include "../utils/utils.cpp"
 
 class Package
 {
@@ -32,6 +32,21 @@ public:
 
     /// Restiuisce il percorso di salvataggio del pacchetto
     QString getSavePath();
+
+    /// Imposta il percorso in cui si trovano i sorgenti del progetto
+    void setSourcesPath(QString path);
+
+    /// Restituisce il percorso in cui si trovano i sorgenti del progetto
+    QString getSourcesPath();
+
+    /// Imposta il percorso del file principale del progetto
+    void setMainFilePath(QString path);
+
+    /// Restituisce il percorso in cui si trova il file principale insieme al suo nome
+    QString getMainFilePath();
+
+    /// Restituisce il percorso completo del progetto (salvataggio + nome)
+    QString getCompletePath();
 
     /// Restituisce il numero di librerie presenti
     int getLibraryCount();
@@ -78,6 +93,10 @@ private:
     QString name;
     // Percorso di salvataggio del pacchetto
     QString path;
+    // Percorso dei sorgenti del progetto
+    QString sources_path;
+    // Percorso del file principale del progetto
+    QString main_file;
     // Descrizione del pacchetto
     QString description;
     // Array con le librerie
