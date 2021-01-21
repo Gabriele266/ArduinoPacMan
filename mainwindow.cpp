@@ -93,12 +93,20 @@ void MainWindow::on_actionNuovo_pacchetto_triggered()
 
         // Aggiungo il pacchetto al gestore
         packageManager->addPackage(package);
+
+        // Imposto il percorso di salvataggio per i percorsi di ricerca lib
+        librariesSearchPath.setSavePath(formatPathForOs(package->getCompletePath(), QStringList("libsrc.src")));
     }
 
     // Aggiorno il titolo
     updateTitleInfo();
     // Aggiorno la barra di stato
     updateStatusBar();
+}
+
+void MainWindow::aggiungiPercorsoRicercaTriggered(QString path){
+    librariesSearchPath.addPath(path);
+    qInfo() << "Aggiunto percorso " << path << endl;
 }
 
 void MainWindow::on_packageManager_currentChanged(int index)
@@ -110,5 +118,16 @@ void MainWindow::on_packageManager_currentChanged(int index)
 void MainWindow::on_actionPercorsi_ricerca_librerie_triggered()
 {
     SearchPathManager *man = new SearchPathManager();
-    man->exec();
+    QObject::connect(man, &SearchPathManager::pathAdded, this, &MainWindow::aggiungiPercorsoRicercaTriggered);
+    int res = man->exec();
+
+    // Controllo se l'utente ha accettato
+    if(res == QDialog::Accepted){
+        // Avvio uno scrittore
+        SearchPathListWriter *writer = new SearchPathListWriter();
+        writer->setLibraryList(&librariesSearchPath);
+
+        // Avvio il thread di scrittura
+        writer->start();
+    }
 }

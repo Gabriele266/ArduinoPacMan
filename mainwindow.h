@@ -12,6 +12,8 @@
 #include "gui/generalstatusbar.h"
 #include "packages/package.h"
 #include "searchpathmanager.h"
+#include "threads/searchpathlistwriter.h"
+#include "file_types/libsearchpathlist.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -42,14 +44,17 @@ private slots:
     void onPackageManagerTabChange(unsigned int newTab);
     void on_actionPercorsi_ricerca_librerie_triggered();
 
+    void aggiungiPercorsoRicercaTriggered(QString path);
 private:
     Ui::MainWindow *ui;
-    QString endl = "\n";
 
     // Gestore dei paccchetti
     PackageManager *packageManager = new PackageManager();
 
     // Creo una status bar
     GeneralStatusBar *statusBar = new GeneralStatusBar();
+
+    // Lista dei percorsi di ricerca delle librerie
+    LibSearchPathList librariesSearchPath;
 };
 #endif // MAINWINDOW_H
