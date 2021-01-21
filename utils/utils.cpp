@@ -13,6 +13,12 @@
 #include <QOperatingSystemVersion>
 #include <QDebug>
 
+/// Rappresenta un carattere di a capo
+#define endl "\n"
+
+/// Rappresenta un file riga in html
+#define html_endl "<br>"
+
 /// Controlla che la stringa string non contenga nessuno dei caratteri specificati
 /// \arg string la stringa da controllare
 /// \arg not_allowed_chars Lista di caratteri non consentiti
