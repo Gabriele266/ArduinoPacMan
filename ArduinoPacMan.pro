@@ -12,10 +12,12 @@ SOURCES += \
     gui/generalstatusbar.cpp \
     gui/packagemanager.cpp \
     gui/packagetab.cpp \
+	packages/attributeditem.cpp \
 	packages/library.cpp \
     main.cpp \
     mainwindow.cpp \
     newpackagedialog.cpp \
+	packages/natural.cpp \
 	packages/package.cpp \
     pacman_info.h \
 	searchpathmanager.cpp \
@@ -28,9 +30,11 @@ HEADERS += \
     gui/generalstatusbar.h \
     gui/packagemanager.h \
     gui/packagetab.h \
+	packages/attributeditem.h \
 	packages/library.h \
     mainwindow.h \
     newpackagedialog.h \
+	packages/natural.h \
 	packages/package.h \
 	packages/version.h \
 	searchpathmanager.h \
