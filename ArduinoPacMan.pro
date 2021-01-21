@@ -12,6 +12,7 @@ SOURCES += \
     gui/generalstatusbar.cpp \
     gui/packagemanager.cpp \
     gui/packagetab.cpp \
+	newsearchpath.cpp \
 	packages/attributeditem.cpp \
 	packages/library.cpp \
     main.cpp \
@@ -30,6 +31,7 @@ HEADERS += \
     gui/generalstatusbar.h \
     gui/packagemanager.h \
     gui/packagetab.h \
+	newsearchpath.h \
 	packages/attributeditem.h \
 	packages/library.h \
     mainwindow.h \
@@ -47,6 +49,7 @@ FORMS += \
     gui/packagetab.ui \
     mainwindow.ui \
     newpackagedialog.ui \
+    newsearchpath.ui \
     searchpathmanager.ui
 
 # Default rules for deployment.
