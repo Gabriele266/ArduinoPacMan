@@ -17,17 +17,11 @@
 #include "../utils/utils.cpp"
 #include "attributeditem.h"
 
-class Package
+class Package : public AttributedItem
 {
 public:
     Package();
     Package(QString name);
-
-    /// Imposta il nome del pacchetto
-    void setName(QString name);
-
-    /// Restituisce il nome del pacchetto
-    QString getName();
 
     /// Imposta il percorso di salvataggio
     void setSavePath(QString val);
@@ -52,12 +46,6 @@ public:
 
     /// Restituisce il numero di librerie presenti
     int getLibraryCount();
-
-    /// Imposta i tag del pacchetto
-    void setTags(QString tags){tag = tags;}
-
-    /// Restituisce i tag del pacchetto
-    QString getTags() {return tag;}
 
     /// Aggiunge una libreria
     /// \arg lib un puntatore alla libreria da aggiungere
