@@ -68,6 +68,8 @@ public:
     unsigned int operator-=(int val);
     unsigned int operator-=(Natural *v);
 
+    unsigned int operator++(int);
+
     void operator=(Natural n);
     void operator=(Natural *n);
     // Questo operatore causa una perdita di segno al valore (verrà applicato il valore assoluto)

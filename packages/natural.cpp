@@ -95,6 +95,11 @@ unsigned int Natural::operator+=(Natural *v){
     return val;
 }
 
+unsigned int Natural::operator++(int){
+    val += 1;
+    return val;
+}
+
 unsigned int Natural::operator-(Natural v){
     return Natural::diff(val, v);
 }
