@@ -10,10 +10,12 @@
 #include <QDomElement>
 #include <QDomDocument>
 #include <QDomNode>
+#include <QDate>
 
 #include "library.h"
 #include "pacman_info.h"
 #include "../utils/utils.cpp"
+#include "attributeditem.h"
 
 class Package
 {
@@ -89,8 +91,7 @@ public:
     bool create();
 
 private:
-    // Nome del pacchetto
-    QString name;
+
     // Percorso di salvataggio del pacchetto
     QString path;
     // Percorso dei sorgenti del progetto
@@ -103,8 +104,6 @@ private:
     QList<Library*> libraries;
     // Percorso del file di descrizione del pacchetto
     QString description_path;
-    // Tag del pacchetto
-    QString tag;
 };
 
 #endif // PACKAGE_H

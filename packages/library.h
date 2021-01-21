@@ -16,21 +16,14 @@
 
 // Header custom
 #include "version.h"
+#include "attributeditem.h"
 
 /// Rappresenta una libreria
-class Library
+class Library : public AttributedItem
 {
 public:
     Library();
     Library(QString name);
-
-    /// Imposta il nome della libreria
-    /// \arg name Nome della libreria
-    void setName(QString name);
-
-    /// Restituisce il nome della libreria
-    /// \return Una stringa contenente il nome
-    QString getName();
 
     /// Imposta il percorso in cui si trova la libreria (senza il nome)
     /// \arg path Percorso
@@ -80,8 +73,6 @@ public:
     QString getCompletePath();
 
 private:
-    // Nome della libreria
-    QString name;
     // Percorso
     QString path;
     // Nome della cartella per la documentazione
@@ -118,8 +109,6 @@ private:
 
     // Versione della libreria
     Version version;
-
-
 };
 
 /// Carica i sorgenti della libreria nella lista interna

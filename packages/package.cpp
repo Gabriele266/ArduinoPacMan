@@ -5,14 +5,6 @@ Package::Package()
 
 }
 
-void Package::setName(QString name){
-    this->name = name;
-}
-
-QString Package::getName(){
-    return this->name;
-}
-
 void Package::setSavePath(QString val){
     this->path = val;
 }
@@ -22,7 +14,7 @@ QString Package::getSavePath(){
 }
 
 QString Package::getCompletePath(){
-    return formatPathForOs(this->path, QStringList(name));
+    return formatPathForOs(this->path, QStringList(getName()));
 }
 
 void Package::setMainFilePath(QString file){
@@ -90,12 +82,12 @@ bool Package::create(){
     // Creo la cartella per il pacchetto
     QDir dir;
     // Formatto il percorso giusto per il sistema operativo
-    QString package_path_complete = formatPathForOs(path, QStringList(name));
+    QString package_path_complete = formatPathForOs(path, QStringList(getName()));
     qInfo() << "Percorso per os: " << package_path_complete << "\n";
     dir.mkdir(package_path_complete);
 
     // Creo il file di progetto
-    QString package_file = formatPathForOs(package_path_complete, QStringList(name + ".pak"));
+    QString package_file = formatPathForOs(package_path_complete, QStringList(getName() + ".pak"));
     QFile file(package_file);
 
     // Controllo se riesco ad aprirlo
@@ -115,7 +107,7 @@ bool Package::create(){
 
         // Metto il nome del pacchetto
         QDomElement elem = doc.createElement("property");
-        elem.setAttribute("name", name);
+        elem.setAttribute("name", getName());
         root.appendChild(elem);
 
         // Metto la descrizione
