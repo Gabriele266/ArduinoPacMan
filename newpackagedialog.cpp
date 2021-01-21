@@ -74,10 +74,19 @@ NewPackageDialog::NewPackageDialog(QWidget *parent) :
     // Avvio la autocorrezione
     on_packageName_textChanged(ui->packageName->text());
     on_packagePath_textChanged(ui->packagePath->text());
+
     ui->correctSources->hide();
     ui->incorrectSources->show();
     // Imposto il titolo della finestra
     setWindowTitle("Creazione nuovo pacchetto");
+
+    // Controllo se esiste già un pacchetto con il nome iniziale
+    if(QDir(formatPathForOs(ui->packagePath->text(), QStringList(ui->packageName->text()) )).exists()){
+        disableContinueWithNameError();
+        ui->errorLabel->show();
+        ui->correctLabel->hide();
+        ui->errorLabel->setText("Nel percorso specificato è già presente <br>un pacchetto o una cartella con quel nome. ");
+    }
 }
 
 NewPackageDialog::~NewPackageDialog()
