@@ -5,14 +5,6 @@ Library::Library()
 
 }
 
-Library::Library(QString name){
-    this->name = name;
-}
-
-void Library::setName(QString name){
-    this->name = name;
-}
-
 void Library::setDocumentationDir(QString dir_name){
     this->documentation_dir_name = dir_name;
 
@@ -23,10 +15,6 @@ void Library::setDocumentationDir(QString dir_name){
     else{
         documentation = false;
     }
-}
-
-QString Library::getName(){
-    return this->name;
 }
 
 void Library::setPath(QString path){
@@ -63,7 +51,7 @@ QString Library::getDocumentationDir(){
 }
 
 QString Library::getCompletePath(){
-    return path + "\\" + name;
+    return path + "\\" + getName();
 }
 
 QString Library::getDocumentationAbsolutePath(){
@@ -81,7 +69,7 @@ void Library::setCompletePath(QString path){
     // Controllo se esiste
     if(dir.exists()){
         // Prendo il nome
-        this->name = dir.dirName();
+        setName( dir.dirName());
         dir.cdUp();
         this->path = dir.path();
     }
@@ -146,7 +134,7 @@ void getFilesList(QString path, QStringList *destination){
 
 bool Library::init(){
     // Controllo che la cartella esista
-    QString complete_path = path + "\\" + name;
+    QString complete_path = path + "\\" + getName();
     qInfo() << "Percorso completo: " << complete_path << "\n";
 
     // Creo un oggetto cartella
@@ -161,7 +149,7 @@ bool Library::init(){
             qInfo() << "Sono presenti " << inf.count() << " elementi nella cartella. \n";
             // Sono presenti degli elementi
             // Controllo se esiste un file .h con lo stesso nome
-            QString f_name = name + ".h";
+            QString f_name = getName() + ".h";
             qInfo() << "Nome file di include" << f_name << "\n";
             // Scorro gli elementi
             for(int x = 0; x < inf.count(); x++){

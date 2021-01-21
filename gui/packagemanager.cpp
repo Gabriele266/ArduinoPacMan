@@ -12,7 +12,7 @@ void PackageManager::addPackage(Package *pack){
     // Controllo che non sia un puntatore nullo
     if(pack != nullptr){
         // Imposto l'indice del pacchetto
-        pack->setTags(QString::number(packages.count()));
+        pack->addTag(QString::number(packages.count()));
         // Aggiungo il pacchetto
         packages.append(pack);
 
@@ -39,7 +39,7 @@ bool PackageManager::isCurrentPackage(){
 
     // Scorro tutti i pacchetti e controllo i loro tag per sapere se si tratta di un tab-pacchetto
     for(int x = 0; x < packages.count(); x++){
-        if(packages[x]->getTags().toInt() == cur){
+        if(packages[x]->getTag(0).toInt() == cur){
             return true;
         }
     }
@@ -53,7 +53,7 @@ Package* PackageManager::getCurrentPackage(){
 
     // Scorro tutti i pacchetti e controllo i loro tag per sapere se si tratta di un tab-pacchetto
     for(int x = 0; x < packages.count(); x++){
-        if(packages[x]->getTags().toInt() == current){
+        if(packages[x]->getTag(0).toInt() == current){
             return packages[x];
         }
     }

@@ -5,6 +5,10 @@ AttributedItem::AttributedItem()
 
 }
 
+void AttributedItem::setName(QString name){
+    this->name = name;
+}
+
 void AttributedItem::setAuthor(QString author){
     this->author = author;
 }
