@@ -92,4 +92,15 @@ static QChar getOSSeparator(){
     return separator_for_os;
 }
 
+/// Controlla che la stringa string non esista nella lista list
+/// restituisce true se la situazione è verificata
+static bool notExists(QString string, QStringList list){
+    for(int x = 0; x < list.count(); x++){
+        if(list[x] == string){
+            return false;
+        }
+    }
+    return true;
+}
+
 #endif
