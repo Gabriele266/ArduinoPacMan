@@ -78,3 +78,6 @@ DISTFILES += \
 	icons/library_viewer/Library.xcf \
 	icons/library_viewer/Package.png \
 	icons/library_viewer/Package.xcf \
+
+RESOURCES += \
+	icons/icons.qrc

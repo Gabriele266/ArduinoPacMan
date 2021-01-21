@@ -6,104 +6,254 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1077</width>
-    <height>873</height>
+    <width>1093</width>
+    <height>835</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QTreeWidget" name="fileBrowser">
-       <column>
-        <property name="text">
-         <string>Elemento</string>
+      <widget class="QSplitter" name="splitter_2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <widget class="QSplitter" name="splitter">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>100</height>
+         </size>
         </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Descrizione</string>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
         </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Percorso completo</string>
+        <widget class="QTreeWidget" name="fileBrowser">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>100</height>
+          </size>
+         </property>
+         <column>
+          <property name="text">
+           <string>Elemento</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Descrizione</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Percorso completo</string>
+          </property>
+         </column>
+        </widget>
+        <widget class="QTreeWidget" name="libraryBrowser">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>100</height>
+          </size>
+         </property>
+         <column>
+          <property name="text">
+           <string>Libreria</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Versione</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Percorso</string>
+          </property>
+         </column>
+        </widget>
+       </widget>
+       <widget class="QTreeWidget" name="dependencyBrowser">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>100</height>
+         </size>
         </property>
-       </column>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>300</height>
+         </size>
+        </property>
+        <column>
+         <property name="text">
+          <string>Dipendenza</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Da file</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Versione minima</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Raggiunta</string>
+         </property>
+        </column>
+       </widget>
       </widget>
      </item>
      <item>
-      <widget class="QTreeWidget" name="libraryBrowser">
-       <column>
-        <property name="text">
-         <string>Libreria</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Versione</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Percorso</string>
-        </property>
-       </column>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <widget class="QTreeWidget" name="dependencyBrowser">
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>300</height>
-      </size>
-     </property>
-     <column>
-      <property name="text">
-       <string>Dipendenza</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Da file</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Versione minima</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Raggiunta</string>
-      </property>
-     </column>
-    </widget>
-   </item>
-   <item>
-    <layout class="QGridLayout" name="gridLayout">
-     <property name="sizeConstraint">
-      <enum>QLayout::SetMinimumSize</enum>
-     </property>
-     <item row="0" column="0">
-      <widget class="QPushButton" name="exportPackage">
-       <property name="text">
-        <string>Esporta</string>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="sizeConstraint">
+        <enum>QLayout::SetMinimumSize</enum>
        </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QPushButton" name="addLibrary">
-       <property name="text">
-        <string>Aggiungi</string>
-       </property>
-      </widget>
+       <item>
+        <widget class="QPushButton" name="addLibraryButton">
+         <property name="text">
+          <string>Aggiungi libreria</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="deleteLibraryButton">
+         <property name="text">
+          <string>Rimuovi libreria</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="infoButton">
+         <property name="text">
+          <string>Informazioni</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>15</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="moveLibraryButton">
+         <property name="text">
+          <string>Sposta libreria</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="saveButton">
+         <property name="text">
+          <string>Salva</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>80</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="exportButton">
+         <property name="text">
+          <string>Esporta</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>30</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
      </item>
     </layout>
    </item>

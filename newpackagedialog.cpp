@@ -60,6 +60,11 @@ NewPackageDialog::NewPackageDialog(QWidget *parent) :
     ui->pathCorrect->setStyleSheet("QLabel {"
                                     "color : green;}");
 
+    ui->correctSources->setStyleSheet("QLabel {"
+                                    "color : green;}");
+
+    ui->incorrectSources->setStyleSheet("QLabel {"
+                                                "color : red;}");
     // Ottengo il pulsante per andare avanti
     continue_button = ui->buttonBox->button(QDialogButtonBox::Ok);
 
@@ -69,7 +74,8 @@ NewPackageDialog::NewPackageDialog(QWidget *parent) :
     // Avvio la autocorrezione
     on_packageName_textChanged(ui->packageName->text());
     on_packagePath_textChanged(ui->packagePath->text());
-
+    ui->correctSources->hide();
+    ui->incorrectSources->show();
     // Imposto il titolo della finestra
     setWindowTitle("Creazione nuovo pacchetto");
 }
@@ -247,9 +253,32 @@ void NewPackageDialog::on_change_clicked()
         // Prendo solo il nome del file
         QFileInfo info(file);
         ui->mainFile->setText(info.fileName());
+
     }
 }
 
 void NewPackageDialog::on_buttonBox_accepted(){
+}
 
+void NewPackageDialog::on_mainFile_textChanged(const QString &arg1)
+{
+    // Controllo che il file esista
+    if(arg1 != ""){
+        // Controllo che esista
+        if(QFile::exists(arg1)){
+            ui->correctSources->show();
+            ui->incorrectSources->hide();
+            continue_button->setEnabled(true);
+        }
+        else{
+            ui->incorrectSources->show();
+            ui->correctSources->hide();
+            continue_button->setEnabled(false);
+        }
+    }
+    else{
+        ui->incorrectSources->show();
+        ui->correctSources->hide();
+        continue_button->setEnabled(false);
+    }
 }

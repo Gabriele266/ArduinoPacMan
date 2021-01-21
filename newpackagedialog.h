@@ -47,6 +47,8 @@ private slots:
 
     void on_buttonBox_accepted();
 
+    void on_mainFile_textChanged(const QString &arg1);
+
 private:
     Ui::NewPackageDialog *ui;
     // Lista dei caratteri non accettabili
@@ -65,6 +67,9 @@ private:
     void disableContinueWithPathError();
 
     void disableContinueWithNameError();
+
+    void disableContinueWithSourcesError();
+
     /// Cerca di abilitare la possibilità di andare avanti
     void enableContinue();
 

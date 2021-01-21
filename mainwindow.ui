@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="windowIcon">
+   <iconset theme=":/icons/program/ProgramIcon.ico"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
@@ -93,6 +96,10 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionNuovo_pacchetto">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/icons/program/Nuovo.png</normaloff>:/icons/program/Nuovo.png</iconset>
+   </property>
    <property name="text">
     <string>Nuovo pacchetto</string>
    </property>
@@ -101,6 +108,10 @@
    </property>
   </action>
   <action name="actionApri_pacchetto">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/icons/program/Apri.png</normaloff>:/icons/program/Apri.png</iconset>
+   </property>
    <property name="text">
     <string>Apri pacchetto</string>
    </property>
@@ -125,16 +136,28 @@
    </property>
   </action>
   <action name="actionImporta_libreria">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/icons/program/Import.png</normaloff>:/icons/program/Import.png</iconset>
+   </property>
    <property name="text">
     <string>Importa libreria</string>
    </property>
   </action>
   <action name="actionEsporta_libreria">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/icons/program/Export.png</normaloff>:/icons/program/Export.png</iconset>
+   </property>
    <property name="text">
     <string>Esporta libreria</string>
    </property>
   </action>
   <action name="actionRimuovi_libreria">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/icons/program/Chiudi.png</normaloff>:/icons/program/Chiudi.png</iconset>
+   </property>
    <property name="text">
     <string>Rimuovi libreria</string>
    </property>
@@ -263,6 +286,8 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="icons/icons.qrc"/>
+ </resources>
  <connections/>
 </ui>
