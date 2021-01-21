@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/icons/program">
+        <file>Apri.png</file>
+        <file>Chiudi.png</file>
+        <file>Documentation.png</file>
+        <file>Export.png</file>
+        <file>Import.png</file>
+        <file>Information.png</file>
+        <file>Nuovo.png</file>
+        <file>ProgramIcon.ico</file>
+        <file>ProgramIcon.png</file>
+        <file>Properties.png</file>
+        <file>Structure.png</file>
+    </qresource>
+</RCC>
