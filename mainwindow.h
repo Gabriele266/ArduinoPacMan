@@ -11,6 +11,7 @@
 #include "gui/packagemanager.h"
 #include "gui/generalstatusbar.h"
 #include "packages/package.h"
+#include "searchpathmanager.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -39,6 +40,8 @@ private slots:
     void on_packageManager_currentChanged(int index);
 
     void onPackageManagerTabChange(unsigned int newTab);
+    void on_actionPercorsi_ricerca_librerie_triggered();
+
 private:
     Ui::MainWindow *ui;
     QString endl = "\n";

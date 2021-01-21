@@ -106,3 +106,9 @@ void MainWindow::on_packageManager_currentChanged(int index)
     // Aggiorno il titolo
     updateTitleInfo();
 }
+
+void MainWindow::on_actionPercorsi_ricerca_librerie_triggered()
+{
+    SearchPathManager *man = new SearchPathManager();
+    man->exec();
+}
