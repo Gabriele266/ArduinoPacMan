@@ -54,8 +54,6 @@ void SearchPathManager::addEntry(QString path){
     }
 }
 
-
-
 QStringList SearchPathManager::getEntriesList(){
     return entries;
 }
