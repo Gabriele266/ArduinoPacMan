@@ -23,6 +23,16 @@ MainWindow::MainWindow(QWidget *parent)
     // Connetto il segnale di cambiamento dei tab
     QObject::connect(packageManager, &PackageManager::tabChanged, this, &MainWindow::onPackageManagerTabChange);
 
+    // Scrivo il percorso in uso per il salvataggio dei percorsi di ricerca librerie
+    qInfo() << "File percorsi di ricerca librerie: " << libSearchPath << endl;
+
+    // Avvio la lettura per i percorsi di ricerca lib
+    SearchPathListReader *reader = new SearchPathListReader();
+    reader->setDestinationList(&librariesSearchPath);
+    librariesSearchPath.setSavePath(libSearchPath);
+    reader->setFile(libSearchPath);
+
+    reader->start();
 }
 
 void MainWindow::updateTitleInfo(){
@@ -93,9 +103,6 @@ void MainWindow::on_actionNuovo_pacchetto_triggered()
 
         // Aggiungo il pacchetto al gestore
         packageManager->addPackage(package);
-
-        // Imposto il percorso di salvataggio per i percorsi di ricerca lib
-        librariesSearchPath.setSavePath(formatPathForOs(package->getCompletePath(), QStringList("libsrc.src")));
     }
 
     // Aggiorno il titolo
@@ -115,10 +122,27 @@ void MainWindow::on_packageManager_currentChanged(int index)
     updateTitleInfo();
 }
 
+void MainWindow::rimuoviPercorsoRicerca(QString path){
+    // Rimuovo l'elemento con quel testo
+    librariesSearchPath.removeElemByPath(path);
+}
+
 void MainWindow::on_actionPercorsi_ricerca_librerie_triggered()
 {
+    // Creo la finestra
     SearchPathManager *man = new SearchPathManager();
+
+    // Connetto il segnale di aggiunta di una nuova entry el metodo di gestione
     QObject::connect(man, &SearchPathManager::pathAdded, this, &MainWindow::aggiungiPercorsoRicercaTriggered);
+
+    // Connetto il segnale di rimozione degli elementi
+    QObject::connect(man, &SearchPathManager::pathRemoved, this, &MainWindow::rimuoviPercorsoRicerca);
+
+    // Controllo se sono presenti dei percorsi già salvati
+    if(librariesSearchPath.getListCount() > 0){
+        man->loadFromList(librariesSearchPath.getEntryList());
+    }
+
     int res = man->exec();
 
     // Controllo se l'utente ha accettato

@@ -6,13 +6,23 @@
 #include <QTextStream>
 #include <QLabel>
 
-#include "packages/library.h"
-#include "newpackagedialog.h"
+
+// Dialoghi addizionali
 #include "gui/packagemanager.h"
 #include "gui/generalstatusbar.h"
+
+// Costrutti logici
 #include "packages/package.h"
+#include "packages/library.h"
+
+// Altri dialoghi
+#include "newpackagedialog.h"
 #include "searchpathmanager.h"
+
+// Threads per la gestione delle operazioni di IO
 #include "threads/searchpathlistwriter.h"
+#include "threads/searchpathlistreader.h"
+
 #include "file_types/libsearchpathlist.h"
 
 QT_BEGIN_NAMESPACE
@@ -44,7 +54,10 @@ private slots:
     void onPackageManagerTabChange(unsigned int newTab);
     void on_actionPercorsi_ricerca_librerie_triggered();
 
+    /// Chiamato quando si aggiunge un percorso di ricerca
     void aggiungiPercorsoRicercaTriggered(QString path);
+    /// Chiamato quando si rimuove un percorso di ricerca
+    void rimuoviPercorsoRicerca(QString path);
 private:
     Ui::MainWindow *ui;
 
@@ -56,5 +69,8 @@ private:
 
     // Lista dei percorsi di ricerca delle librerie
     LibSearchPathList librariesSearchPath;
+
+    // Percorso in cui salvare i percorsi di ricerca
+    QString libSearchPath = getHomePath() + "libsources.src";
 };
 #endif // MAINWINDOW_H
