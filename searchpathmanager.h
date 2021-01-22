@@ -25,10 +25,11 @@ public:
     void addEntry(QString path);
 
     /// Carica le informazioni base della finestra dalla lista baseEntries
-    void loadFromList(QStringList baseEntries);
+    void loadFromList(QStringList* baseEntries);
 
     /// Restituisce una lista con tutti i percorsi di ricerca
     QStringList getEntriesList();
+
 private slots:
     void on_addPath_clicked();
 
@@ -40,6 +41,9 @@ signals:
     /// Chiamato quando si aggiunge un nuovo percorso di ricerca
     void pathAdded(QString newPath);
 
+    /// Chiamato quando un percorso viene rimosso
+    void pathRemoved(QString path);
+
 private:
     Ui::SearchPathManager *ui;
 
@@ -47,7 +51,10 @@ private:
     QStringList entries;
 
     // Aggiorna il contatore delle librerie
-    void updateLibrariesCounter();
+    void updateItemsCounter();
+
+    // Aggiorna la vista degli elementi
+    void updateItemsView();
 };
 
 #endif // SEARCHPATHMANAGER_H
