@@ -18,12 +18,16 @@ Natural LibSearchPathList::getListCount(){
 }
 
 bool LibSearchPathList::checkUp(){
-    for(Natural x = 0; x < pathList.count(); x++){
+    for(Natural x = 0; x < Natural::make(pathList.count(), ElideUnderZero); x++){
         if(!QDir(pathList[x]).exists()){
             return false;
         }
     }
     return true;
+}
+
+QStringList* LibSearchPathList::getEntryList(){
+    return &pathList;
 }
 
 void LibSearchPathList::setSavePath(QString path){
@@ -36,4 +40,14 @@ QString LibSearchPathList::getSavePath(){
 
 void LibSearchPathList::removePath(Natural index){
     pathList.remove(index);
+}
+
+bool LibSearchPathList::removeElemByPath(QString path){
+    for(Natural x = 0; x < Natural::make(pathList.count(), ElideUnderZero); x++){
+        if(pathList[x] == path){
+            pathList.remove(x);
+            return true;
+        }
+    }
+    return false;
 }

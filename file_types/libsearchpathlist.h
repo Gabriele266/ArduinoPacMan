@@ -41,6 +41,12 @@ public:
     /// Rimuove il percorso con quell' indice
     void removePath(Natural index);
 
+    /// Rimuove l'elemento con quel valore di percorso
+    /// restituisce vero se lo ha trovato o falso se non esisteva
+    bool removeElemByPath(QString path);
+
+    /// Restituisce un puntatore alla lista di elementi
+    QStringList* getEntryList();
 private:
     // Percorso di salvataggio del file
     QString file_path;
