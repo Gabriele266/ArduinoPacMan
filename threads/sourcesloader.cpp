@@ -42,7 +42,7 @@ void SourcesLoader::appendEntries(QTreeWidgetItem *item, QDir dir){
             elem->setText(0, f.fileName());
             elem->setText(1, "File");
             elem->setText(2, f.absoluteFilePath());
-
+            elem->setIcon(0, QIcon(":/icons/browsing/file_icon.png"));
             // Aggiungo al nodo
             item->addChild(elem);
         }
@@ -56,7 +56,7 @@ void SourcesLoader::appendEntries(QTreeWidgetItem *item, QDir dir){
                 elem->setText(0, lst[x]);
                 elem->setText(1, "Cartella");
                 elem->setText(2, formatPathForOs(dir.path(), QStringList(lst[x])));
-
+                elem->setIcon(0, QIcon(":/icons/browsing/folder_icon.png"));
                 item->addChild(elem);
 
                 // Lancio di nuovo la ricerca

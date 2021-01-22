@@ -12,4 +12,8 @@
         <file>Properties.png</file>
         <file>Structure.png</file>
     </qresource>
+    <qresource prefix="/icons/browsing">
+        <file>file_icon.png</file>
+        <file>folder_icon.png</file>
+    </qresource>
 </RCC>
