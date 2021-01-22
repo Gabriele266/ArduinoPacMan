@@ -132,6 +132,40 @@ unsigned int Natural::get(int value, NaturalNumberMode mode){
     }
 }
 
+Natural Natural::make(int value, NaturalNumberMode mode){
+    switch(mode){
+    case NaturalNumberMode::UseAbsoluteValue:
+        return Natural::abs(value);
+        break;
+    case NaturalNumberMode::ElideUnderZero:
+        if(value < 0){
+            return 0;
+        }
+        else{
+            return value;
+        }
+    }
+}
+
+bool Natural::operator<(Natural n){
+    if(val < n.getValue()){
+        return true;
+    }
+    return false;
+}
+
+bool Natural::operator<(int n){
+    return val < (Natural::abs(n));
+}
+
+bool Natural::operator>(int n){
+    return val > (Natural::abs(n));
+}
+
+bool Natural::operator>(Natural n){
+    return val > n.getValue();
+}
+
 void Natural::set(int num, NaturalNumberMode mode){
     val = Natural::get(num, mode);
 }

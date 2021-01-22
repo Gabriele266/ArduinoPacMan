@@ -53,6 +53,9 @@ public:
     /// Effettua la differenza tra due numeri senza segno
     static unsigned int diff(unsigned int n, unsigned int n2);
 
+    /// Restituisce una istanza della classe naturale applicando una politica precisa
+    static Natural make(int value, NaturalNumberMode mode);
+
     unsigned int operator+(Natural left);
     unsigned int operator+(int v);
 
@@ -67,6 +70,22 @@ public:
     unsigned int operator-=(Natural n);
     unsigned int operator-=(int val);
     unsigned int operator-=(Natural *v);
+
+    bool operator<(Natural n);
+    bool operator<(int n);
+    bool operator<(Natural *n);
+
+    bool operator>(Natural n);
+    bool operator>(int n);
+    bool operator>(Natural *n);
+
+    bool operator>=(Natural n);
+    bool operator>=(int n);
+    bool operator>=(Natural *m);
+
+    bool operator<=(Natural n);
+    bool operator<=(int n);
+    bool operator<=(Natural *n);
 
     unsigned int operator++(int);
 
