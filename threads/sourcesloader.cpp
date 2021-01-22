@@ -19,6 +19,9 @@ void SourcesLoader::run(){
         // Avvio la ricerca
         appendEntries(root, path);
     }
+
+    // Espando tutti gli elementi
+    destination->expandAll();
 }
 
 void SourcesLoader::appendEntries(QTreeWidgetItem *item, QDir dir){
