@@ -6,6 +6,8 @@ NewSearchPath::NewSearchPath(QWidget *parent) :
     ui(new Ui::NewSearchPath)
 {
     ui->setupUi(this);
+
+    setWindowTitle("Nuovo percorso di ricerca librerie");
 }
 
 NewSearchPath::~NewSearchPath()
@@ -29,5 +31,14 @@ void NewSearchPath::on_pathEditor_textChanged(const QString &arg1)
         else{
             ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
         }
+    }
+}
+
+void NewSearchPath::on_editButton_clicked()
+{
+    QString file = QFileDialog::getExistingDirectory(this, "Seleziona un percorso in cui cercare le librerie");
+
+    if(file != ""){
+        ui->pathEditor->setText(file);
     }
 }

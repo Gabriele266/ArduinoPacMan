@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QDir>
+#include <QFileDialog>
 
 namespace Ui {
 class NewSearchPath;
@@ -24,6 +25,8 @@ private slots:
     void on_buttonBox_accepted();
 
     void on_pathEditor_textChanged(const QString &arg1);
+
+    void on_editButton_clicked();
 
 private:
     Ui::NewSearchPath *ui;
