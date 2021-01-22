@@ -38,6 +38,7 @@ void SourcesLoader::appendEntries(QTreeWidgetItem *item, QDir dir){
             auto *elem = new QTreeWidgetItem();
             elem->setText(0, f.fileName());
             elem->setText(1, "File");
+            elem->setText(2, f.absoluteFilePath());
 
             // Aggiungo al nodo
             item->addChild(elem);
@@ -51,6 +52,7 @@ void SourcesLoader::appendEntries(QTreeWidgetItem *item, QDir dir){
                 // Percorso della cartella corrente
                 elem->setText(0, lst[x]);
                 elem->setText(1, "Cartella");
+                elem->setText(2, formatPathForOs(dir.path(), QStringList(lst[x])));
 
                 item->addChild(elem);
 
