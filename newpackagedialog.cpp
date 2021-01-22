@@ -15,6 +15,7 @@ NewPackageDialog::NewPackageDialog(QWidget *parent) :
 
     // Popolo la lista dei caratteri non consentiti
     no_chars.append(' ');
+    no_chars.append('\'');
     no_chars.append('/');
     no_chars.append('\\');
     no_chars.append('=');
@@ -259,10 +260,7 @@ void NewPackageDialog::on_change_clicked()
     QString file = QFileDialog::getOpenFileName(this, "Selezionare il file principale del progetto", ui->sourcesPath->text());
 
     if(file != ""){
-        // Prendo solo il nome del file
-        QFileInfo info(file);
-        ui->mainFile->setText(info.fileName());
-
+        ui->mainFile->setText(file);
     }
 }
 
