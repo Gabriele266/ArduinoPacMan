@@ -1,13 +1,17 @@
 #include "newsearchpath.h"
 #include "ui_newsearchpath.h"
 
-NewSearchPath::NewSearchPath(QWidget *parent) :
+NewSearchPath::NewSearchPath(QString basePath, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::NewSearchPath)
 {
     ui->setupUi(this);
 
+    // Imposto il titolo della finestra
     setWindowTitle("Nuovo percorso di ricerca librerie");
+
+    // Imposto il percorso di partenza
+    ui->pathEditor->setText(basePath);
 }
 
 NewSearchPath::~NewSearchPath()
@@ -17,8 +21,10 @@ NewSearchPath::~NewSearchPath()
 
 void NewSearchPath::on_buttonBox_accepted()
 {
-    // Emetto il sengale
-    emit pathAccepted(ui->pathEditor->text());
+}
+
+QString NewSearchPath::getSelectedPath(){
+    return ui->pathEditor->text();
 }
 
 void NewSearchPath::on_pathEditor_textChanged(const QString &arg1)
@@ -36,9 +42,21 @@ void NewSearchPath::on_pathEditor_textChanged(const QString &arg1)
 
 void NewSearchPath::on_editButton_clicked()
 {
-    QString file = QFileDialog::getExistingDirectory(this, "Seleziona un percorso in cui cercare le librerie");
+    // Testo presente nella casella di impostazione
+    QString pt = ui->pathEditor->text();
 
-    if(file != ""){
-        ui->pathEditor->setText(file);
+    // Percorso scelto dall' utente
+    QString path;
+
+    // Controllo se è stato messo un percorso base
+    if(pt != ""){
+        path = QFileDialog::getExistingDirectory(this, "Seleziona un percorso in cui cercare le librerie", pt);
+    }
+    else{
+        path = QFileDialog::getExistingDirectory(this, "Seleziona un percorso in cui cercare le librerie", getHomePath());
+    }
+
+    if(path != ""){
+        ui->pathEditor->setText(path);
     }
 }

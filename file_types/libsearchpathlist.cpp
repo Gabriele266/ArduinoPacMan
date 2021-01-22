@@ -42,6 +42,14 @@ void LibSearchPathList::removePath(Natural index){
     pathList.remove(index);
 }
 
+bool LibSearchPathList::editElem(Natural index, QString newVal){
+    if(pathList.count() > index){
+        pathList[index] = newVal;
+        return true;
+    }
+    return false;
+}
+
 bool LibSearchPathList::removeElemByPath(QString path){
     for(Natural x = 0; x < Natural::make(pathList.count(), ElideUnderZero); x++){
         if(pathList[x] == path){

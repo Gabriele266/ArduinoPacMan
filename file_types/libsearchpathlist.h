@@ -45,6 +45,9 @@ public:
     /// restituisce vero se lo ha trovato o falso se non esisteva
     bool removeElemByPath(QString path);
 
+    /// Modifica l'elemento con quell' indice applicando un nuovo valore
+    bool editElem(Natural index, QString newVal);
+
     /// Restituisce un puntatore alla lista di elementi
     QStringList* getEntryList();
 private:

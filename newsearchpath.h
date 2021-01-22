@@ -5,6 +5,8 @@
 #include <QDir>
 #include <QFileDialog>
 
+#include "utils/utils.cpp"
+
 namespace Ui {
 class NewSearchPath;
 }
@@ -14,12 +16,13 @@ class NewSearchPath : public QDialog
     Q_OBJECT
 
 public:
-    explicit NewSearchPath(QWidget *parent = nullptr);
+    /// Inizializza il dialogo con un percorso di partenza pari a ""
+    explicit NewSearchPath(QString baseValue = "", QWidget *parent = nullptr);
+
     ~NewSearchPath();
 
-signals:
-    /// Emesso quando si accetta e si ha un percorso immesso
-    void pathAccepted(QString path);
+    /// Restituisce il percorso che è stato scelto
+    QString getSelectedPath();
 
 private slots:
     void on_buttonBox_accepted();

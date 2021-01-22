@@ -50,6 +50,17 @@ void SearchPathManager::updateItemsView(){
     }
 }
 
+void SearchPathManager::editItem(Natural index, QString newVal){
+    QString old_val = entries[index];
+
+    entries[index] = newVal;
+
+    // Imposto il testo
+    ui->pathList->item(index)->setText(newVal);
+
+    emit pathEdited(index, old_val, newVal);
+}
+
 void SearchPathManager::addEntry(QString path){
     // Controllo che non esista nessuna altra entry con questo nome
     if(notExists(path, entries)){
@@ -73,18 +84,16 @@ QStringList SearchPathManager::getEntriesList(){
     return entries;
 }
 
-void SearchPathManager::onEntryAccept(QString entry){
-    addEntry(entry);
-}
-
 void SearchPathManager::on_addPath_clicked()
 {
     // Aggiungo un elemento
     NewSearchPath pt;
-    // Connetto il gestore
-    QObject::connect(&pt, &NewSearchPath::pathAccepted, this, &SearchPathManager::onEntryAccept);
     // Avvio
-    pt.exec();
+    auto r = pt.exec();
+
+    if(r == QDialog::Accepted){
+        addEntry(pt.getSelectedPath());
+    }
 }
 
 void SearchPathManager::on_removePath_clicked()
@@ -105,4 +114,22 @@ void SearchPathManager::on_removePath_clicked()
 
     // Emetto il segnale
     emit pathRemoved(old_item_text);
+}
+
+void SearchPathManager::on_editCurrent_clicked()
+{
+    // Prendo l'indice corrente
+    Natural curIndex = Natural::make(ui->pathList->currentRow(), ElideUnderZero);
+
+    // Prendo il vecchio testo
+    QString old_text = ui->pathList->item(curIndex)->text();
+
+    // Mostro il dialogo per avere il nuovo valore
+    NewSearchPath pt(old_text);
+    auto r = pt.exec();
+
+    // Controllo il risultato
+    if(r == QDialog::Accepted){
+        editItem(curIndex, pt.getSelectedPath());
+    }
 }

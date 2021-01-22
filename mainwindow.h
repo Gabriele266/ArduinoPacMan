@@ -56,8 +56,12 @@ private slots:
 
     /// Chiamato quando si aggiunge un percorso di ricerca
     void aggiungiPercorsoRicercaTriggered(QString path);
+
     /// Chiamato quando si rimuove un percorso di ricerca
     void rimuoviPercorsoRicerca(QString path);
+
+    /// Chiamato quando si modifica un percorso di ricerca dal relativo dialogo
+    void modificaPercorsoRicerca(Natural index, QString old_val, QString new_val);
 private:
     Ui::MainWindow *ui;
 

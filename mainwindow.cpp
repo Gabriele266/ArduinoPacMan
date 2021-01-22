@@ -127,6 +127,11 @@ void MainWindow::rimuoviPercorsoRicerca(QString path){
     librariesSearchPath.removeElemByPath(path);
 }
 
+void MainWindow::modificaPercorsoRicerca(Natural index, QString old_val, QString new_val){
+    librariesSearchPath.editElem(index, new_val);
+    qInfo() << "Valore " << new_val << " nuovo per " << old_val << " con indice " << index << endl;
+}
+
 void MainWindow::on_actionPercorsi_ricerca_librerie_triggered()
 {
     // Creo la finestra
@@ -137,6 +142,9 @@ void MainWindow::on_actionPercorsi_ricerca_librerie_triggered()
 
     // Connetto il segnale di rimozione degli elementi
     QObject::connect(man, &SearchPathManager::pathRemoved, this, &MainWindow::rimuoviPercorsoRicerca);
+
+    // Connetto il segnale per la modifica degli elementi
+    QObject::connect(man, &SearchPathManager::pathEdited, this, &MainWindow::modificaPercorsoRicerca);
 
     // Controllo se sono presenti dei percorsi già salvati
     if(librariesSearchPath.getListCount() > 0){
