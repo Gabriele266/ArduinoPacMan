@@ -109,4 +109,35 @@ static bool notExists(QString string, QStringList list){
     return true;
 }
 
+/// Restituisce il percorso della home del sistema operativo
+/// su linux /home/$username
+/// su windows C:\Users\$Username
+static QString getHomePath(){
+    auto os_vers = QOperatingSystemVersion::currentType();
+
+    // Prendo il nome utente corrente
+    QString user_name = qgetenv("USER");
+    if(user_name == ""){
+        user_name = qgetenv("USERNAME");
+    }
+
+    // Controllo se si tratta di windows
+    if(os_vers == QOperatingSystemVersion::Windows){
+        return "C:\\Users\\" + user_name + "\\";
+    }
+    else{
+        return "/home/" + user_name + "/";
+    }
+}
+
+/// Risolve un percorso che contiene collegamenti simbolici come ~.
+static QString resolvePath(QString startPath){
+    if(startPath.startsWith("~")){
+        return startPath.replace("~", getHomePath());
+    }
+    else{
+        return startPath;
+    }
+}
+
 #endif
