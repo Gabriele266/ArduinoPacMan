@@ -8,6 +8,8 @@
 #include <QString>
 #include <QStringList>
 
+#include "natural.h"
+
 /// Rappresenta i differenti risultati di una operazione di compare tra due versioni
 enum CompareResult{
     /// Indica che le due versioni sono uguali
@@ -65,6 +67,12 @@ public:
     /// \arg Stringa contenente la versione nel formato 1.2.3
     /// \return Una istanza della classe versione con i valori impostati. (in caso di errore la versione sarà 0.0.0
     static Version versionFromString(QString version_id);
+
+    /// Crea una versione con impostati i valori passati
+    static Version version(Natural m, Natural b, Natural s);
+
+    /// Crea una versione 0.0.0 come versione base
+    static Version baseVersion();
 
     /// Restituisce il numero della versione maggiore
     unsigned int getMajor();

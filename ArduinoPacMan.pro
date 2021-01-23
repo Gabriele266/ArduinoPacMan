@@ -15,12 +15,14 @@ SOURCES += \
     gui/packagetab.cpp \
 	newsearchpath.cpp \
 	packages/attributeditem.cpp \
+	packages/dependency.cpp \
 	packages/library.cpp \
     main.cpp \
     mainwindow.cpp \
     newpackagedialog.cpp \
 	packages/natural.cpp \
 	packages/package.cpp \
+	packages/source.cpp \
     pacman_info.h \
 	searchpathmanager.cpp \
 	threads/librariesloader.cpp \
@@ -37,17 +39,20 @@ HEADERS += \
     gui/packagetab.h \
 	newsearchpath.h \
 	packages/attributeditem.h \
+	packages/dependency.h \
 	packages/library.h \
     mainwindow.h \
     newpackagedialog.h \
 	packages/natural.h \
 	packages/package.h \
+	packages/source.h \
 	packages/version.h \
 	searchpathmanager.h \
 	threads/librariesloader.h \
 	threads/searchpathlistreader.h \
 	threads/searchpathlistwriter.h \
-	threads/sourcesloader.h
+	threads/sourcesloader.h \
+	utils/macros.h
 
 FORMS += \
     gui/generalstatusbar.ui \

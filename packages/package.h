@@ -16,6 +16,7 @@
 #include "pacman_info.h"
 #include "../utils/utils.cpp"
 #include "attributeditem.h"
+#include "utils/macros.h"
 
 class Package : public AttributedItem
 {
@@ -23,23 +24,18 @@ public:
     Package();
     Package(QString name);
 
-    /// Imposta il percorso di salvataggio
-    void setSavePath(QString val);
+    GETTER_SETTERC(QString,
+                   path, SavePath,
+                   Imposta il percorso di salvataggio del pacchetto (senza il nome),
+                   Restituisce il percorso in cui è stato salvato il pacchetto (escluso il nome))
 
-    /// Restiuisce il percorso di salvataggio del pacchetto
-    QString getSavePath();
+    GETTER_SETTERC(QString, sources_path, SourcesPath,
+                   Imposta il percorso dei sorgenti legati al progetto,
+                   Ottiene il percorso dei sorgenti in uso dal pacchetto)
 
-    /// Imposta il percorso in cui si trovano i sorgenti del progetto
-    void setSourcesPath(QString path);
-
-    /// Restituisce il percorso in cui si trovano i sorgenti del progetto
-    QString getSourcesPath();
-
-    /// Imposta il percorso del file principale del progetto
-    void setMainFilePath(QString path);
-
-    /// Restituisce il percorso in cui si trova il file principale insieme al suo nome
-    QString getMainFilePath();
+    GETTER_SETTERC(QString, main_file, MainFilePath,
+                   Imposta il percorso completo del file principale del progetto (punto di entrata del codice),
+                   Restituisce il percorso completo del file principale del progetto)
 
     /// Restituisce il percorso completo del progetto (salvataggio + nome)
     QString getCompletePath();
@@ -82,6 +78,7 @@ private:
 
     // Percorso di salvataggio del pacchetto
     QString path;
+
     // Percorso dei sorgenti del progetto
     QString sources_path;
     // Percorso del file principale del progetto

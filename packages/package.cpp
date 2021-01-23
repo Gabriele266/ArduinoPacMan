@@ -5,33 +5,8 @@ Package::Package()
 
 }
 
-void Package::setSavePath(QString val){
-    this->path = val;
-}
-
-QString Package::getSavePath(){
-    return this->path;
-}
-
 QString Package::getCompletePath(){
     return formatPathForOs(this->path, QStringList(getName()));
-}
-
-void Package::setMainFilePath(QString file){
-    // Prendo il nome del file
-    main_file = path;
-}
-
-QString Package::getMainFilePath(){
-    return main_file;
-}
-
-void Package::setSourcesPath(QString path){
-    sources_path = path;
-}
-
-QString Package::getSourcesPath(){
-    return sources_path;
 }
 
 int Package::getLibraryCount(){
@@ -85,7 +60,6 @@ bool Package::create(){
     QString package_path_complete = formatPathForOs(path, QStringList(getName()));
     qInfo() << "Percorso per os: " << package_path_complete << "\n";
     dir.mkdir(package_path_complete);
-
     // Creo il file di progetto
     QString package_file = formatPathForOs(package_path_complete, QStringList(getName() + ".pak"));
     QFile file(package_file);

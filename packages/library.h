@@ -17,6 +17,7 @@
 // Header custom
 #include "version.h"
 #include "attributeditem.h"
+#include "utils/macros.h"
 
 /// Rappresenta una libreria
 class Library : public AttributedItem
@@ -25,20 +26,16 @@ public:
     Library();
     Library(QString name);
 
-    /// Imposta il percorso in cui si trova la libreria (senza il nome)
-    /// \arg path Percorso
-    void setPath(QString path);
+    GETTER_SETTERC(QString, path, Path,
+                   Imposta il percorso in cui si trova questa libreria,
+                   Restituisce il percorso in cui è stata salvata la libreria)
 
     /// Imposta il percorso in cui si trova la libreria (senza il nome)
     /// \arg dir Istanza della classe dir che punta alla cartella
-    void setPath(QDir dir);
+    CUSTOM_SETTER(QDir, path, Path, mem.path())
 
     /// Imposta il percorso completo della libreria (percorso e nome)
     void setCompletePath(QString path);
-
-    /// Restituisce il percorso della libreria
-    /// \return Una stringa
-    QString getPath();
 
     /// Imposta il nome della cartella che contiene la documentazione della libreria
     /// \arg dir_name Nome della cartella

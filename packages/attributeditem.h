@@ -13,6 +13,7 @@
 #include <QTextStream>
 
 #include "natural.h"
+#include "../utils/macros.h"
 
 /// Rappresenta un oggetto con degli attributi
 class AttributedItem
@@ -21,29 +22,29 @@ public:
     AttributedItem();
 
     /// Imposta il nome dell' oggetto
-    void setName(QString name);
+    GETTER_SETTER(QString, name, Name)
 
-    /// Imposta l'autore dell' oggetto
-    void setAuthor(QString author);
+    GETTER_SETTER(QString, author, Author)
 
-    /// Imposta la data di creazione
-    void setCreationDate(QDate date);
-    void setCreationDate(QString date);
+    GETTER_SETTER(QDate, creation_date, CreationDate)
 
-    /// Imposta l'orario di creazione dell' oggetto
-    void setCreationTime(QTime time);
-    void setCreationTime(QString str);
+    /// Permette di impostare la data di creazione tramite l'uso di una stringa
+    CUSTOM_SETTER(QString, creation_date, CreationDate, QDate::fromString(mem))
 
-    /// Imposta l'orario di ultima modifica dell' oggetto
-    void setLastModifyTime(QString time);
-    void setLastModifyTime(QTime time);
+    GETTER_SETTER(QTime, creation_time, CreationTime)
 
-    /// Imposta la data di ultima modifica dell' oggetto
-    void setLastModifyDate(QDate date);
-    void setLastModifyDate(QString date);
+    /// Permette di impostare l'orario di creazione tramite una stringa
+    CUSTOM_SETTER(QString, creation_time, CreationTime, QTime::fromString(mem))
 
-    /// Imposta la descrizione a partire da una stringa
-    void setDescription(QString description);
+    GETTER_SETTER(QDate, last_modify_date, LastModifyDate)
+
+    CUSTOM_SETTER(QString, last_modify_date, LastModifyDate, QDate::fromString(mem))
+
+    GETTER_SETTER(QTime, last_modify_time, LastModifyTime)
+
+    CUSTOM_SETTER(QString, last_modify_time, LastModifyTime, QTime::fromString(mem))
+
+    GETTER_SETTER(QString, description, Description)
 
     /// Imposta la descrizione a partire da un file
     void loadDescription(QFile file);
@@ -63,29 +64,16 @@ public:
     /// Pulisce i tag
     void clearTags();
 
-    /// Restituisce il nome
-    QString getName();
-
-    /// Restituisce l'autore
-    QString getAuthor();
-
     /// Restituisce la data di creazione
-    QDate getCreationDate();
-    QString getCreationDateString();
+    CUSTOM_GETTER(QString, creation_date, CreationDateString, creation_date.toString())
 
-    QTime getCreationTime();
-    QString getCreationTimeString();
+    CUSTOM_GETTER(QString, creation_time, CreationTimeString, creation_time.toString())
 
-    QDate getLastModifyDate();
-    QString getLastModifyDateString();
+    CUSTOM_GETTER(QString, last_modify_date, LastModifyDateString, last_modify_date.toString())
 
-    QTime getLastModifyTime();
-    QString getLastModifyTimeString();
+    CUSTOM_GETTER(QString, last_modify_time, LastModifyTimeString, last_modify_time.toString())
 
     QString getLastModifyInfo();
-
-    /// Restituisce la descrizione dell' oggetto
-    QString getDescription();
 
     QStringList* getTagsList();
 

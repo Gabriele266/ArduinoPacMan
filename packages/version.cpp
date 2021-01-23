@@ -92,6 +92,22 @@ Version Version::versionFromString(QString version_id){
     return ver;
 }
 
+Version Version::version(Natural m, Natural b, Natural s){
+    Version vers;
+    vers.setMajor(m);
+    vers.setSub(b);
+    vers.setRev(s);
+
+    return vers;
+}
+
+Version Version::baseVersion(){
+    Version vers;
+    vers.set(0, 0, 0);
+
+    return vers;
+}
+
 CompareResult Version::compareVersions(Version *ver){
     // Controllo che la versione esista
     if(ver != nullptr){

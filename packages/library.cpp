@@ -17,31 +17,6 @@ void Library::setDocumentationDir(QString dir_name){
     }
 }
 
-void Library::setPath(QString path){
-    QDir dir = path;
-    // Controllo che esista
-    if(dir.exists(path)){
-        this->path = path;
-    }
-    else{
-        this->path = "";
-    }
-}
-
-void Library::setPath(QDir dir){
-    // Controllo se esiste
-    if(dir.exists()){
-        this->path = dir.path();
-    }
-    else{
-        this->path = "";
-    }
-}
-
-QString Library::getPath(){
-    return path;
-}
-
 bool Library::hasDocumentationDir(){
     return documentation;
 }
