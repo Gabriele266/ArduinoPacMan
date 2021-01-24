@@ -28,9 +28,14 @@ public:
     /// Restituisce il percorso del pacchetto
     QString getPackagePath();
 
+    /// Restituisce il percorso di tutti i sorgenti del pacchetto
     QString getSourcesPath();
 
+    /// Restituisce il file principale del pacchetto
     QString getMainFilePath();
+
+    /// Restituisce la descrizione del pacchetto
+    QString getDescription();
 
 private slots:
 

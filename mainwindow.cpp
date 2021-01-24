@@ -99,6 +99,9 @@ void MainWindow::on_actionNuovo_pacchetto_triggered()
         package->setSavePath(dialog->getPackagePath());
         package->setSourcesPath(dialog->getSourcesPath());
         package->setMainFilePath(dialog->getMainFilePath());
+        package->setDescription(dialog->getDescription());
+
+        qInfo() << " descrizione " << dialog->getDescription() << endl;
         package->create();
 
         // Aggiungo il pacchetto al gestore

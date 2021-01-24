@@ -227,6 +227,10 @@ void NewPackageDialog::on_packagePath_textChanged(const QString &arg1)
     }
 }
 
+QString NewPackageDialog::getDescription(){
+    return ui->packageDescription->toPlainText();
+}
+
 void NewPackageDialog::on_sfoglia_clicked()
 {
     QString dir = QFileDialog::getExistingDirectory(this, "Scegliere il percorso dei sorgenti");

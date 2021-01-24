@@ -86,7 +86,7 @@ bool Package::create(){
 
         // Metto la descrizione
         QDomElement desc = doc.createElement("property");
-        desc.setAttribute("description", description);
+        desc.setAttribute("description", getDescription());
         root.appendChild(desc);
 
         QDomElement vers = doc.createElement("pac-version");
@@ -101,9 +101,6 @@ bool Package::create(){
     else{
         return false;
     }
-
-
-
     return false;
 }
 

@@ -18,6 +18,7 @@
 #include "attributeditem.h"
 #include "utils/macros.h"
 
+/// Rappresenta un pacchetto
 class Package : public AttributedItem
 {
 public:
@@ -78,17 +79,12 @@ private:
 
     // Percorso di salvataggio del pacchetto
     QString path;
-
     // Percorso dei sorgenti del progetto
     QString sources_path;
     // Percorso del file principale del progetto
     QString main_file;
-    // Descrizione del pacchetto
-    QString description;
     // Array con le librerie
     QList<Library*> libraries;
-    // Percorso del file di descrizione del pacchetto
-    QString description_path;
 };
 
 #endif // PACKAGE_H
