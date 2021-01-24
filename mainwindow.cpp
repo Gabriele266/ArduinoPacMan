@@ -95,11 +95,24 @@ void MainWindow::on_actionNuovo_pacchetto_triggered()
 
     if(res == QDialog::Accepted){
         Package *package = new Package();
+        // Imposto le generalità
         package->setName(dialog->getPackageName());
         package->setSavePath(dialog->getPackagePath());
+
+        // Imposto i percorsi legati ai sorgenti del progetto
         package->setSourcesPath(dialog->getSourcesPath());
         package->setMainFilePath(dialog->getMainFilePath());
+
+        // Imposto la descrizione del pacchetto
         package->setDescription(dialog->getDescription());
+
+        // Imposto la data e l'ora di creazione del pacchetto
+        package->setCreationDate(QDate::currentDate());
+        package->setCreationTime(QTime::currentTime());
+
+        // Imposto l'orario di ultima modifica
+        package->setLastModifyDate(QDate::currentDate());
+        package->setLastModifyTime(QTime::currentTime());
 
         qInfo() << " descrizione " << dialog->getDescription() << endl;
         package->create();

@@ -89,6 +89,23 @@ bool Package::create(){
         desc.setAttribute("description", getDescription());
         root.appendChild(desc);
 
+        // Momento di creazione del pacchetto
+        QDomElement creation = doc.createElement("property");
+        creation.setAttribute("creation_date", getCreationDate().toString());
+        creation.setAttribute("creation_time", getCreationTime().toString());
+        root.appendChild(creation);
+
+        // Ultima modifica
+        QDomElement last_modify = doc.createElement("property");
+        last_modify.setAttribute("last_mod_date", getLastModifyDate().toString());
+        last_modify.setAttribute("last_mod_time", getLastModifyTime().toString());
+        root.appendChild(last_modify);
+
+        QDomElement sources = doc.createElement("property");
+        sources.setAttribute("path", getSourcesPath());
+        sources.setAttribute("main_file", getMainFilePath());
+        root.appendChild(sources);
+
         QDomElement vers = doc.createElement("pac-version");
         vers.appendChild(doc.createTextNode(ARDUINO_PACMAN_VERSION.toString()));
         root.appendChild(vers);
