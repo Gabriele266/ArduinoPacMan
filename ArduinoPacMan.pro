@@ -29,6 +29,7 @@ SOURCES += \
 	threads/packagereader.cpp \
 	threads/searchpathlistreader.cpp \
 	threads/searchpathlistwriter.cpp \
+	threads/sourceslister.cpp \
 	threads/sourcesloader.cpp \
 	utils/utils.cpp \
 	packages/version.cpp
@@ -53,7 +54,9 @@ HEADERS += \
 	threads/packagereader.h \
 	threads/searchpathlistreader.h \
 	threads/searchpathlistwriter.h \
+	threads/sourceslister.h \
 	threads/sourcesloader.h \
+	utils/costants.h \
 	utils/macros.h
 
 FORMS += \
