@@ -17,6 +17,7 @@
 #include "../utils/utils.cpp"
 #include "attributeditem.h"
 #include "utils/macros.h"
+#include "dependency.h"
 
 /// Rappresenta un pacchetto
 class Package : public AttributedItem
@@ -37,6 +38,9 @@ public:
     GETTER_SETTERC(QString, main_file, MainFilePath,
                    Imposta il percorso completo del file principale del progetto (punto di entrata del codice),
                    Restituisce il percorso completo del file principale del progetto)
+
+    /// Restituisce il puntatore alla lista delle dipendenze di questo pacchetto
+    CUSTOM_GETTER(QList<Dependency*>*, dependencies, DependenciesList, &dependencies)
 
     /// Restituisce il percorso completo del progetto (salvataggio + nome)
     QString getCompletePath();
@@ -76,7 +80,6 @@ public:
     bool create();
 
 private:
-
     // Percorso di salvataggio del pacchetto
     QString path;
     // Percorso dei sorgenti del progetto
@@ -85,6 +88,8 @@ private:
     QString main_file;
     // Array con le librerie
     QList<Library*> libraries;
+    // Lista delle dipendenze del pacchetto
+    QList<Dependency*> dependencies;
 };
 
 #endif // PACKAGE_H
