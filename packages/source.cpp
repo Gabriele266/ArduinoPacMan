@@ -50,3 +50,31 @@ bool Source::fileIsSource(QString file){
     // Controllo se è presente nella lista
     return isAnyOfList(suff, sources_extensions);
 }
+
+void Source::appendDependency(Dependency *dep){
+    dependencies.append(dep);
+}
+
+void Source::setCompleteFile(QString f){
+    if(f != ""){
+        QFileInfo info(f);
+        file_path = info.path();
+        source_name = info.fileName();
+        file_suffix = info.suffix();
+        file = f;
+
+        if(file_suffix == "h"){
+            type = HeaderFile;
+        }
+        else if(file_suffix == "cpp" || file_suffix == "c"){
+            type = ImplementationFile;
+        }
+        else if(file_suffix == "ino"){
+            type = ArduinoSketch;
+        }
+        else{
+            qInfo() << "Trovato file non riconosciuto: " << file << endl;
+            type = Unknown;
+        }
+    }
+}

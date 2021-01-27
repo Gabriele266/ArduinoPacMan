@@ -51,8 +51,11 @@ bool PackageManager::isCurrentPackage(){
 void PackageManager::startDependencyIndexer(Package *package){
     // Creo il thread
     SourcesLister *lister = new SourcesLister();
-
-    lister->setMainFile(package->getMainFilePath());
+    // Creo il sorgente
+    Source *src = new Source();
+    src->setCompleteFile(package->getMainFilePath());
+    // Avvio il thread
+    lister->setSource(src);
     lister->setDestinationList(package->getDependenciesList());
     lister->start();
 }

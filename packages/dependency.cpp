@@ -19,10 +19,6 @@ Dependency::Dependency(QString lib) : Dependency(lib, ""){
 
 }
 
-void Dependency::attachSource(void *source){
-    source_file_caller = source;
-}
-
 Dependency Dependency::createDependency(QString lib_name, QString lib_header, Version minimal){
     Dependency newDependency;
     newDependency.setLibraryName(lib_name);

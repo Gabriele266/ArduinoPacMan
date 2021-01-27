@@ -1,11 +1,11 @@
 #include "sourceslister.h"
 
-SourcesLister::SourcesLister(QString file, QList<Dependency*>* results){
+SourcesLister::SourcesLister(Source* file, QList<Dependency*>* results){
     startFile = file;
     resultsList = results;
 }
 
-SourcesLister::SourcesLister() : SourcesLister("", nullptr)
+SourcesLister::SourcesLister() : SourcesLister(nullptr, nullptr)
 {
     // Nothing
 }
@@ -23,9 +23,7 @@ void SourcesLister::appendDependencyToWidget(Dependency *dep){
 
 void SourcesLister::run(){
     // Creo l'oggetto file
-    QFile file(startFile);
-
-
+    QFile file(startFile->getCompleteFile());
 
     if(file.open(QIODevice::ReadOnly)){
         // Creo uno stream di testo
@@ -40,9 +38,9 @@ void SourcesLister::run(){
             // Controllo se si tratta di una direttiva al preprocessore per una inclusione di libreria
             if(curLine.startsWith("#include")){
                 // Prendo il contenuto dell' header richiesto
-                QString head = curLine.mid(curLine.indexOf('e') + 1);
+                QString head = curLine.mid(curLine.indexOf('<') + 1, curLine.indexOf('>') - 1);
                 // Rimuovo gli spazi
-                head = head.remove(' ');
+                head = head.remove('>');
                 qInfo() << "Header richiesto: " << head;
                 // Prendo il nome della libreria
                 QStringList div = head.split('.');
@@ -53,7 +51,10 @@ void SourcesLister::run(){
                     Dependency *d = new Dependency();
                     d->setLibraryName(lib_name);
                     d->setHeaderName(head);
+                    // Aggiungo la dipendenza alla lista
                     resultsList->append(d);
+                    // Aggiungo la dipendenza al sorgente
+                    startFile->appendDependency(d);
                 }
             }
             current_row ++;

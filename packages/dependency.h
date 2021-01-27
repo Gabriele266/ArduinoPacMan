@@ -36,9 +36,6 @@ public:
                    Imposta la versione minima necessaria per il funzionamento,
                    Restituisce la versione minima necessaria alla libreria)
 
-    /// Imposta il sorgente che ha chiamato questa dipendenza
-    void attachSource(void* source);
-
     /// Determina se la dipendenza è raggiunta
     bool isSolved() {return solved;}
 
@@ -65,9 +62,6 @@ private:
 
     // Versione minima richiesta
     Version minimal_version;
-
-    // File che necessita di questa dipendenza
-    void* source_file_caller;
 
     // Indica se la dipendenza è stata risolta
     bool solved = false;

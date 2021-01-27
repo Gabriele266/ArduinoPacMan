@@ -18,17 +18,18 @@
 #include "utils/macros.h"
 #include "../packages/dependency.h"
 #include "../packages/natural.h"
+#include "../packages/source.h"
 
 class SourcesLister : public QThread
 {
 public:
     SourcesLister();
-    SourcesLister(QString file, QList<Dependency*>* results);
+    SourcesLister(Source* file, QList<Dependency*>* results);
 
     void run();
 
     /// Imposta il sorgente da cui partire alla ricerca delle librerie
-    SETTER(QString, startFile, MainFile)
+    SETTER(Source*, startFile, Source)
 
     /// Imposta la lista in cui aggiungere i risultati della ricerca
     SETTER(QList<Dependency*>*, resultsList, DestinationList)
@@ -38,7 +39,7 @@ public:
 
 private:
     // File da cui partire
-    QString startFile;
+    Source* startFile = nullptr;
     // Lista a cui aggiungere i risultati
     QList<Dependency*> *resultsList = nullptr;
     // Widget a cui aggiungere i risultati
