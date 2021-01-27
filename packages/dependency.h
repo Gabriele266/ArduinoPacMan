@@ -12,7 +12,8 @@
 
 #include "library.h"
 #include "version.h"
-#include "source.h"
+
+#include "utils/macros.h"
 
 
 /// Rappresenta una dipendenza di un sorgente verso una libreria
@@ -20,39 +21,30 @@ class Dependency
 {
 public:
     Dependency();
+    Dependency(QString libraryName);
+    Dependency(QString libraryName, QString header, Version minimal = Version::baseVersion());
 
-    /// Imposta il nome della libreria
-    void setLibraryName(QString name);
+    GETTER_SETTERC(QString, libraryName, LibraryName,
+                   Imposta il nome della libreria da ricercare,
+                   Restituisce il nome della libreria necessaria)
 
-    /// Imposta il nome dell' header necessario
-    void setHeaderName(QString header);
+    GETTER_SETTERC(QString, header_name, HeaderName,
+                   Imposta il valore dell header ricercato,
+                   Restituisce il valore dell header da ricercare)
 
-    /// Imposta la versione minimale necessaria
-    void setMinimalVersion(Version version);
+    GETTER_SETTERC(Version, minimal_version, MinimalVersion,
+                   Imposta la versione minima necessaria per il funzionamento,
+                   Restituisce la versione minima necessaria alla libreria)
 
     /// Imposta il sorgente che ha chiamato questa dipendenza
-//    void attachSource(Source *source);
-
-    /// Indica se la dipendenza è raggiunta
-    void setSolved(bool val);
+    void attachSource(void* source);
 
     /// Determina se la dipendenza è raggiunta
-    bool isSolved();
+    bool isSolved() {return solved;}
 
-    /// Imposta la libreria che la raggiunge
-    void setLibrary(Library *lib);
-
-    /// Restituisce il nome della libreria
-    QString getLibraryName();
-
-    /// Restituisce il valore dell' header richiesto
-    QString getHeaderName();
-
-    /// Restituisce la versione minima necessaria al sorgente
-    Version getMinimalVersion();
-
-    /// Restituisce la libreria che risolve questa dipendenza o nullptr se non esiste
-    Library* getDepLibrary();
+    /// Restituisce un puntatore alla libreria che raggiunge questa dipendenza
+    /// se non esiste restituisce nullptr
+    GETTER(Library*, foundLib, Library)
 
     /// Crea una dipendenza di una certa libreria da un sorgente
     /// \arg lib_name Nome della libreria da ricercare
@@ -73,6 +65,9 @@ private:
 
     // Versione minima richiesta
     Version minimal_version;
+
+    // File che necessita di questa dipendenza
+    void* source_file_caller;
 
     // Indica se la dipendenza è stata risolta
     bool solved = false;
