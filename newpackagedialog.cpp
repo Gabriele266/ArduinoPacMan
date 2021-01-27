@@ -251,7 +251,7 @@ void NewPackageDialog::on_sfoglia_clicked()
 }
 
 QString NewPackageDialog::getMainFilePath(){
-    return formatPathForOs(ui->sourcesPath->text(), QStringList(ui->mainFile->text()));
+    return ui->mainFile->text();
 }
 
 QString NewPackageDialog::getSourcesPath(){
