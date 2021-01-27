@@ -22,6 +22,7 @@
 // Threads per la gestione delle operazioni di IO
 #include "threads/searchpathlistwriter.h"
 #include "threads/searchpathlistreader.h"
+#include "threads/packagereader.h"
 
 #include "file_types/libsearchpathlist.h"
 
@@ -62,6 +63,8 @@ private slots:
 
     /// Chiamato quando si modifica un percorso di ricerca dal relativo dialogo
     void modificaPercorsoRicerca(Natural index, QString old_val, QString new_val);
+    void on_actionApri_pacchetto_triggered();
+
 private:
     Ui::MainWindow *ui;
 

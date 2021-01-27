@@ -179,3 +179,25 @@ void MainWindow::on_actionPercorsi_ricerca_librerie_triggered()
         writer->start();
     }
 }
+
+void MainWindow::on_actionApri_pacchetto_triggered()
+{
+    // Chiedo una directory in cui cercare il pacchetto
+    QString dir = QFileDialog::getExistingDirectory(this, "Selezionare la cartella del pacchetto");
+
+    // Controllo che l'utente abbia accettato
+    if(dir != ""){
+        // Avvio un thread di lettura delle informazioni sul pacchetto
+        PackageReader *reader = new PackageReader();
+        reader->setPath(dir);
+
+        reader->start();
+
+        // Attendo che finisca
+        while(reader->isRunning()){
+            // Attendo
+        }
+        // Aggiungo il pacchetto
+        packageManager->addPackage(reader->getPackage());
+    }
+}

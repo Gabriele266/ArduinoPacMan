@@ -26,6 +26,7 @@ SOURCES += \
     pacman_info.h \
 	searchpathmanager.cpp \
 	threads/librariesloader.cpp \
+	threads/packagereader.cpp \
 	threads/searchpathlistreader.cpp \
 	threads/searchpathlistwriter.cpp \
 	threads/sourcesloader.cpp \
@@ -49,6 +50,7 @@ HEADERS += \
 	packages/version.h \
 	searchpathmanager.h \
 	threads/librariesloader.h \
+	threads/packagereader.h \
 	threads/searchpathlistreader.h \
 	threads/searchpathlistwriter.h \
 	threads/sourcesloader.h \

@@ -80,28 +80,28 @@ bool Package::create(){
         root.appendChild(doc.createComment("File di pacchetto per ArduinoPacMan. Contiene le informazioni del pacchetto. "));
 
         // Metto il nome del pacchetto
-        QDomElement elem = doc.createElement("property");
-        elem.setAttribute("name", getName());
+        QDomElement elem = doc.createElement("name");
+        elem.setAttribute("value", getName());
         root.appendChild(elem);
 
         // Metto la descrizione
-        QDomElement desc = doc.createElement("property");
-        desc.setAttribute("description", getDescription());
+        QDomElement desc = doc.createElement("description");
+        desc.setAttribute("value", getDescription());
         root.appendChild(desc);
 
         // Momento di creazione del pacchetto
-        QDomElement creation = doc.createElement("property");
-        creation.setAttribute("creation_date", getCreationDate().toString());
-        creation.setAttribute("creation_time", getCreationTime().toString());
+        QDomElement creation = doc.createElement("creation_info");
+        creation.setAttribute("date", getCreationDate().toString());
+        creation.setAttribute("time", getCreationTime().toString());
         root.appendChild(creation);
 
         // Ultima modifica
-        QDomElement last_modify = doc.createElement("property");
-        last_modify.setAttribute("last_mod_date", getLastModifyDate().toString());
-        last_modify.setAttribute("last_mod_time", getLastModifyTime().toString());
+        QDomElement last_modify = doc.createElement("modify_info");
+        last_modify.setAttribute("date", getLastModifyDate().toString());
+        last_modify.setAttribute("time", getLastModifyTime().toString());
         root.appendChild(last_modify);
 
-        QDomElement sources = doc.createElement("property");
+        QDomElement sources = doc.createElement("sources");
         sources.setAttribute("path", getSourcesPath());
         sources.setAttribute("main_file", getMainFilePath());
         root.appendChild(sources);
