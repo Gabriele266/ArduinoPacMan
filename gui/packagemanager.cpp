@@ -30,6 +30,8 @@ void PackageManager::addPackage(Package *pack){
 
         // Avvio il thread
         loader->start(QThread::HighPriority);
+        // Avvio il thread per il caricamento delle dipendenze
+        startDependencyIndexer(pack);
     }
 }
 
@@ -44,6 +46,15 @@ bool PackageManager::isCurrentPackage(){
         }
     }
     return false;
+}
+
+void PackageManager::startDependencyIndexer(Package *package){
+    // Creo il thread
+    SourcesLister *lister = new SourcesLister();
+
+    lister->setMainFile(package->getMainFilePath());
+    lister->setDestinationList(package->getDependenciesList());
+    lister->start();
 }
 
 Package* PackageManager::getCurrentPackage(){

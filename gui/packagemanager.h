@@ -8,6 +8,7 @@
 #include "../packages/package.h"
 #include "packagetab.h"
 #include "threads/sourcesloader.h"
+#include "threads/sourceslister.h"
 
 #include <QWidget>
 #include <QTabWidget>
@@ -47,6 +48,9 @@ public:
 
     /// Restituisce il numero di pacchetti che sono stati aggiunti all' ambiente
     unsigned int getPackagesCount();
+
+    /// Avvia la ricerca delle dipendenze per il pacchetto package
+    void startDependencyIndexer(Package *package);
 
 private slots:
     void on_surfaceManager_currentChanged(int index);
