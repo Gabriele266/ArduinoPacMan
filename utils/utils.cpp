@@ -13,6 +13,8 @@
 #include <QOperatingSystemVersion>
 #include <QDebug>
 
+#include "packages/natural.h"
+
 /// Rappresenta un carattere di a capo
 #define endl "\n"
 
@@ -69,6 +71,16 @@ static QString formatPathForOs(QString base, QStringList additions){
     }
 
     return path;
+}
+
+/// Determina se la stringa str è presente almeno una volta nella lista list
+static bool isAnyOfList(QString str, QStringList list){
+    for(Natural x = 0; x < Natural::make(list.count(), ElideUnderZero); x++){
+        if(str == list[x]){
+            return true;
+        }
+    }
+    return false;
 }
 
 /// Rimuove tutti gli elementi che indicano percorsi ridondanti
