@@ -18,6 +18,7 @@
 #include "attributeditem.h"
 #include "utils/macros.h"
 #include "dependency.h"
+#include "source.h"
 
 /// Rappresenta un pacchetto
 class Package : public AttributedItem
@@ -40,7 +41,7 @@ public:
                    Restituisce il percorso completo del file principale del progetto)
 
     /// Restituisce il puntatore alla lista delle dipendenze di questo pacchetto
-    CUSTOM_GETTER(QList<Dependency*>*, dependencies, DependenciesList, &dependencies)
+    CUSTOM_GETTER(QList<Source*>*, sources_list, SourcesList, &sources_list)
 
     /// Restituisce il percorso completo del progetto (salvataggio + nome)
     QString getCompletePath();
@@ -79,6 +80,32 @@ public:
     /// Crea il pacchetto
     bool create();
 
+    /// Aggiunge il sorgente al pacchetto
+    void addSource(Source *src);
+
+    /// Restituisce il sorgente con quell' indice (se esiste) altrimenti nullptr
+    Source* getSource(Natural index);
+
+    /// Determina se esiste una dipendenza per la stessa libreria (in caso di header richiesti diversi verranno fuse)
+    bool existsDependency(Dependency *dep);
+
+    /// Restituisce il numero di sorgenti presenti
+    GETTER(Natural, sources_list.count(), SourcesCount)
+
+    /// Restituisce il numero delle dipendenze del pacchetto (Qualsiasi sorgente)
+    Natural getTotalDependencies();
+
+    /// Restituisce il numero di tutte le dipendenze che non sono raggiunte
+    Natural getTotalUnmetDependencies();
+
+    /// Restituisce la dipendenza del sorgente src all' indice index. Se non esiste restituisce nullptr
+    Dependency* getDependency(Source* src, Natural index);
+
+    /// Restituisce una dipendenza tramite un indice assoluto
+    Dependency* getDependency(Natural absolute_index);
+
+    /// Restituisce la prima dipendenza per quella libreria cercandola il tutti i sorgenti
+    Dependency* getDependency(QString library);
 private:
     // Percorso di salvataggio del pacchetto
     QString path;
@@ -89,7 +116,7 @@ private:
     // Array con le librerie
     QList<Library*> libraries;
     // Lista delle dipendenze del pacchetto
-    QList<Dependency*> dependencies;
+    QList<Source*> sources_list;
 };
 
 #endif // PACKAGE_H

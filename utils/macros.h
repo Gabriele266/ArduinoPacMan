@@ -22,7 +22,7 @@
     type get##faceName(){return member;}
 
 /// Si espande in un metodo setter con una istruzione di set diversa da un val = membro
-#define CUSTOM_SETTER(argument_type, member, faceName, custom_code) void set##faceName(argument_type mem){member = custom_code;}
+#define CUSTOM_SETTER(argument_type, member, faceName, custom_code) void set##faceName(argument_type mem) {member = custom_code;}
 
 /// Fornisce un metodo per creare metodi getter con istruzioni di get diverse da return mem
 #define CUSTOM_GETTER(argument_type, member, faceName, custom_code) argument_type get##faceName() {return custom_code;}

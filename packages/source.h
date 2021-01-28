@@ -43,6 +43,15 @@ public:
     /// Restituisce il tipo di sorgente
     GETTER(SourceType, type, SourceType)
 
+    /// Restituisce il numero di dipendenze di questo file
+    GETTER(Natural, dependencies.count(), DependenciesCount)
+
+    /// Restituisce la dipendenza con quell' indice, altrimenti nullptr
+    Dependency* getDependency(Natural index);
+
+    /// Restituisce la dipendenza che necessita di quella libreria o nullptr
+    Dependency* getDependency(QString lib_name);
+
     /// Aggiunge una dipendenza del file
     void appendDependency(Dependency *dep);
 
@@ -61,8 +70,14 @@ public:
     /// Determina se questo file è un sorgente di codice o qualcos' altro
     bool isSource();
 
+    /// Restituisce il numero delle dipendenze che devono ancora essere raggiunte
+    Natural getTotalUnmetDependencies();
+
     /// Determina se questo file è un sorgente di codice o qualcos' altro
     static bool fileIsSource(QString file);
+
+    /// Determina se questo sorgente necessita della libreria name per funzionare
+    bool needsLibrary(QString name);
 private:
     // Percorso del file
     QString file_path;

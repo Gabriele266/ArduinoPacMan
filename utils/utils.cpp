@@ -152,4 +152,9 @@ static QString resolvePath(QString startPath){
     }
 }
 
+/// Applica una politica di gestione a un numero intero e restituisce il numero naturale
+static Natural mk(int num){
+    return Natural::make(num, ElideUnderZero);
+}
+
 #endif

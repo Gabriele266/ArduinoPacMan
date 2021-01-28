@@ -34,6 +34,45 @@ Source::Source(QString f){
     }
 }
 
+Dependency* Source::getDependency(Natural index){
+    if(index < mk(dependencies.count())){
+        return dependencies[index];
+    }
+    return nullptr;
+}
+
+bool Source::needsLibrary(QString name){
+    for(Natural x = 0; x < mk(dependencies.count()); x++){
+        if(dependencies[x]->getLibraryName() == name){
+            return true;
+        }
+    }
+    return false;
+}
+
+Dependency* Source::getDependency(QString lib_name){
+    if(needsLibrary(lib_name)){
+        for(Natural x = 0; x < mk(dependencies.count()); x++){
+            if(dependencies[x]->getLibraryName() == lib_name){
+                return dependencies[x];
+            }
+        }
+    }
+    return nullptr;
+}
+
+Natural Source::getTotalUnmetDependencies(){
+    // Numero di dipendenze non raggiunte
+    Natural total = 0;
+
+    for(Natural x = 0; x < mk(dependencies.count()); x++){
+        if(!dependencies[x]->isSolved()){
+            total ++;
+        }
+    }
+    return total;
+}
+
 Source::Source(QFileInfo info){
     file_path = info.filePath();
     file_suffix = info.suffix();

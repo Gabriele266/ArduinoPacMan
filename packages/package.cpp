@@ -53,6 +53,75 @@ Library* Package::getLibrary(unsigned int index){
     return nullptr;
 }
 
+void Package::addSource(Source *src){
+    if(src != nullptr){
+        sources_list.append(src);
+    }
+}
+
+Source* Package::getSource(Natural index){
+    if(index < Natural::make(sources_list.count(), ElideUnderZero)){
+        return sources_list[index];
+    }
+    return nullptr;
+}
+
+bool Package::existsDependency(Dependency *dep){
+    if(dep != nullptr){
+        // Scorro tutti i file sorgenti
+        for(Natural x = 0; x < mk(sources_list.count()); x++){
+            Source* current = sources_list[x];
+
+            Dependency *curr_dep = nullptr;
+            // Scorro le sue dipendenze
+            for(Natural y = 0; y < current->getDependenciesCount(); y++){
+                // Prendo la dipendenza corrente
+                curr_dep = current->getDependency(y);
+                if(curr_dep->getLibraryName() == dep->getLibraryName()){
+                    // La dipendenza esiste
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+Natural Package::getTotalDependencies(){
+    // Numero totale delle dipendenze
+    Natural total = 0;
+
+    // Scorro tutti i sorgenti
+    for(Natural x = 0; x < mk(sources_list.count()); x++){
+        total += sources_list[x]->getDependenciesCount();
+    }
+    return total;
+}
+
+Natural Package::getTotalUnmetDependencies(){
+    // Numero totale
+    Natural total = 0;
+
+    for(Natural x = 0; x < mk(sources_list.count()); x++){
+        total += sources_list[x]->getTotalUnmetDependencies();
+    }
+
+    return total;
+}
+
+Dependency* Package::getDependency(Source *src, Natural index){
+    return src->getDependency(index);
+}
+
+Dependency* Package::getDependency(QString library){
+    for(Natural x = 0; x < mk(sources_list.count()); x++){
+        if(sources_list[x]->needsLibrary(library)){
+            return sources_list[x]->getDependency(library);
+        }
+    }
+    return nullptr;
+}
+
 bool Package::create(){
     // Creo la cartella per il pacchetto
     QDir dir;
