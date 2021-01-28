@@ -50,7 +50,7 @@ public:
     unsigned int getPackagesCount();
 
     /// Avvia la ricerca delle dipendenze per il pacchetto package
-    void startDependencyIndexer(Package *package);
+    void startDependencyIndexer(Package *package, QTreeWidget* widget, QTreeWidgetItem *parent = nullptr);
 
 private slots:
     void on_surfaceManager_currentChanged(int index);

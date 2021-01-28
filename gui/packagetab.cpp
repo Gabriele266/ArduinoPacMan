@@ -21,6 +21,11 @@ QTreeWidget* PackageTab::getFileBrowser(){
     return ui->fileBrowser;
 }
 
+QTreeWidget *PackageTab::getDependencyBrowser()
+{
+    return ui->dependencyBrowser;
+}
+
 Package* PackageTab::getPackage(){
     return package;
 }

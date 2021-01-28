@@ -37,6 +37,10 @@ public:
 
     // Restituisce l'indirizzo del browser dei file
     QTreeWidget* getFileBrowser();
+
+    /// Restituisce un puntatore al browser delle dipendenze
+    QTreeWidget* getDependencyBrowser();
+
 private:
     Ui::PackageTab *ui;
     // Pacchetto che rappresenta il tab

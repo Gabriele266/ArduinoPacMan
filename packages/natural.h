@@ -101,6 +101,9 @@ public:
 
     /// Calcola il valore assoluto del numero intero con segno e lo restituisce
     static unsigned int abs(int x);
+
+    /// Restituisce il numero naturale come stringa
+    QString toString();
 private:
     // Valore del numero
     unsigned int val;

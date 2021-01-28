@@ -15,5 +15,6 @@
     <qresource prefix="/icons/browsing">
         <file>file_icon.png</file>
         <file>folder_icon.png</file>
+        <file>dependencies.png</file>
     </qresource>
 </RCC>

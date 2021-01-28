@@ -96,6 +96,7 @@ DISTFILES += \
 	icons/Structure.png \
 	icons/Structure.xcf \
 	icons/contract.xcf \
+	icons/dependencies.png \
 	icons/export.xcf \
 	icons/library_viewer/Library.png \
 	icons/library_viewer/Library.xcf \

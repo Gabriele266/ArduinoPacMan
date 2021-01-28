@@ -31,7 +31,7 @@ void PackageManager::addPackage(Package *pack){
         // Avvio il thread
         loader->start(QThread::HighPriority);
         // Avvio il thread per il caricamento delle dipendenze
-        startDependencyIndexer(pack);
+        startDependencyIndexer(pack, tab->getDependencyBrowser());
     }
 }
 
@@ -48,7 +48,7 @@ bool PackageManager::isCurrentPackage(){
     return false;
 }
 
-void PackageManager::startDependencyIndexer(Package *package){
+void PackageManager::startDependencyIndexer(Package *package, QTreeWidget* widget, QTreeWidgetItem *parent){
     // Creo il thread
     SourcesLister *lister = new SourcesLister();
     // Creo il sorgente
@@ -57,6 +57,7 @@ void PackageManager::startDependencyIndexer(Package *package){
     // Avvio il thread
     lister->setSource(src);
     lister->setDestinationList(package->getDependenciesList());
+    lister->setWidget(widget);
     lister->start();
 }
 

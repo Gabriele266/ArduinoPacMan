@@ -52,6 +52,9 @@ public:
     /// Imposta il file del sorgente
     GETTER(QString, file, CompleteFile)
 
+    /// Restituisce il nome del sorgente
+    GETTER(QString, source_name, Name)
+
     /// Imposta il file
     void setCompleteFile(QString file);
 

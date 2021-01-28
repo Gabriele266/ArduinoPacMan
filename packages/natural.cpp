@@ -43,6 +43,10 @@ void Natural::setValue(Natural *v){
     val = v->getValue();
 }
 
+QString Natural::toString(){
+    return QString::number(val);
+}
+
 void Natural::sub(int num){
     // Prendo il valore assoluto
     auto absolute = Natural::abs(num);

@@ -10,13 +10,22 @@ SourcesLister::SourcesLister() : SourcesLister(nullptr, nullptr)
     // Nothing
 }
 
-void SourcesLister::appendDependencyToWidget(Dependency *dep){
+void SourcesLister::appendDependencyToWidget(Source *src, Dependency *dep, Natural row){
     // Controllo che esista un controllo
     if(widget != nullptr){
         if(dep != nullptr){
             QTreeWidgetItem *item = new QTreeWidgetItem();
             item->setText(0, dep->getLibraryName());
-
+            item->setText(1, src->getName());
+            item->setText(2, row.toString());
+            item->setText(3, "No");
+            item->setIcon(0, QIcon(":/icons/browsing/dependencies.png"));
+            if(parent != nullptr){
+                parent->addChild(item);
+            }
+            else{
+                widget->addTopLevelItem(item);
+            }
         }
     }
 }
@@ -55,6 +64,8 @@ void SourcesLister::run(){
                     resultsList->append(d);
                     // Aggiungo la dipendenza al sorgente
                     startFile->appendDependency(d);
+                    // Appendo al controllo
+                    appendDependencyToWidget(startFile, d, current_row);
                 }
             }
             current_row ++;

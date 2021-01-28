@@ -37,6 +37,8 @@ public:
     /// Imposta il widget a cui aggiungere i risultati
     SETTER(QTreeWidget*, widget, Widget);
 
+    /// Imposta l'oggetto parente a cui aggiungere il controllo
+    SETTER(QTreeWidgetItem*, parent, ParentItem)
 private:
     // File da cui partire
     Source* startFile = nullptr;
@@ -44,10 +46,11 @@ private:
     QList<Dependency*> *resultsList = nullptr;
     // Widget a cui aggiungere i risultati
     QTreeWidget *widget = nullptr;
-
+    // Elemento a cui aggiungere i risultati
+    QTreeWidgetItem *parent = nullptr;
 protected:
     // Appende la dipendenza al controllo ad albero specificato
-    void appendDependencyToWidget(Dependency *dep);
+    void appendDependencyToWidget(Source *src, Dependency *dep, Natural row);
 };
 
 #endif // SOURCESLISTER_H
