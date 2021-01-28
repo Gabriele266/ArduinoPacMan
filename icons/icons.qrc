@@ -16,5 +16,7 @@
         <file>file_icon.png</file>
         <file>folder_icon.png</file>
         <file>dependencies.png</file>
+        <file>browsing/right.png</file>
+        <file>browsing/wrong.png</file>
     </qresource>
 </RCC>
