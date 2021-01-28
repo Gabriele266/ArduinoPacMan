@@ -56,7 +56,7 @@ void PackageManager::startDependencyIndexer(Package *package, QTreeWidget* widge
     src->setCompleteFile(package->getMainFilePath());
     // Avvio il thread
     lister->setSource(src);
-    lister->setDestinationList(package->getDependenciesList());
+//    lister->setDestinationList(package->getDependenciesList());
     lister->setWidget(widget);
     lister->start();
 }
