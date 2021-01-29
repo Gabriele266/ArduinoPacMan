@@ -9,7 +9,10 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+	file_types/group.cpp \
+	file_types/key.cpp \
 	file_types/libsearchpathlist.cpp \
+	file_types/settings.cpp \
     gui/generalstatusbar.cpp \
     gui/packagemanager.cpp \
     gui/packagetab.cpp \
@@ -29,13 +32,18 @@ SOURCES += \
 	threads/packagereader.cpp \
 	threads/searchpathlistreader.cpp \
 	threads/searchpathlistwriter.cpp \
+	threads/settingswriter.cpp \
 	threads/sourceslister.cpp \
 	threads/sourcesloader.cpp \
+	utils/startup.cpp \
 	utils/utils.cpp \
 	packages/version.cpp
 
 HEADERS += \
+	file_types/group.h \
+	file_types/key.h \
 	file_types/libsearchpathlist.h \
+	file_types/settings.h \
     gui/generalstatusbar.h \
     gui/packagemanager.h \
     gui/packagetab.h \
@@ -54,6 +62,7 @@ HEADERS += \
 	threads/packagereader.h \
 	threads/searchpathlistreader.h \
 	threads/searchpathlistwriter.h \
+	threads/settingswriter.h \
 	threads/sourceslister.h \
 	threads/sourcesloader.h \
 	utils/costants.h \

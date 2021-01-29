@@ -86,7 +86,7 @@ bool PackageManager::hasPackages(){
 unsigned int PackageManager::getCurrentPackageIndex(){
     // Controllo se il tab corrente è un pacchetto
     if(isCurrentPackage()){
-
+        return 0;
     }
 }
 
