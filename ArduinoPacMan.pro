@@ -9,6 +9,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+	file_types/attribute.cpp \
 	file_types/group.cpp \
 	file_types/key.cpp \
 	file_types/libsearchpathlist.cpp \
@@ -40,6 +41,7 @@ SOURCES += \
 	packages/version.cpp
 
 HEADERS += \
+	file_types/attribute.h \
 	file_types/group.h \
 	file_types/key.h \
 	file_types/libsearchpathlist.h \

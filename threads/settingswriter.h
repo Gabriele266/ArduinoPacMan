@@ -9,6 +9,7 @@
 #include <QThread>
 #include "file_types/settings.h"
 #include <QFile>
+#include <QTextStream>
 #include <QDir>
 #include <QDomDocument>
 #include <QDomElement>
@@ -23,6 +24,9 @@ public:
 
     void run();
 
+    GETTER_SETTERC(Settings*, settings, Settings,
+                   Imposta il puntatore alle impostazioni da scrivere su disco,
+                   Restituisce un puntatore alle impostazioni da scrivere sul disco)
 private:
     // Impostazioni da scrivere
     Settings *settings = nullptr;

@@ -31,6 +31,10 @@ void Settings::addKey(QString groupName, Key *k){
     }
 }
 
+Natural Settings::getGroupsCount(){
+    return groups.count();
+}
+
 Key* Settings::getKey(QString group_name, QString key_name){
     auto g = getGroup(group_name);
 
@@ -52,6 +56,36 @@ Key* Settings::getKey(QString name){
         }
     }
     return nullptr;
+}
+
+QString Settings::getKeyValue(QString group_name, QString key_name){
+    // Ottengo il gruppo con quel nome
+    Group* gr = getGroup(group_name);
+
+    if(gr != nullptr){
+        auto k = gr->getKey(key_name);
+
+        if(k != nullptr){
+            return k->getValue();
+        }
+    }
+    return "";
+}
+
+void Settings::setKeyValue(QString name, QString value){
+    auto key = getKey(name);
+    if(key != nullptr){
+        key->setValue(value);
+    }
+}
+
+void Settings::setKeyValue(QString group_name, QString key_name, QString value){
+    // Rintraccio la chiave
+    auto key = getKey(group_name, key_name);
+
+    if(key != nullptr){
+        key->setValue(value);
+    }
 }
 
 bool Settings::existsKey(QString name){

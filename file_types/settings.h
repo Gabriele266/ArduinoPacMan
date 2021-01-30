@@ -13,6 +13,7 @@
 #include <QDomNode>
 #include <QDir>
 
+#include "packages/attributeditem.h"
 #include "utils/macros.h"
 #include "utils/utils.cpp"
 
@@ -20,7 +21,7 @@
 #include "group.h"
 
 /// Rappresenta un file di impostazioni
-class Settings
+class Settings : public AttributedItem
 {
 public:
     Settings();
@@ -41,6 +42,9 @@ public:
 
     /// Aggiunge la chiave al gruppo con quel nome
     void addKey(QString grupName, Key *k);
+
+    /// Restituisce il numero dei gruppi presenti in queste impostazioni
+    Natural getGroupsCount();
 
     /// Aggiunge la chiave k al gruppo con l'indice group_index
     void addKey(Natural group_index, Key *k);
@@ -65,6 +69,11 @@ public:
     /// \arg group_name nome del gruppo in cui cercare
     QString getKeyValue(QString group_name, QString key_name);
 
+    /// Imposta il valore della chiave con quel nome
+    void setKeyValue(QString name, QString value);
+
+    /// Cerca la chiave nel gruppo e ne imposta il valore
+    void setKeyValue(QString group_name, QString key_name, QString value);
 private:
     // Percorso del file
     QString file_path = "";

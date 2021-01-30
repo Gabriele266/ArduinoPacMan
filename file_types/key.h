@@ -13,10 +13,12 @@
 #include <QDomElement>
 #include <QDomDocument>
 #include <QStringList>
+#include <QList>
 #include <QMap>
 
 #include "packages/natural.h"
 #include "utils/utils.cpp"
+#include "attribute.h"
 
 /// Numero massimo di attributi per ogni chiave
 #define MAX_KEY_ATTRIBUTES 5
@@ -26,8 +28,9 @@ class Key
 {
 public:
     Key();
-
     Key(QString name, QString value);
+    Key(QString name, QString value, AttributeList attributes);
+
 
     GETTER_SETTERC(QString, name, Name,
                    Imposta il nome della chiave,
@@ -37,33 +40,35 @@ public:
                    Imposta il valore della chiave,
                    Restituisce il valore della chiavve)
 
-    /// Formatta una chiave a partire da una riga di testo
-    static Key keyFromElement(QDomElement line);
-
-    /// Carica la chiave da una stringa
-    bool loadFromString(QDomElement str);
-
-    /// Formatta la chiave e i suoi attributi in una stringa per far si che vengano salvati
-    QDomElement getElement();
-
     /// Aggiunge l'alltributo name con il valore value alla chiave
     void addAttribute(QString name, QString value);
 
     /// Aggiunge l'attributo partendo da una tupla di stringhe
-    void addAttribute(QMap<QString, QString> map);
+    void addAttribute(Attribute *attr);
+
+    /// Imposta il valore dell' attributo con quel nome
+    void setAttributeValue(QString attribute_name, QString value);
 
     /// Restituisce il valore dell' attributo con quel nome, altrimenti ""
-    QString getAttribute(QString name);
+    QString getAttributeValue(QString name);
+
+    /// Restituisce l'attributo con quel nome
+    Attribute* getAttributeByName(QString name);
+
+    /// Restituisce l'attributo con quell' indice, altrimenti un attributo nullo
+    Attribute* getAttributeByIndex(Natural index);
 
     /// Restituisce il numero di attributi della chiave
     Natural getAttributesCount();
+
+
 private:
     // Nome della chiave
     QString name;
     // Valore della chiave
     QString value;
     // Lista di eventuali attributi
-    QMap<QString, QString> additional_attributes;
+    AttributeList attributes;
 };
 
 #endif // KEY_H

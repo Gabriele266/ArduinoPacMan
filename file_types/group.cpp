@@ -27,13 +27,13 @@ Key* Group::getKey(QString name){
     return nullptr;
 }
 
-QDomElement Group::toElement(){
-    QDomElement el;
-    el.setTagName(name);
-    for(Natural x = 0; x < mk(keys.count()); x++){
-        el.appendChild(keys.at(x)->getElement());
+QString Group::getValue(QString key_name){
+    // Ottengo la chiave con quel nome
+    Key* k = getKey(key_name);
+    if(k != nullptr){
+        return k->getValue();
     }
-    return el;
+    return "";
 }
 
 Natural Group::getKeysCount(){
