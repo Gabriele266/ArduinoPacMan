@@ -34,6 +34,19 @@ Source::Source(QString f){
     }
 }
 
+QString Source::sourceTypeToString(SourceType type){
+    switch(type){
+    case HeaderFile:
+        return "Header";
+    case ImplementationFile:
+        return "Implementation";
+    case ArduinoSketch:
+        return "Arduino Sketch";
+    default:
+        return "No source";
+    }
+}
+
 Dependency* Source::getDependency(Natural index){
     if(index < mk(dependencies.count())){
         return dependencies[index];
@@ -88,6 +101,17 @@ bool Source::fileIsSource(QString file){
 
     // Controllo se è presente nella lista
     return isAnyOfList(suff, sources_extensions);
+}
+
+bool Source::isSource(){
+    if(getSourceType() != Unknown){
+        return true;
+    }
+    return false;
+}
+
+void Source::switchToNextLine(){
+    current_row ++;
 }
 
 void Source::appendDependency(Dependency *dep){

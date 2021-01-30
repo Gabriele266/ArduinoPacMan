@@ -36,7 +36,7 @@ public:
                    Imposta il percorso dei sorgenti legati al progetto,
                    Ottiene il percorso dei sorgenti in uso dal pacchetto)
 
-    GETTER_SETTERC(QString, main_file, MainFilePath,
+    GETTER_SETTERC(QString, main_file, MainSourcePath,
                    Imposta il percorso completo del file principale del progetto (punto di entrata del codice),
                    Restituisce il percorso completo del file principale del progetto)
 
@@ -86,6 +86,15 @@ public:
     /// Restituisce il sorgente con quell' indice (se esiste) altrimenti nullptr
     Source* getSource(Natural index);
 
+    /// Restituisce il sorgente a partire da un file completo (percorso e nome)
+    Source* getSource(QString file);
+
+    /// Restituisce un puntatore al sorgente principale
+    Source* getMainSource();
+
+    /// Determina se esiste un sorgente legato a quel file
+    bool existsSource(QString file);
+
     /// Determina se esiste una dipendenza per la stessa libreria (in caso di header richiesti diversi verranno fuse)
     bool existsDependency(Dependency *dep);
 
@@ -113,9 +122,11 @@ private:
     QString sources_path;
     // Percorso del file principale del progetto
     QString main_file;
-    // Array con le librerie
+
+    // Array con le librerie che risolvono le dipendenze
     QList<Library*> libraries;
-    // Lista delle dipendenze del pacchetto
+
+    // Lista dei sorgenti del pacchetto con le loro dipendenze
     QList<Source*> sources_list;
 };
 

@@ -51,7 +51,7 @@ void PackageReader::run(){
 
             QDomElement sources = root.firstChildElement("sources");
             package->setSourcesPath(sources.attribute("path"));
-            package->setMainFilePath(sources.attribute("main_file"));
+            package->setMainSourcePath(sources.attribute("main_file"));
         }
     }
 }

@@ -34,8 +34,8 @@ SOURCES += \
 	threads/searchpathlistreader.cpp \
 	threads/searchpathlistwriter.cpp \
 	threads/settingswriter.cpp \
-	threads/sourceslister.cpp \
 	threads/sourcesloader.cpp \
+	threads/srcdependencylister.cpp \
 	utils/startup.cpp \
 	utils/utils.cpp \
 	packages/version.cpp
@@ -65,8 +65,8 @@ HEADERS += \
 	threads/searchpathlistreader.h \
 	threads/searchpathlistwriter.h \
 	threads/settingswriter.h \
-	threads/sourceslister.h \
 	threads/sourcesloader.h \
+	threads/srcdependencylister.h \
 	utils/costants.h \
 	utils/macros.h
 

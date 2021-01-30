@@ -101,7 +101,7 @@ void MainWindow::on_actionNuovo_pacchetto_triggered()
 
         // Imposto i percorsi legati ai sorgenti del progetto
         package->setSourcesPath(dialog->getSourcesPath());
-        package->setMainFilePath(dialog->getMainFilePath());
+        package->setMainSourcePath(dialog->getMainFilePath());
 
         // Imposto la descrizione del pacchetto
         package->setDescription(dialog->getDescription());

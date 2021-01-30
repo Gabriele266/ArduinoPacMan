@@ -8,7 +8,7 @@
 #include "../packages/package.h"
 #include "packagetab.h"
 #include "threads/sourcesloader.h"
-#include "threads/sourceslister.h"
+#include "threads/srcdependencylister.h"
 
 #include <QWidget>
 #include <QTabWidget>
@@ -50,22 +50,24 @@ public:
     unsigned int getPackagesCount();
 
     /// Avvia la ricerca delle dipendenze per il pacchetto package
-    void startDependencyIndexer(Package *package, QTreeWidget* widget, QTreeWidgetItem *parent = nullptr);
+    void startDependencyIndexer(Package *package, QTreeWidget* widget);
 
 private slots:
     void on_surfaceManager_currentChanged(int index);
+
+    /// Chiamata quando il caricamento dei sorgenti è terminato
+    void onSourcesLoadingFinished();
 
 signals:
     // Emesso quando il tab è stato cambiato
     void tabChanged(unsigned int newTab);
 private:
-
-    // Funzione chiamata ogni volta che si cambia pacchetto
-
     // Lista di pacchetti
     QList<Package *>packages;
 
     Ui::PackageManager *ui;
+    // Thread per il caricamento delle dipendenze di un pacchetto
+    SrcDependencyLister *lister = new SrcDependencyLister();
 };
 
 #endif // PACKAGEMANAGER_H

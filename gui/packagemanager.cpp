@@ -27,11 +27,22 @@ void PackageManager::addPackage(Package *pack){
         auto *loader = new SourcesLoader();
         loader->setDestination(tab->getFileBrowser());
         loader->setSearchPath(pack->getSourcesPath());
+        loader->setPackage(pack);
 
         // Avvio il thread
         loader->start(QThread::HighPriority);
-        // Avvio il thread per il caricamento delle dipendenze
-        startDependencyIndexer(pack, tab->getDependencyBrowser());
+
+        lister = new SrcDependencyLister();
+        // Imposto il pacchetto
+        lister->setPackage(pack);
+        // Imposto il widget
+        lister->setWidget(tab->getDependencyBrowser());
+    }
+}
+
+void PackageManager::onSourcesLoadingFinished(){
+    if(lister != nullptr){
+        lister->start();
     }
 }
 
@@ -48,16 +59,9 @@ bool PackageManager::isCurrentPackage(){
     return false;
 }
 
-void PackageManager::startDependencyIndexer(Package *package, QTreeWidget* widget, QTreeWidgetItem *parent){
+void PackageManager::startDependencyIndexer(Package *package, QTreeWidget* widget){
     // Creo il thread
-    SourcesLister *lister = new SourcesLister();
-    // Creo il sorgente
-    Source *src = new Source();
-    src->setCompleteFile(package->getMainFilePath());
-    lister->setSource(src);
-    lister->setWidget(widget);
-    // Avvio il thread
-    lister->start();
+
 }
 
 Package* PackageManager::getCurrentPackage(){

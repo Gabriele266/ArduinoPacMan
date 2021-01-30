@@ -46,6 +46,14 @@ public:
     /// Restituisce il numero di dipendenze di questo file
     GETTER(Natural, dependencies.count(), DependenciesCount)
 
+    /// Restituisce il numero della riga corrente
+    GETTER_SETTERC(Natural, current_row, CurrentRow,
+                   Imposta il valore della riga corrente,
+                   Restituisce il valore della riga corrente)
+
+    /// Passa alla riga successiva
+    void switchToNextLine();
+
     /// Restituisce la dipendenza con quell' indice, altrimenti nullptr
     Dependency* getDependency(Natural index);
 
@@ -76,8 +84,12 @@ public:
     /// Determina se questo file è un sorgente di codice o qualcos' altro
     static bool fileIsSource(QString file);
 
+    /// Restituisce una stringa per rappresentare il tipo di sorgente
+    static QString sourceTypeToString(SourceType type);
+
     /// Determina se questo sorgente necessita della libreria name per funzionare
     bool needsLibrary(QString name);
+
 private:
     // Percorso del file
     QString file_path;
@@ -95,6 +107,9 @@ private:
 
     // Lista di dipendenze del sorgente
     QList<Dependency*> dependencies;
+
+    // Valore della riga corrente
+    Natural current_row = 1;
 };
 
 #endif // SOURCE_H

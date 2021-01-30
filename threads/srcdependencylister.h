@@ -2,8 +2,8 @@
  *  Rappresenta un thread per il caricamento in una lista delle librerie necessarie ai sorgenti
  * */
 
-#ifndef SOURCESLISTER_H
-#define SOURCESLISTER_H
+#ifndef SrcDependencyLister_H
+#define SrcDependencyLister_H
 
 #include <QThread>
 #include <QString>
@@ -14,38 +14,53 @@
 #include <QList>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
+#include <QMessageBox>
 
 #include "utils/macros.h"
 #include "../packages/dependency.h"
+#include "../packages/package.h"
 #include "../packages/natural.h"
 #include "../packages/source.h"
 
-class SourcesLister : public QThread
+class SrcDependencyLister : public QThread
 {
 public:
-    SourcesLister();
-    SourcesLister(Source* file);
+    SrcDependencyLister();
+    SrcDependencyLister(Package* pack);
 
     void run();
 
-    /// Imposta il sorgente da cui partire alla ricerca delle librerie
-    SETTER(Source*, startFile, Source)
+    /// Imposta il pacchetto per cui visualizzare la lista delle dipendenze
+    SETTER(Package*, package, Package)
 
     /// Imposta il widget a cui aggiungere i risultati
     SETTER(QTreeWidget*, widget, Widget);
 
     /// Imposta l'oggetto parente a cui aggiungere il controllo
     SETTER(QTreeWidgetItem*, parent, ParentItem)
+
 private:
     // File da cui partire
-    Source* startFile = nullptr;
+    Package* package = nullptr;
     // Widget a cui aggiungere i risultati
     QTreeWidget *widget = nullptr;
     // Elemento a cui aggiungere i risultati
     QTreeWidgetItem *parent = nullptr;
+
 protected:
     // Appende la dipendenza al controllo ad albero specificato
-    void appendDependencyToWidget(Source *src, Dependency *dep, Natural row);
+    void appendDependencyToWidget(Dependency *dep);
+    // Processa una inclusione di libreria
+    void processLibraryInclusion(QString header_line);
+    // Processa una inclusione di un file locale
+    void processLocalFileInclusion(QString header_line);
+    // Processa un file sorgente
+    void processSource(Source *src);
+
+    // Sorgente su cui si sta lavorando
+    Source* current_source = nullptr;
+    // Percorso corrente della ricerca
+    QString current_path = "";
 };
 
-#endif // SOURCESLISTER_H
+#endif // SrcDependencyLister_H

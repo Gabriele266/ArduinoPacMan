@@ -11,8 +11,13 @@
 #include <QFileInfo>
 #include <QFileInfoList>
 #include <QTreeWidget>
+#include <QMessageBox>
 
 #include "utils/utils.cpp"
+#include "packages/source.h"
+#include "packages/package.h"
+#include "utils/macros.h"
+#include "gui/packagemanager.h"
 
 /// Rappresenta un thread di caricamento sorgenti
 class SourcesLoader : public QThread
@@ -29,14 +34,31 @@ public:
     /// Imposta il percorso di ricerca dei file
     void setSearchPath(QString path);
 
-    /// Appende le entryes della cartella all' item
-    void appendEntries(QTreeWidgetItem *item, QDir dir);
+    /// Imposta l afunzione che verrà chiamata all' uscita del thread
+    void setExitFunction(void (PackageManager::*pointer)());
+
+    /// Imposta il pacchetto su cui lavorare
+    SETTER(Package*, package, Package)
+
 private:
     // Percorso di ricerca del thread
     QString search_path;
 
     // Lista di stringhe in cui mettere i nomi dei file sorgenti trovati
     QTreeWidget *destination = nullptr;
+
+    // Pacchetto
+    Package *package = nullptr;
+
+    // Funzione da chiamare quando il thread termina
+    void (PackageManager::*function)(void) = nullptr;
+
+protected:
+    /// Appende le entryes della cartella all' item
+    void appendEntries(QTreeWidgetItem *item, QDir dir);
+
+    /// Determina se il file passato come argomento è un file sorgente e lo aggiunge al pacchetto
+    void appendFileIfSource(QString file);
 };
 
 #endif // SOURCESLOADER_H

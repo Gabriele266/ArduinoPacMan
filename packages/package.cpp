@@ -46,6 +46,16 @@ bool Package::existsLibraryWithPath(QString path){
     return false;
 }
 
+Source* Package::getMainSource(){
+    for(Natural x = 0; x < mk(sources_list.count()); x++){
+        QString y = sources_list[x]->getCompleteFile();
+        if(sources_list[x]->getCompleteFile() == main_file){
+            return sources_list[x];
+        }
+    }
+    return nullptr;
+}
+
 Library* Package::getLibrary(unsigned int index){
     if(existsLibrary(index)){
         return libraries[index];
@@ -64,6 +74,24 @@ Source* Package::getSource(Natural index){
         return sources_list[index];
     }
     return nullptr;
+}
+
+Source* Package::getSource(QString file){
+    // Scorro tutti i sorgenti e controllo se qualcuno ha lo stesso nome
+    for(Natural x = 0;  x < mk(sources_list.count()); x++){
+        QDir s = sources_list[x]->getCompleteFile();
+        if(s == QDir(file)){
+            return sources_list[x];
+        }
+    }
+    return nullptr;
+}
+
+bool Package::existsSource(QString file){
+    if(getSource(file) != nullptr){
+        return true;
+    }
+    return false;
 }
 
 bool Package::existsDependency(Dependency *dep){
@@ -172,7 +200,7 @@ bool Package::create(){
 
         QDomElement sources = doc.createElement("sources");
         sources.setAttribute("path", getSourcesPath());
-        sources.setAttribute("main_file", getMainFilePath());
+        sources.setAttribute("main_file", getMainSourcePath());
         root.appendChild(sources);
 
         QDomElement vers = doc.createElement("pac-version");

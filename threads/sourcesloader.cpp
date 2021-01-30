@@ -13,15 +13,48 @@ void SourcesLoader::run(){
     // Aggiungo il nodo root
     destination->addTopLevelItem(root);
 
-    QDir path = search_path;
+    // Creo un oggetto cartella in cui mostrare i file sorgenti
+    QDir path(search_path);
+
     // Controllo che esista
     if(path.exists()){
         // Avvio la ricerca
         appendEntries(root, path);
     }
+    else{
+        QMessageBox::critical(nullptr, "Errore grave", "Errore grave: il percorso scelto per il caricamento dei sorgenti non esiste. ");
+    }
 
     // Espando tutti gli elementi
     destination->expandAll();
+    // Controllo che la funzione da chiamare esista
+    if(function != nullptr){
+
+    }
+}
+
+void SourcesLoader::setExitFunction(void (PackageManager::*pointer)()){
+    function = pointer;
+}
+
+void SourcesLoader::appendFileIfSource(QString file){
+    // Creo l'oggetto sorgente
+    Source *src = new Source();
+    src->setCompleteFile(file);
+
+    if(src->isSource()){
+        qInfo() << "File sorgente trovato: " << src->getName() <<
+                   " tipologia di sorgente: " <<
+                   Source::sourceTypeToString(src->getSourceType()) << endl;
+
+        if(package != nullptr){
+            package->addSource(src);
+        }
+        else{
+            qInfo() << "Impossibile aggiungere il sorgente " << src->getName() << " siccome non è stato specificato nessun"
+            "pacchetto a cui aggiungerlo. " << endl;
+        }
+    }
 }
 
 void SourcesLoader::appendEntries(QTreeWidgetItem *item, QDir dir){
@@ -30,11 +63,13 @@ void SourcesLoader::appendEntries(QTreeWidgetItem *item, QDir dir){
 
     // Tolgo gli elementi ridondanti
     for(int x = 0; x < lst.count(); x++){
+        // Percorso completo del file o cartella
+        QString complete_path = formatPathForOs(dir.path(), QStringList(lst[x]));
         // Controllo se l'elemento corrente è un file
-        QFileInfo f(lst[x]);
+        QFileInfo f(complete_path);
         // Oggetto cartella
         // Utile in caso di file system unix o linux
-        QDir d(formatPathForOs(dir.path(), QStringList(lst[x])));
+        QDir d(complete_path);
         // Controllo se si tratta di un file
         if(!d.exists()){
             // Aggiungo il file
@@ -45,6 +80,9 @@ void SourcesLoader::appendEntries(QTreeWidgetItem *item, QDir dir){
             elem->setIcon(0, QIcon(":/icons/browsing/file_icon.png"));
             // Aggiungo al nodo
             item->addChild(elem);
+
+            // Aggiungo il sorgente al pacchetto
+            appendFileIfSource(f.absoluteFilePath());
         }
         // Si tratta di una cartella
         else{
