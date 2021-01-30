@@ -1,11 +1,10 @@
 #include "sourceslister.h"
 
-SourcesLister::SourcesLister(Source* file, QList<Dependency*>* results){
+SourcesLister::SourcesLister(Source* file){
     startFile = file;
-    resultsList = results;
 }
 
-SourcesLister::SourcesLister() : SourcesLister(nullptr, nullptr)
+SourcesLister::SourcesLister() : SourcesLister(nullptr)
 {
     // Nothing
 }
@@ -79,9 +78,7 @@ void SourcesLister::run(){
                         Dependency *d = new Dependency();
                         d->setLibraryName(lib_name);
                         d->setHeaderName(head);
-                        // Aggiungo la dipendenza alla lista
-                        resultsList->append(d);
-                        // Aggiungo la dipendenza al sorgente
+                        // Aggiungo la dipendenza alla sorgente
                         startFile->appendDependency(d);
                         // Appendo al controllo
                         appendDependencyToWidget(startFile, d, current_row);

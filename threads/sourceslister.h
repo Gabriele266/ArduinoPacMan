@@ -24,15 +24,12 @@ class SourcesLister : public QThread
 {
 public:
     SourcesLister();
-    SourcesLister(Source* file, QList<Dependency*>* results);
+    SourcesLister(Source* file);
 
     void run();
 
     /// Imposta il sorgente da cui partire alla ricerca delle librerie
     SETTER(Source*, startFile, Source)
-
-    /// Imposta la lista in cui aggiungere i risultati della ricerca
-    SETTER(QList<Dependency*>*, resultsList, DestinationList)
 
     /// Imposta il widget a cui aggiungere i risultati
     SETTER(QTreeWidget*, widget, Widget);
@@ -42,8 +39,6 @@ public:
 private:
     // File da cui partire
     Source* startFile = nullptr;
-    // Lista a cui aggiungere i risultati
-    QList<Dependency*> *resultsList = nullptr;
     // Widget a cui aggiungere i risultati
     QTreeWidget *widget = nullptr;
     // Elemento a cui aggiungere i risultati
