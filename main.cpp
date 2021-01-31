@@ -13,6 +13,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
+    Source *src = new Source("C:\\Users\\Gabri\\Documents\\MEGA\\Informatica\\C++\\Counter\\main.c");
+
     // Creo la finestra principale
     MainWindow w;
 

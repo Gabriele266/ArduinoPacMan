@@ -32,7 +32,6 @@ class Source
 public:
     Source();
     Source(QString file);
-    Source(QFileInfo info);
 
     /// Restituisce il percorso relativo del file (senza nome e estensione)
     GETTER(QString, file_path, FilePath)

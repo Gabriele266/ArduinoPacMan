@@ -11,7 +11,7 @@ Source::Source()
 }
 
 Source::Source(QString f){
-    if(file != ""){
+    if(f != ""){
         QFileInfo info(f);
         file_path = info.filePath();
         source_name = info.fileName();
@@ -84,13 +84,6 @@ Natural Source::getTotalUnmetDependencies(){
         }
     }
     return total;
-}
-
-Source::Source(QFileInfo info){
-    file_path = info.filePath();
-    file_suffix = info.suffix();
-    source_name = info.fileName();
-    file = info.absoluteFilePath();
 }
 
 bool Source::fileIsSource(QString file){
