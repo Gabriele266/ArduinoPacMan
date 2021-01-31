@@ -11,6 +11,7 @@
 #include "file_types/settings.h"
 #include "file_types/group.h"
 #include "file_types/key.h"
+#include "threads/settingsreader.h"
 
 /// Impostazioni della applicazione
 static Settings* application_settings = nullptr;
@@ -69,4 +70,13 @@ static void writeDefaultSettings(){
     SettingsWriter *writer = new SettingsWriter();
     writer->setSettings(global_settings);
     writer->start();
+}
+
+static void readDefaultSettings(){
+    application_settings = new Settings();
+    application_settings->setFilePath(formatPathForOs(QDir::currentPath(), QStringList("debug/settings/settings.stc")));
+
+    SettingsReader *reader = new SettingsReader();
+    reader->setSettingsObject(application_settings);
+    reader->start();
 }

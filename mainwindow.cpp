@@ -42,6 +42,8 @@ MainWindow::MainWindow(QWidget *parent)
         // Scrivo le impostazioni base
         writeDefaultSettings();
     }
+
+    readDefaultSettings();
 }
 
 void MainWindow::updateTitleInfo(){
