@@ -37,6 +37,7 @@ void PackageManager::addPackage(Package *pack){
         lister->setPackage(pack);
         // Imposto il widget
         lister->setWidget(tab->getDependencyBrowser());
+        lister->start();
     }
 }
 

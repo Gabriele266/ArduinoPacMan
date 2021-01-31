@@ -34,9 +34,6 @@ public:
     /// Imposta il percorso di ricerca dei file
     void setSearchPath(QString path);
 
-    /// Imposta l afunzione che verrà chiamata all' uscita del thread
-    void setExitFunction(void (PackageManager::*pointer)());
-
     /// Imposta il pacchetto su cui lavorare
     SETTER(Package*, package, Package)
 
@@ -50,15 +47,9 @@ private:
     // Pacchetto
     Package *package = nullptr;
 
-    // Funzione da chiamare quando il thread termina
-    void (PackageManager::*function)(void) = nullptr;
-
 protected:
     /// Appende le entryes della cartella all' item
     void appendEntries(QTreeWidgetItem *item, QDir dir);
-
-    /// Determina se il file passato come argomento è un file sorgente e lo aggiunge al pacchetto
-    void appendFileIfSource(QString file);
 };
 
 #endif // SOURCESLOADER_H

@@ -27,34 +27,6 @@ void SourcesLoader::run(){
 
     // Espando tutti gli elementi
     destination->expandAll();
-    // Controllo che la funzione da chiamare esista
-    if(function != nullptr){
-
-    }
-}
-
-void SourcesLoader::setExitFunction(void (PackageManager::*pointer)()){
-    function = pointer;
-}
-
-void SourcesLoader::appendFileIfSource(QString file){
-    // Creo l'oggetto sorgente
-    Source *src = new Source();
-    src->setCompleteFile(file);
-
-    if(src->isSource()){
-        qInfo() << "File sorgente trovato: " << src->getName() <<
-                   " tipologia di sorgente: " <<
-                   Source::sourceTypeToString(src->getSourceType()) << endl;
-
-        if(package != nullptr){
-            package->addSource(src);
-        }
-        else{
-            qInfo() << "Impossibile aggiungere il sorgente " << src->getName() << " siccome non è stato specificato nessun"
-            "pacchetto a cui aggiungerlo. " << endl;
-        }
-    }
 }
 
 void SourcesLoader::appendEntries(QTreeWidgetItem *item, QDir dir){
@@ -80,9 +52,6 @@ void SourcesLoader::appendEntries(QTreeWidgetItem *item, QDir dir){
             elem->setIcon(0, QIcon(":/icons/browsing/file_icon.png"));
             // Aggiungo al nodo
             item->addChild(elem);
-
-            // Aggiungo il sorgente al pacchetto
-            appendFileIfSource(f.absoluteFilePath());
         }
         // Si tratta di una cartella
         else{

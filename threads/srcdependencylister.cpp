@@ -72,13 +72,16 @@ void SrcDependencyLister::processLocalFileInclusion(QString line){
 
     QString complete_path = formatPathForOs(current_path, QStringList(head));
     // Creo un sorgente e avvio la ricerca di dipendenze
-    Source* src = package->getSource(complete_path);
+    Source* src = new Source();
+    src->setCompleteFile(complete_path);
     processSource(src);
 }
 
 void SrcDependencyLister::processSource(Source *src){
     // Imposto il file corrente
     current_source = src;
+    // Aggiungo il sorgente al pacchetto
+    package->addSource(src);
     // Resetto la riga corrente
     src->setCurrentRow(1);
     current_path = src->getFilePath();
@@ -135,10 +138,13 @@ void SrcDependencyLister::processSource(Source *src){
 void SrcDependencyLister::run(){
     // Controllo che sia stato impostato un pacchetto a cui aggiungere le dipendenze
     if(package != nullptr){
-        // Parto dal file principale
-        auto r = package->getMainSource();
-        if(r != nullptr){
-            processSource(r);
+        // Controllo che il pacchetto abbia un sorgente principale
+        if(package->getMainSourcePath() != ""){
+            // Parto dal file principale
+            Source *src = new Source();
+            QString main_file_path = package->getMainSourcePath();
+            src->setCompleteFile(main_file_path);
+            processSource(src);
         }
     }
 }
