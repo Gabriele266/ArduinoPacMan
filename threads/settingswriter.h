@@ -11,6 +11,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDir>
+#include <QMessageBox>
 #include <QDomDocument>
 #include <QDomElement>
 

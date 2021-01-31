@@ -33,6 +33,15 @@ MainWindow::MainWindow(QWidget *parent)
     reader->setFile(libSearchPath);
 
     reader->start();
+
+    // Controllo se ci sono delle impostazioni
+    if(application_settings != nullptr){
+        // Applico le impostazioni
+    }
+    else{
+        // Scrivo le impostazioni base
+        writeDefaultSettings();
+    }
 }
 
 void MainWindow::updateTitleInfo(){

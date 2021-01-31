@@ -19,6 +19,8 @@
 #include "newpackagedialog.h"
 #include "searchpathmanager.h"
 
+#include "utils/settings_manager.cpp"
+
 // Threads per la gestione delle operazioni di IO
 #include "threads/searchpathlistwriter.h"
 #include "threads/searchpathlistreader.h"

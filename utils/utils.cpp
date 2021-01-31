@@ -53,23 +53,32 @@ static QString formatPathForOs(QString base, QStringList additions){
     auto version = QOperatingSystemVersion::current();
     // Carattere da usare come separatore
     QChar separator_for_os;
+    // Carattere non accettabile
+    QChar not_acceptable_separator;
+    // Percorso base
+    QString path = base;
     if(version >= QOperatingSystemVersion::Windows7){
         // Utilizzo separatori windows
         separator_for_os = '\\';
+        not_acceptable_separator = '/';
+
     }
     else{
-        // Utilizzo separatori linux like
         separator_for_os = '/';
+        not_acceptable_separator = '\\';
     }
 
-    QString path = base;
+    // Rimuovo i caratteri non accettabili
+    path = path.replace(not_acceptable_separator, separator_for_os);
+
     for(int x = 0; x < additions.count(); x ++){
         // Aggiungo il separatore
         path += separator_for_os;
-        // Aggiungo il percorso
-        path += additions[x];
+        // Aggiungo il percorso togliendo i caratteri non accettabili
+        path += additions[x].replace(not_acceptable_separator, separator_for_os);
     }
 
+    qInfo() << "Percorso formattato: " << path << endl;
     return path;
 }
 
