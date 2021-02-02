@@ -85,7 +85,7 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_actionNuovo_pacchetto_triggered()
 {
-    NewPackageDialog *dialog = new NewPackageDialog();
+    NewPackageDialog *dialog = new NewPackageDialog(&settings);
     int res = dialog->exec();
 
     if(res == QDialog::Accepted){

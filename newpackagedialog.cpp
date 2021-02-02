@@ -1,11 +1,13 @@
 #include "newpackagedialog.h"
 #include "ui_newpackagedialog.h"
 
-NewPackageDialog::NewPackageDialog(QWidget *parent) :
+NewPackageDialog::NewPackageDialog(Settings *st, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::NewPackageDialog)
 {
     ui->setupUi(this);
+    settings = st;
+
     // Blocco le dimensioni della finestra
     setMaximumHeight(this->size().height());
     setMaximumWidth(this->size().width());
@@ -87,6 +89,12 @@ NewPackageDialog::NewPackageDialog(QWidget *parent) :
         ui->errorLabel->show();
         ui->correctLabel->hide();
         ui->errorLabel->setText("Nel percorso specificato è già presente <br>un pacchetto o una cartella con quel nome. ");
+    }
+
+    if(settings != nullptr){
+        // Imposto il percorso base per i pacchetti
+        ui->packagePath->setText(resolvePath(settings->getKeyValue("paths", "default-package-path")));
+        ui->sourcesPath->setText(resolvePath(settings->getKeyValue("paths", "default-sources-path")));
     }
 }
 

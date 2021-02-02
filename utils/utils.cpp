@@ -157,8 +157,13 @@ static QString resolvePath(QString startPath){
     // variabile con il risultato delle operazioni
     QString result = startPath;
 
-    if(result.startsWith("$CURPATH$")){
+    if(result.startsWith("$CURPATH$/")){
         result.replace("$CURPATH$", QDir::currentPath());
+    }
+
+    if(result.startsWith("$OSHOME$")){
+        QChar s = getOSSeparator();
+        result.replace(QString("$OSHOME$") + s, getHomePath());
     }
 
     if(startPath.startsWith("~")){

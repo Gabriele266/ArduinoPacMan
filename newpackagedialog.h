@@ -9,6 +9,8 @@
 #include <QFileDialog>
 
 #include "utils/utils.cpp"
+#include "file_types/settings.h"
+#include "file_types/key.h"
 
 namespace Ui {
 class NewPackageDialog;
@@ -19,7 +21,7 @@ class NewPackageDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit NewPackageDialog(QWidget *parent = nullptr);
+    explicit NewPackageDialog(Settings *settings = nullptr, QWidget *parent = nullptr);
     ~NewPackageDialog();
 
     /// Restituisce il nome del pacchetto
@@ -80,6 +82,9 @@ private:
 
     // Puntatore al pulsante per andare avanti
     QPushButton *continue_button;
+
+    // Impostazioni della applicazione
+    Settings *settings = nullptr;
 };
 
 #endif // NEWPACKAGEDIALOG_H
