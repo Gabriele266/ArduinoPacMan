@@ -11,6 +11,12 @@ MainWindow::MainWindow(QWidget *parent)
     // Aggiungo il widget per la gestione dei pacchetti
     ui->verticalLayout->addWidget(packageManager);
 
+    // Avvio la lettura delle impostazioni dal disco
+    settings.setFilePath(formatPathForOs(QDir::currentPath(), QStringList("settings/settings.stc")));
+    SettingsReader *settingsReader = new SettingsReader();
+    settingsReader->setSettingsObject(&settings);
+    settingsReader->start();
+
     // Inizializzo il gestore dei pacchetti
     packageManager->init();
 
@@ -22,28 +28,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Connetto il segnale di cambiamento dei tab
     QObject::connect(packageManager, &PackageManager::tabChanged, this, &MainWindow::onPackageManagerTabChange);
-
-    // Scrivo il percorso in uso per il salvataggio dei percorsi di ricerca librerie
-    qInfo() << "File percorsi di ricerca librerie: " << libSearchPath << endl;
-
-    // Avvio la lettura per i percorsi di ricerca lib
-    SearchPathListReader *reader = new SearchPathListReader();
-    reader->setDestinationList(&librariesSearchPath);
-    librariesSearchPath.setSavePath(libSearchPath);
-    reader->setFile(libSearchPath);
-
-    reader->start();
-
-    // Controllo se ci sono delle impostazioni
-    if(application_settings != nullptr){
-        // Applico le impostazioni
-    }
-    else{
-        // Scrivo le impostazioni base
-        writeDefaultSettings();
-    }
-
-    readDefaultSettings();
 }
 
 void MainWindow::updateTitleInfo(){
@@ -161,6 +145,27 @@ void MainWindow::modificaPercorsoRicerca(Natural index, QString old_val, QString
 
 void MainWindow::on_actionPercorsi_ricerca_librerie_triggered()
 {
+    // Pulisco la lista degli elementi
+    librariesSearchPath.clear();
+
+    // Avvio il caricamento dei percorsi di ricerca dal percorso specificato nelle impostazioni
+    SearchPathListReader *reader = new SearchPathListReader();
+    // Formatto il percorso su cui leggere o scrivere le informazioni
+    QString use_path = resolvePath(settings.getKeyValue("paths", "libsearchpath"));
+    // Imposto il file da leggere al thread di lettura
+    reader->setFile(use_path);
+    // Imposto il file da leggere alla classe per la gestione della lista
+    librariesSearchPath.setSavePath(use_path);
+    // Imposto la lista a cui aggiungere i risultati
+    reader->setDestinationList(&librariesSearchPath);
+
+    // Avvio il thread
+    reader->start();
+    // Attendo che termini
+    while(reader->isRunning()){
+
+    }
+
     // Creo la finestra
     SearchPathManager *man = new SearchPathManager();
 

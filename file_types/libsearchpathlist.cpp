@@ -30,6 +30,10 @@ QStringList* LibSearchPathList::getEntryList(){
     return &pathList;
 }
 
+void LibSearchPathList::clear(){
+    pathList.clear();
+}
+
 void LibSearchPathList::setSavePath(QString path){
     file_path = path;
 }

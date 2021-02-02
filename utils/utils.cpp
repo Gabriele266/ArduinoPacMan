@@ -12,6 +12,7 @@
 #include <QSysInfo>
 #include <QOperatingSystemVersion>
 #include <QDebug>
+#include <QDir>
 
 #include "packages/natural.h"
 
@@ -153,12 +154,18 @@ static QString getHomePath(){
 
 /// Risolve un percorso che contiene collegamenti simbolici come ~.
 static QString resolvePath(QString startPath){
+    // variabile con il risultato delle operazioni
+    QString result = startPath;
+
+    if(result.startsWith("$CURPATH$")){
+        result.replace("$CURPATH$", QDir::currentPath());
+    }
+
     if(startPath.startsWith("~")){
-        return startPath.replace("~", getHomePath());
+        result = result.replace("~", getHomePath());
     }
-    else{
-        return startPath;
-    }
+
+    return result;
 }
 
 /// Applica una politica di gestione a un numero intero e restituisce il numero naturale

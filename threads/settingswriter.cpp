@@ -64,10 +64,10 @@ void SettingsWriter::run(){
             // Mostro l'errore che è avvenuto
             qInfo() << f.errorString() << endl;
             // Invio un messaggio di errore
-            QMessageBox::critical(nullptr, "Errore", QString("Impossibile scrivere le impostazioni %1 nel file %2. Errore restituito: %3")
-                                  .arg(settings->getName())
-                                  .arg(settings->getFilePath())
-                                       .arg(f.errorString()));
+//            QMessageBox::critical(nullptr, "Errore", QString("Impossibile scrivere le impostazioni %1 nel file %2. Errore restituito: %3")
+//                                  .arg(settings->getName())
+//                                  .arg(settings->getFilePath())
+//                                       .arg(f.errorString()));
         }
     }
 }

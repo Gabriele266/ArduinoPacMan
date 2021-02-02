@@ -13,18 +13,15 @@
 #include "file_types/key.h"
 #include "threads/settingsreader.h"
 
-/// Impostazioni della applicazione
-static Settings* application_settings = nullptr;
-
 /// Scrive le impostazioni di default del programma in un percorso legacy
-static void writeDefaultSettings(){
+static void writeDefaultSettings(Settings *application_settings){
     // Formatto un oggetto impostazioni
     Settings *global_settings = new Settings();
     application_settings = global_settings;
     global_settings->setName("arduino-pacman-settings");
     global_settings->setDescription("Arduino pacman settings file for storing options. ");
     // Imposto il percorso del file
-    global_settings->setFilePath(formatPathForOs(QDir::currentPath(), QStringList("debug/settings/settings.stc")));
+    global_settings->setFilePath(formatPathForOs(QDir::currentPath(), QStringList("settings/settings.stc")));
     qInfo() << "Avvio scrittura impostazioni sul disco. " << endl <<
              "file utilizzato: " << global_settings->getFilePath() << endl;
     // Groppo per le impostazioni di visualizzazione generale
@@ -72,11 +69,14 @@ static void writeDefaultSettings(){
     writer->start();
 }
 
-static void readDefaultSettings(){
+static void readDefaultSettings(Settings *application_settings){
     application_settings = new Settings();
-    application_settings->setFilePath(formatPathForOs(QDir::currentPath(), QStringList("debug/settings/settings.stc")));
+    application_settings->setFilePath(formatPathForOs(QDir::currentPath(), QStringList("settings/settings.stc")));
 
     SettingsReader *reader = new SettingsReader();
     reader->setSettingsObject(application_settings);
     reader->start();
+
+    // Anntedo che finisca
+    while(reader->isRunning()){}
 }

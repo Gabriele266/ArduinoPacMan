@@ -50,6 +50,9 @@ public:
 
     /// Restituisce un puntatore alla lista di elementi
     QStringList* getEntryList();
+
+    /// Pulisce la lista da tutti gli elementi
+    void clear();
 private:
     // Percorso di salvataggio del file
     QString file_path;

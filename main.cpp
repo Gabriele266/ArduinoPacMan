@@ -16,6 +16,5 @@ int main(int argc, char *argv[])
     // Creo la finestra principale
     MainWindow w;
     w.show();
-
     return a.exec();
 }

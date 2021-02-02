@@ -79,7 +79,7 @@ private:
     // Lista dei percorsi di ricerca delle librerie
     LibSearchPathList librariesSearchPath;
 
-    // Percorso in cui salvare i percorsi di ricerca
-    QString libSearchPath = getHomePath() + "libsources.src";
+    // Impostazioni della applicazione
+    Settings settings;
 };
 #endif // MAINWINDOW_H

@@ -46,6 +46,9 @@ void SearchPathListReader::run(){
                     // Ignoro il commento
                 }
             }
+            else{
+                qInfo() << "Impossibile aprire il file specificato: " << file.errorString() << endl << " File: " << file_path;
+            }
         }
         else{
             qInfo() << "Richiesta lettura di un file di percorsi di ricerca senza aver definito una lista in cui mettere i risultati. " << endl;

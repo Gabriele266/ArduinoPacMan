@@ -65,5 +65,8 @@ void SettingsReader::run(){
             }
             f.close();
         }
+        else{
+            qInfo() << "File richiesto non esistente per la lettura delle impostazioni. " << endl;
+        }
     }
 }
