@@ -1,0 +1,43 @@
+<html>
+    <head>
+
+    </head>
+
+    <body>
+        <h1 style="color:blue;">La classe Key</h1>
+        La classe Key permette di gestire un valore di impostazione, ad esempio il colore di un campo o la dimensione base di una finestra. <br>
+        Fornisce i seguenti campi privati: 
+        <ul>
+            <li><b>name</b>: nome della chiave</li>
+            <li><b>value</b>: valore della chiave</li>
+            <li><b>attributes</b>: lista di attributi</li>
+        </ul>
+
+        <h2 style="color:green; size:5px;">Utilizzo della classe</h2>
+
+        Tramite il metodo <i>setName(QString name)</i> è possibile impostare il nome della chiave. <br>
+        Il metodo <i>getName()</i> restituisce una stringa contentente il nome della chiave. <br> <br>
+        Per aggiungere un attributo alla chiave è possibile usare la funzione <i>addAttribute()</i> che accetta come parametri <br>
+        sia una coppia di stringhe(nome e valore) o un puntatore ad una classe <b>Attribute</b>. <br>
+        <br>
+        <h3>Accesso agli attributi di una chiave</h3>
+        L'accesso agli attributi di una chiave si divide in tre casistiche, in base a cosa si possiede per identificare l'attributo in maniera univoca. <br>
+        
+        <h4>Accesso ad un attributo a partire dall' indice</h4>
+        Per estrarre un attributo a partire da un indice utilizzare la funzione <i>Attribute* getAttributeByIndex(Natural index);</i> <br>
+        che restituisce un puntatore all' attributo con quell' indice. <br>
+        Se non esiste nessun attributo con quell' indice verra restituito nullptr, un puntatore che punta all' area di memoria 0x00000. <br>
+
+        <h4>Accesso ad un attributo a partire dal suo nome</h4>
+        Se si è in possesso del nome di un attributo è possibile estrarlo tramite la funzione <i>Attribute* getAttributeByName(QString name);</i> <br>
+        che restituisce un puntatore all' attributo con quel nome (il primo della lista). <br>
+        Se non esiste nessun attributo con quel nome viene restituito nullptr.
+
+        <h4>Accesso al valore di un attributo a partire dal suo nome</h4>
+        La funzione <i>QString getAttributeValue(QString name);</i> restituisce il valore del primo attributo con quel nome. <br>
+        Se non ne esiste nessuno verrà restituita una stringa vuota. 
+
+        <h3>Accesso al numero di attributi di una chiave</h3>
+        Tramite la funzione <i>Natural getAttributesCount();</i> è possibile accedere al numero di attributi della chiave sotto forma di numero.
+    </body>
+</html>

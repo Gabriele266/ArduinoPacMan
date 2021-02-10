@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>919</width>
-    <height>535</height>
+    <width>985</width>
+    <height>601</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,6 +23,15 @@
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QTabWidget" name="widgetManager">
+        <property name="minimumSize">
+         <size>
+          <width>500</width>
+          <height>500</height>
+         </size>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
         <widget class="QWidget" name="tab">
          <attribute name="title">
           <string>Tab 1</string>
@@ -44,7 +53,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>919</width>
+     <width>985</width>
      <height>22</height>
     </rect>
    </property>

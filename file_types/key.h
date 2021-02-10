@@ -20,9 +20,6 @@
 #include "utils/utils.cpp"
 #include "attribute.h"
 
-/// Numero massimo di attributi per ogni chiave
-#define MAX_KEY_ATTRIBUTES 5
-
 /// Rappresenta una chiave
 class Key
 {
@@ -60,7 +57,6 @@ public:
 
     /// Restituisce il numero di attributi della chiave
     Natural getAttributesCount();
-
 
 private:
     // Nome della chiave

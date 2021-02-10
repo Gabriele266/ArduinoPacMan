@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>
+            Gestione delle impostazioni
+        </title>
+    </head>
+
+    <body style="line-height: 150%;">
+        <h1 style="color:red;">Gesione delle impostazioni</h1>
+
+        <div>
+            <i>Le impostazioni sono organizzate in chiavi, ognuna delle quali ha un nome, un valore e degli attributi o modificatori. </i><br>
+            In <b>ArduinoPacMan</b> le impostazioni vengono gestite dalle classi: 
+            <ul>
+                <li><b>Settings</b>: per la gestione di un file di impostazioni</li>
+                <li><b>Group</b>: per la gestione di gruppi di chiavi</li>
+                <li><b>Key</b>: per la gestione di ogni singola chiave</li>
+                <li><b>Attribute</b>: per la gestione di un attributo per una chiave</li>
+                <li><b>AttributeList</b>: per la gestione di una lista di attributi</li>
+            </ul>
+
+        </div>
+        
+        Queste classi forniscono una struttura di memorizzazione delle impostazioni in RAM. Permettono di organizzarle gerarchicamente, effettuare <br>
+        degli accessi, ordinarle, ottenere informazioni, ma non di caricarle o di scriverle su disco. Per questo è stata creata una serie di thread <br>
+        per lo svolgimento delle operazioni di scrittura di impostazioni su disco e di lettura delle impostazioni dal disco.
+        <br>
+
+        <a href="key-managing.html">Documentazione classe Key</a>
+    </body>
+</html>
