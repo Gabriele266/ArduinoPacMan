@@ -152,6 +152,10 @@ static QString getHomePath(){
     }
 }
 
+static QString getCurrentPath(){
+    return QDir::currentPath();
+}
+
 /// Risolve un percorso che contiene collegamenti simbolici come ~.
 static QString resolvePath(QString startPath){
     // variabile con il risultato delle operazioni

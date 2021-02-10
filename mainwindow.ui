@@ -6,20 +6,36 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>774</width>
-    <height>443</height>
+    <width>919</width>
+    <height>535</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <property name="windowIcon">
-   <iconset theme=":/icons/program/ProgramIcon.ico"/>
+   <iconset theme=":/icons/program/ProgramIcon.ico">
+    <normaloff>.</normaloff>.</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout"/>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QTabWidget" name="widgetManager">
+        <widget class="QWidget" name="tab">
+         <attribute name="title">
+          <string>Tab 1</string>
+         </attribute>
+        </widget>
+        <widget class="QWidget" name="tab_2">
+         <attribute name="title">
+          <string>Tab 2</string>
+         </attribute>
+        </widget>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
@@ -28,7 +44,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>774</width>
+     <width>919</width>
      <height>22</height>
     </rect>
    </property>
@@ -89,10 +105,18 @@
     <addaction name="separator"/>
     <addaction name="actionApri_file_di_progetto"/>
    </widget>
+   <widget class="QMenu" name="menuVisualizza">
+    <property name="title">
+     <string>Visualizza</string>
+    </property>
+    <addaction name="actionScheda_home"/>
+    <addaction name="actionSchede_a_sinistra"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuGestione"/>
    <addaction name="menuImpostazioni"/>
    <addaction name="menuPacchetto"/>
+   <addaction name="menuVisualizza"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionNuovo_pacchetto">
@@ -283,6 +307,19 @@
   <action name="actionImportazione">
    <property name="text">
     <string>Importazione</string>
+   </property>
+  </action>
+  <action name="actionScheda_home">
+   <property name="text">
+    <string>Scheda home</string>
+   </property>
+  </action>
+  <action name="actionSchede_a_sinistra">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Schede a sinistra</string>
    </property>
   </action>
  </widget>

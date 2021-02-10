@@ -1,0 +1,15 @@
+=============================
+ArduinoPacMan file di informazioni
+=============================
+
+Per effettuare la build del progetto aprirlo in qt-creator e configurare il compilatore come 64bit.
+Informazioni struttura cartelle:
+	icons: icone del progetto
+	gui: elementi grafici definiti (widgets)
+	file_types: costrutti base per la gestione dei file
+	utils: utilities per la gestione dei vari costrutti
+	packages: costrutti per la gestione dei pacchetti
+	schemes: schemi del funzionamento
+	themes: temi della applicazione
+	
+

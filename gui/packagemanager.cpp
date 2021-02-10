@@ -1,14 +1,12 @@
 #include "packagemanager.h"
 #include "ui_packagemanager.h"
 
-PackageManager::PackageManager(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::PackageManager)
+PackageManager::PackageManager()
 {
-    ui->setupUi(this);
+
 }
 
-void PackageManager::addPackage(Package *pack){
+PackageTab* PackageManager::addPackage(Package *pack){
     // Controllo che non sia un puntatore nullo
     if(pack != nullptr){
         // Imposto l'indice del pacchetto
@@ -21,7 +19,7 @@ void PackageManager::addPackage(Package *pack){
         // Imposto i tag del tab
         tab->setTags("<package>");
         // Aggiungo
-        ui->surfaceManager->addTab(tab, pack->getName());
+        tabWidget->addTab(tab, pack->getName());
 
         // Carico i suoi sorgenti
         auto *loader = new SourcesLoader();
@@ -38,18 +36,15 @@ void PackageManager::addPackage(Package *pack){
         // Imposto il widget
         lister->setWidget(tab->getDependencyBrowser());
         lister->start();
-    }
-}
 
-void PackageManager::onSourcesLoadingFinished(){
-    if(lister != nullptr){
-        lister->start();
+        return tab;
     }
+    return nullptr;
 }
 
 bool PackageManager::isCurrentPackage(){
     // Indice del tab corrente
-    int cur = ui->surfaceManager->currentIndex();
+    int cur = tabWidget->currentIndex();
 
     // Scorro tutti i pacchetti e controllo i loro tag per sapere se si tratta di un tab-pacchetto
     for(int x = 0; x < packages.count(); x++){
@@ -68,7 +63,7 @@ void PackageManager::startDependencyIndexer(Package *package, QTreeWidget* widge
 Package* PackageManager::getCurrentPackage(){
     // Determino se il tab corrente è un pacchetto
     // Prendo l'indice corrente
-    int current = ui->surfaceManager->currentIndex();
+    int current = tabWidget->currentIndex();
 
     // Scorro tutti i pacchetti e controllo i loro tag per sapere se si tratta di un tab-pacchetto
     for(int x = 0; x < packages.count(); x++){
@@ -95,20 +90,5 @@ unsigned int PackageManager::getCurrentPackageIndex(){
 }
 
 void PackageManager::init(){
-    // Tolgo tutti i tab
-    ui->surfaceManager->clear();
-}
 
-PackageManager::~PackageManager()
-{
-    delete ui;
-}
-
-void PackageManager::on_surfaceManager_currentChanged(int index)
-{
-    qInfo() << "Cambiato tab in package manager. \n";
-    qInfo() << "Tab corrente è un pacchetto?: " << isCurrentPackage();
-
-    // Emetto il segnale di cambio tab
-    emit tabChanged(index);
 }

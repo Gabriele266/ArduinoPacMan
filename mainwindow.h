@@ -1,6 +1,9 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+class HomePage;
+class PackageManager;
+
 #include <QMainWindow>
 #include <QDebug>
 #include <QTextStream>
@@ -8,8 +11,8 @@
 
 
 // Dialoghi addizionali
-#include "gui/packagemanager.h"
 #include "gui/generalstatusbar.h"
+#include "gui/packagemanager.h"
 
 // Costrutti logici
 #include "packages/package.h"
@@ -32,7 +35,7 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
+class MainWindow : public QMainWindow, PackageManager
 {
     Q_OBJECT
 public:
@@ -67,11 +70,17 @@ private slots:
     void modificaPercorsoRicerca(Natural index, QString old_val, QString new_val);
     void on_actionApri_pacchetto_triggered();
 
+    /// Chiamato quando un tab necessita di creare un nuovo pacchetto
+    void onNewPackageRequired();
+
+    /// Chiamato quando si apre un nuovo pacchetto
+    void onOpenPackageRequired();
+    void on_actionScheda_home_triggered();
+
+    void on_actionSchede_a_sinistra_triggered();
+
 private:
     Ui::MainWindow *ui;
-
-    // Gestore dei paccchetti
-    PackageManager *packageManager = new PackageManager();
 
     // Creo una status bar
     GeneralStatusBar *statusBar = new GeneralStatusBar();
@@ -81,5 +90,16 @@ private:
 
     // Impostazioni della applicazione
     Settings settings;
+
+protected:
+    // Gestisce la creazione di un nuovo pacchetto
+    void newPackage();
+
+    /// Mostra la scheda home
+    void showHomePage();
+
+    /// Apre un nuovo pacchetto
+    void openPackage();
 };
+
 #endif // MAINWINDOW_H

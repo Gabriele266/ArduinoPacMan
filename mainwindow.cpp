@@ -7,18 +7,14 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    setTabWidget(ui->widgetManager);
 
-    // Aggiungo il widget per la gestione dei pacchetti
-    ui->verticalLayout->addWidget(packageManager);
-
+    ui->widgetManager->clear();
     // Avvio la lettura delle impostazioni dal disco
     settings.setFilePath(formatPathForOs(QDir::currentPath(), QStringList("settings/settings.stc")));
     SettingsReader *settingsReader = new SettingsReader();
     settingsReader->setSettingsObject(&settings);
     settingsReader->start();
-
-    // Inizializzo il gestore dei pacchetti
-    packageManager->init();
 
     // Imposto la barra di stato
     ui->statusbar->addPermanentWidget(statusBar, 1);
@@ -26,20 +22,60 @@ MainWindow::MainWindow(QWidget *parent)
     // Aggiorno il titolo
     updateTitleInfo();
 
-    // Connetto il segnale di cambiamento dei tab
-    QObject::connect(packageManager, &PackageManager::tabChanged, this, &MainWindow::onPackageManagerTabChange);
+    showHomePage();
+}
+
+void MainWindow::showHomePage(){
+    // Aggiungo il tab home
+    HomePage *home = new HomePage( nullptr);
+    ui->widgetManager->addTab(home, "Home");
+
+    // Connetto gli eventi
+    QObject::connect(home, &HomePage::newPackageRequired, this, &MainWindow::onNewPackageRequired);
+
+    QObject::connect(home, &HomePage::openPackageRequired, this, &MainWindow::onOpenPackageRequired);
+}
+
+void MainWindow::onNewPackageRequired(){
+    qInfo() << "Nuovo pacchetto richiesto da un tab. " << endl;
+    newPackage();
+}
+
+void MainWindow::onOpenPackageRequired(){
+    openPackage();
+}
+
+void MainWindow::openPackage(){
+    // Chiedo una directory in cui cercare il pacchetto
+    QString dir = QFileDialog::getExistingDirectory(this, "Selezionare la cartella del pacchetto");
+
+    // Controllo che l'utente abbia accettato
+    if(dir != ""){
+        // Avvio un thread di lettura delle informazioni sul pacchetto
+        PackageReader *reader = new PackageReader();
+        reader->setPath(dir);
+
+        reader->start();
+
+        // Attendo che finisca
+        while(reader->isRunning()){
+            // Attendo
+        }
+        // Aggiungo il pacchetto
+        addPackage(reader->getPackage());
+    }
 }
 
 void MainWindow::updateTitleInfo(){
     // Titolo base
     QString title = QString("ArduinoPacMan %1 ").arg(ARDUINO_PACMAN_VERSION.toString());
     // Controllo se ci sono dei pacchetti aggiunti
-    if(packageManager->hasPackages()){
+    if(hasPackages()){
         // Determino se il tab corrente è un pacchetto
-        if(packageManager->isCurrentPackage()){
+        if(isCurrentPackage()){
             // Scrivo il nome del pacchetto
             title += "| ";
-            title += packageManager->getCurrentPackage()->getName();
+            title += getCurrentPackage()->getName();
         }
     }
     setWindowTitle(title);
@@ -52,13 +88,13 @@ void MainWindow::onPackageManagerTabChange(unsigned int newTab){
 
 void MainWindow::updateStatusBar(){
     // Scrivo il numero di pacchetti aperti
-    statusBar->setPackagesCount(packageManager->getPackagesCount());
+    statusBar->setPackagesCount(getPackagesCount());
 
     // Controllo se ci sono pacchetti presenti
-    if(packageManager->isCurrentPackage()){
+    if(isCurrentPackage()){
         // Imposto il percorso del pacchetto corrente
-        statusBar->setCurrentPackagePath(packageManager->getCurrentPackage()->getSavePath());
-        statusBar->setLibraryCount(packageManager->getCurrentPackage()->getLibraryCount());
+        statusBar->setCurrentPackagePath(getCurrentPackage()->getSavePath());
+        statusBar->setLibraryCount(getCurrentPackage()->getLibraryCount());
     }
     else{
         statusBar->setCurrentPackagePath("Scheda home");
@@ -66,25 +102,7 @@ void MainWindow::updateStatusBar(){
     }
 }
 
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
-
-void MainWindow::on_actionNuova_finestra_triggered()
-{
-    // Creo una nuova finestra
-    MainWindow *mainWin = new MainWindow();
-    mainWin->show();
-}
-
-void MainWindow::on_pushButton_clicked()
-{
-
-}
-
-void MainWindow::on_actionNuovo_pacchetto_triggered()
-{
+void MainWindow::newPackage(){
     NewPackageDialog *dialog = new NewPackageDialog(&settings);
     int res = dialog->exec();
 
@@ -113,13 +131,35 @@ void MainWindow::on_actionNuovo_pacchetto_triggered()
         package->create();
 
         // Aggiungo il pacchetto al gestore
-        packageManager->addPackage(package);
+        addPackage(package);
     }
 
     // Aggiorno il titolo
     updateTitleInfo();
     // Aggiorno la barra di stato
     updateStatusBar();
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+void MainWindow::on_actionNuova_finestra_triggered()
+{
+    // Creo una nuova finestra
+    MainWindow *mainWin = new MainWindow();
+    mainWin->show();
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+
+}
+
+void MainWindow::on_actionNuovo_pacchetto_triggered()
+{
+    newPackage();
 }
 
 void MainWindow::aggiungiPercorsoRicercaTriggered(QString path){
@@ -198,22 +238,20 @@ void MainWindow::on_actionPercorsi_ricerca_librerie_triggered()
 
 void MainWindow::on_actionApri_pacchetto_triggered()
 {
-    // Chiedo una directory in cui cercare il pacchetto
-    QString dir = QFileDialog::getExistingDirectory(this, "Selezionare la cartella del pacchetto");
+    openPackage();
+}
 
-    // Controllo che l'utente abbia accettato
-    if(dir != ""){
-        // Avvio un thread di lettura delle informazioni sul pacchetto
-        PackageReader *reader = new PackageReader();
-        reader->setPath(dir);
+void MainWindow::on_actionScheda_home_triggered()
+{
+    showHomePage();
+}
 
-        reader->start();
-
-        // Attendo che finisca
-        while(reader->isRunning()){
-            // Attendo
-        }
-        // Aggiungo il pacchetto
-        packageManager->addPackage(reader->getPackage());
+void MainWindow::on_actionSchede_a_sinistra_triggered()
+{
+    if(ui->actionSchede_a_sinistra->isChecked()){
+        ui->widgetManager->setTabPosition(QTabWidget::West);
+    }
+    else{
+        ui->widgetManager->setTabPosition(QTabWidget::North);
     }
 }

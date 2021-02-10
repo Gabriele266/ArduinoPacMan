@@ -9,26 +9,26 @@
 #include "packagetab.h"
 #include "threads/sourcesloader.h"
 #include "threads/srcdependencylister.h"
+#include "gui/homepage.h"
 
 #include <QWidget>
 #include <QTabWidget>
 #include <QList>
 #include <QStringList>
 
-namespace Ui {
-class PackageManager;
-}
+#include "utils/macros.h"
 
-class PackageManager : public QWidget
+class PackageManager
 {
-    Q_OBJECT
-
 public:
-    explicit PackageManager(QWidget *parent = nullptr);
-    ~PackageManager();
+    PackageManager();
+
+    GETTER_SETTERC(QTabWidget*, tabWidget, TabWidget,
+                   Imposta il widget che si occuperà della visualizzazione dei tab,
+                   Restituisce il widget che si occupa della visualizzazione)
 
     /// Aggiunge un pacchetto alla lista e lo visualizza nel controllo
-    void addPackage(Package *pack);
+    PackageTab* addPackage(Package *pack);
 
     /// Inizializza il gestore
     void init();
@@ -51,23 +51,15 @@ public:
 
     /// Avvia la ricerca delle dipendenze per il pacchetto package
     void startDependencyIndexer(Package *package, QTreeWidget* widget);
-
-private slots:
-    void on_surfaceManager_currentChanged(int index);
-
-    /// Chiamata quando il caricamento dei sorgenti è terminato
-    void onSourcesLoadingFinished();
-
-signals:
-    // Emesso quando il tab è stato cambiato
-    void tabChanged(unsigned int newTab);
 private:
     // Lista di pacchetti
     QList<Package *>packages;
 
-    Ui::PackageManager *ui;
     // Thread per il caricamento delle dipendenze di un pacchetto
     SrcDependencyLister *lister = new SrcDependencyLister();
+
+    // Widget che gestisce la visualizzazione
+    QTabWidget *tabWidget = nullptr;
 };
 
 #endif // PACKAGEMANAGER_H
