@@ -1,6 +1,13 @@
 <html>
     <head>
-
+        <style>
+            code {
+                background-color: #eee;
+                border: 1px solid #999;
+                display: block;
+                padding: 20px;
+            }
+        </style>
     </head>
 
     <body>
@@ -39,5 +46,27 @@
 
         <h3>Accesso al numero di attributi di una chiave</h3>
         Tramite la funzione <i>Natural getAttributesCount();</i> è possibile accedere al numero di attributi della chiave sotto forma di numero.
+        
+        <br>
+        <h2 style="color:green">Esempio di utilizzo</h2>
+        Si vuole creare una chiave, impostarne nome, valore e aggiungere un attributo in maniera semplice.
+        <br>
+        <code>
+            // Dichiaro la nuova chiave e la alloco nello heap RAM. (Consigliato siccome tutte le altre classi accettano puntatori <br>
+            // a Key e non valori in copia <br>
+            Key *k = new Key();<br>
+            <br>
+            // Imposto il nome della chiave<br>
+            k->setName("prima-chiave");<br>
+            <br>
+            // Imposto il valore della chiave<br>
+            k->setValue("primo-valore");<br>
+            <br>
+            // Aggiungo un attributo usando la funzione che accetta una coppia di stringhe<br>
+            k->addAttribute("name", "value");<br>
+            <br>
+            // Scrivo il nome della chiave <br>
+            qInfo() << k->getName();<br>
+        </code>
     </body>
 </html>
