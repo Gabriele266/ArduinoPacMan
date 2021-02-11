@@ -43,7 +43,7 @@ QString LibSearchPathList::getSavePath(){
 }
 
 void LibSearchPathList::removePath(Natural index){
-    pathList.remove(index);
+    pathList.removeAt(index);
 }
 
 bool LibSearchPathList::editElem(Natural index, QString newVal){
@@ -57,7 +57,7 @@ bool LibSearchPathList::editElem(Natural index, QString newVal){
 bool LibSearchPathList::removeElemByPath(QString path){
     for(Natural x = 0; x < Natural::make(pathList.count(), ElideUnderZero); x++){
         if(pathList[x] == path){
-            pathList.remove(x);
+            pathList.removeAt(x);
             return true;
         }
     }

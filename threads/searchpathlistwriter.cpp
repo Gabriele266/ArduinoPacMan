@@ -18,7 +18,7 @@ void SearchPathListWriter::run(){
             // Controllo che il percorso sia plausibile
             if(searchPathList->getSavePath() != ""){
                 // Creo il file
-                QFile file = searchPathList->getSavePath();
+                QFile file (searchPathList->getSavePath());
 
                 // Tento di aprirlo in scrittura
                 if(file.open(QIODevice::WriteOnly | QIODevice::Text)){

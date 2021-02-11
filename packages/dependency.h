@@ -8,7 +8,6 @@
 
 #include <QString>
 #include <QStringList>
-#include <QProperty>
 
 #include "library.h"
 #include "version.h"

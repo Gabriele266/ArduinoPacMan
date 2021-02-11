@@ -104,7 +104,7 @@ void SearchPathManager::on_removePath_clicked()
     QString old_item_text = ui->pathList->item(index)->text();
 
     // Rimuovo l'elemento
-    entries.remove(index);
+    entries.removeAt(index);
 
     // Aggiorno la vista
     updateItemsView();
