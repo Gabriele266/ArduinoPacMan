@@ -176,15 +176,6 @@ void MainWindow::newPackage(){
     updateStatusBar();
 }
 
-MainWindow::~MainWindow()
-{
-    delete ui;
-    // Rimuovo tutti i pacchetti
-    for(Natural x = 0; x < packageList.count(); x++){
-        delete packageList[x];
-    }
-}
-
 void MainWindow::on_actionNuova_finestra_triggered()
 {
     // Creo una nuova finestra
@@ -340,5 +331,38 @@ void MainWindow::on_widgetManager_currentChanged(int index)
         // Ottengo il pacchetto relativo al tab corrente
         qInfo() << "Pacchetto cambiato: " << packageList[ind]->getName() << endl;
         statusBar->setCurrentPackagePath(cur->getCompletePath());
+    }
+}
+
+Package* MainWindow::getCurrentPackage(){
+    // Indice del pacchetto nella sua lista
+    int index = getPackageIndex(ui->widgetManager->currentIndex());
+    if(index >= 0 && packageList.count() > index){
+        return packageList[index];
+    }
+    return nullptr;
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+    // Rimuovo tutti i pacchetti
+    for(Natural x = 0; x < packageList.count(); x++){
+        delete packageList[x];
+    }
+}
+
+void MainWindow::on_actionPropriet_pacchetto_triggered()
+{
+    // Ottengo il pacchetto corrente
+    auto cur = getCurrentPackage();
+
+    // Controllo se effettivamente esiste
+    if(cur != nullptr){
+        PackageInfo *info = new PackageInfo(cur);
+        info->show();
+    }
+    else{
+        QMessageBox::critical(this, "Errore", "Per visualizzare le proprietà di un pacchetto è necessario prima selezionarne uno nel controllo multi-tab o aprirne uno nuovo. ");
     }
 }

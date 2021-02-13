@@ -20,6 +20,7 @@ SOURCES += \
     gui/packagetab.cpp \
 	gui/tab.cpp \
 	newsearchpath.cpp \
+	packageinfo.cpp \
 	packages/attributeditem.cpp \
 	packages/dependency.cpp \
 	packages/library.cpp \
@@ -57,6 +58,7 @@ HEADERS += \
     gui/packagetab.h \
 	gui/tab.h \
 	newsearchpath.h \
+	packageinfo.h \
 	packages/attributeditem.h \
 	packages/dependency.h \
 	packages/library.h \
@@ -87,6 +89,7 @@ FORMS += \
     mainwindow.ui \
     newpackagedialog.ui \
     newsearchpath.ui \
+    packageinfo.ui \
     searchpathmanager.ui
 
 # Default rules for deployment.

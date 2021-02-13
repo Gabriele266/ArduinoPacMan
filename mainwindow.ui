@@ -103,8 +103,8 @@
     </property>
     <addaction name="actionApri_nel_gestore_dei_file"/>
     <addaction name="actionApri_nel_terminale"/>
-    <addaction name="actionVisualizza_informazioni"/>
     <addaction name="separator"/>
+    <addaction name="actionPropriet_pacchetto"/>
     <addaction name="actionModifica_attributi"/>
     <addaction name="actionRinomina"/>
     <addaction name="separator"/>
@@ -258,11 +258,6 @@
     <string>Apri nel terminale</string>
    </property>
   </action>
-  <action name="actionVisualizza_informazioni">
-   <property name="text">
-    <string>Visualizza informazioni</string>
-   </property>
-  </action>
   <action name="actionModifica_attributi">
    <property name="text">
     <string>Modifica attributi</string>
@@ -329,6 +324,11 @@
    </property>
    <property name="text">
     <string>Schede a sinistra</string>
+   </property>
+  </action>
+  <action name="actionPropriet_pacchetto">
+   <property name="text">
+    <string>Proprietà pacchetto</string>
    </property>
   </action>
  </widget>

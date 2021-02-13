@@ -32,6 +32,8 @@ class PackageManager;
 
 #include "file_types/libsearchpathlist.h"
 
+#include "packageinfo.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -82,6 +84,8 @@ private slots:
 
     void on_widgetManager_currentChanged(int index);
 
+    void on_actionPropriet_pacchetto_triggered();
+
 private:
     Ui::MainWindow *ui;
 
@@ -112,6 +116,9 @@ protected:
 
     /// Restituisce l'indice del pacchetto corrente
     int getPackageIndex(Natural tabIndex);
+
+    /// Restituisce il pacchetto corrente
+    Package* getCurrentPackage();
 };
 
 #endif // MAINWINDOW_H
