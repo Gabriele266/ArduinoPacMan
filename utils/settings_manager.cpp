@@ -22,8 +22,6 @@ static void writeDefaultSettings(Settings *application_settings){
     global_settings->setDescription("Arduino pacman settings file for storing options. ");
     // Imposto il percorso del file
     global_settings->setFilePath(formatPathForOs(QDir::currentPath(), QStringList("settings/settings.stc")));
-    qInfo() << "Avvio scrittura impostazioni sul disco. " << endl <<
-             "file utilizzato: " << global_settings->getFilePath() << endl;
     // Groppo per le impostazioni di visualizzazione generale
     Group *group = new Group();
     group->setName("global-appearence");
@@ -45,6 +43,7 @@ static void writeDefaultSettings(Settings *application_settings){
     g->setName("paths");
     g->addKey(new Key("libsearchpath", "$CURPATH$/libsrc.src"));
     g->addKey(new Key("default-package-path", "$OSHOME$/ArduinoPacManPackages/"));
+    g->addKey(new Key("default-package-sources", "$OSHOME$/Sources/"));
     g->addKey(new Key("base-package-name", "NewPackage"));
 
     global_settings->addGroup(g);

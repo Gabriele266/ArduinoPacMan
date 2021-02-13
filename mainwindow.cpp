@@ -14,11 +14,14 @@ MainWindow::MainWindow(QWidget *parent)
     settings.setFilePath(formatPathForOs(QDir::currentPath(), QStringList("settings/settings.stc")));
     // Controllo se il file di impostazioni esiste
     if(QFile::exists(settings.getFilePath())){
+        // Notifico che ho trovato le impostazioni
+        qInfo() << "File di impostazioni esistente, avvio il caricamento. " << endl;
         // Avvio la lettura delle impostazioni
         SettingsReader *settingsReader = new SettingsReader();
         settingsReader->setSettingsObject(&settings);
         settingsReader->start();
-    }else{
+    }
+    else{
         qInfo() << "File di impostazioni non trovato, avvio la scrittura sul disco. " << endl;
         // Avvio la scrittura delle impostazioni
         writeDefaultSettings(&settings);
@@ -40,7 +43,6 @@ void MainWindow::showHomePage(){
 
     // Connetto gli eventi
     QObject::connect(home, &HomePage::newPackageRequired, this, &MainWindow::onNewPackageRequired);
-
     QObject::connect(home, &HomePage::openPackageRequired, this, &MainWindow::onOpenPackageRequired);
 }
 
