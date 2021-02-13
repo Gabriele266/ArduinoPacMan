@@ -10,7 +10,6 @@ void SearchPathListWriter::setLibraryList(LibSearchPathList *info){
 }
 
 void SearchPathListWriter::run(){
-    LibWritingEnd exit_code;
     // Controllo che sia stata impostata una lista di percorsi da scrivere
     if(searchPathList != nullptr){
         // Controllo che sia presente qualcosa da scrivere
@@ -32,23 +31,8 @@ void SearchPathListWriter::run(){
                     for(Natural x = 0; x < searchPathList->getListCount(); x++){
                         str << searchPathList->getPath(x) << endl;
                     }
-                    // Imposto lo stato di uscita
-                    exit_code = Success;
-                }
-                else{
-                    exit_code = FileAccessError;
                 }
             }
-            else{
-                exit_code = PassedPathNotExisting;
-            }
-            // Creo un file per il
         }
-        else{
-            exit_code = LibrarySearchPathEmpty;
-        }
-    }
-    else{
-        exit_code = NoListPassed;
     }
 }

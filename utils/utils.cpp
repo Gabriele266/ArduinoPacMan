@@ -79,7 +79,6 @@ static QString formatPathForOs(QString base, QStringList additions){
         path += additions[x].replace(not_acceptable_separator, separator_for_os);
     }
 
-    qInfo() << "Percorso formattato: " << path << endl;
     return path;
 }
 

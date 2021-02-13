@@ -12,9 +12,17 @@ MainWindow::MainWindow(QWidget *parent)
     ui->widgetManager->clear();
     // Avvio la lettura delle impostazioni dal disco
     settings.setFilePath(formatPathForOs(QDir::currentPath(), QStringList("settings/settings.stc")));
-    SettingsReader *settingsReader = new SettingsReader();
-    settingsReader->setSettingsObject(&settings);
-    settingsReader->start();
+    // Controllo se il file di impostazioni esiste
+    if(QFile::exists(settings.getFilePath())){
+        // Avvio la lettura delle impostazioni
+        SettingsReader *settingsReader = new SettingsReader();
+        settingsReader->setSettingsObject(&settings);
+        settingsReader->start();
+    }else{
+        qInfo() << "File di impostazioni non trovato, avvio la scrittura sul disco. " << endl;
+        // Avvio la scrittura delle impostazioni
+        writeDefaultSettings(&settings);
+    }
 
     // Imposto la barra di stato
     ui->statusbar->addPermanentWidget(statusBar, 1);

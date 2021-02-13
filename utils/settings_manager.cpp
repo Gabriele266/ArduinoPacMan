@@ -43,7 +43,7 @@ static void writeDefaultSettings(Settings *application_settings){
     // Gruppo per le impostazioni dei vari percorsi
     Group *g = new Group();
     g->setName("paths");
-    g->addKey(new Key("libsearchpath-windows", "$CURPATH$/libsrc.src"));
+    g->addKey(new Key("libsearchpath", "$CURPATH$/libsrc.src"));
     g->addKey(new Key("default-package-path", "$OSHOME$/ArduinoPacManPackages/"));
     g->addKey(new Key("base-package-name", "NewPackage"));
 
