@@ -192,6 +192,13 @@ void Natural::operator=(Natural *n){
     val = *n;
 }
 
+bool Natural::operator<=(Natural n){
+    if(val <= n.getValue()){
+        return true;
+    }
+    return false;
+}
+
 // Questo operatore causa una perdita di segno al valore (verrà applicato il valore assoluto)
 void Natural::operator=(int r){
     val = Natural::abs(r);

@@ -13,6 +13,7 @@ class PackageManager;
 // Dialoghi addizionali
 #include "gui/generalstatusbar.h"
 #include "gui/packagemanager.h"
+#include "gui/tab.h"
 
 // Costrutti logici
 #include "packages/package.h"
@@ -79,6 +80,8 @@ private slots:
 
     void on_actionSchede_a_sinistra_triggered();
 
+    void on_widgetManager_currentChanged(int index);
+
 private:
     Ui::MainWindow *ui;
 
@@ -91,6 +94,12 @@ private:
     // Impostazioni della applicazione
     Settings settings;
 
+    // Lista con i pacchetti
+    QList<Package*> packageList;
+
+    // Lista di tutti i tab
+    QList<Tab*> tabs;
+
 protected:
     // Gestisce la creazione di un nuovo pacchetto
     void newPackage();
@@ -100,6 +109,9 @@ protected:
 
     /// Apre un nuovo pacchetto
     void openPackage();
+
+    /// Restituisce l'indice del pacchetto corrente
+    int getPackageIndex(Natural tabIndex);
 };
 
 #endif // MAINWINDOW_H

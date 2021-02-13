@@ -18,6 +18,7 @@ SOURCES += \
 	gui/homepage.cpp \
     gui/packagemanager.cpp \
     gui/packagetab.cpp \
+	gui/tab.cpp \
 	newsearchpath.cpp \
 	packages/attributeditem.cpp \
 	packages/dependency.cpp \
@@ -54,6 +55,7 @@ HEADERS += \
 	gui/homepage.h \
     gui/packagemanager.h \
     gui/packagetab.h \
+	gui/tab.h \
 	newsearchpath.h \
 	packages/attributeditem.h \
 	packages/dependency.h \

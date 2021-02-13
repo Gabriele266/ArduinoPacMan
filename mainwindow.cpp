@@ -40,6 +40,7 @@ void MainWindow::showHomePage(){
     // Aggiungo il tab home
     HomePage *home = new HomePage( nullptr);
     ui->widgetManager->addTab(home, "Home");
+    tabs.append(home);
 
     // Connetto gli eventi
     QObject::connect(home, &HomePage::newPackageRequired, this, &MainWindow::onNewPackageRequired);
@@ -72,7 +73,9 @@ void MainWindow::openPackage(){
             // Attendo
         }
         // Aggiungo il pacchetto
-        addPackage(reader->getPackage());
+        tabs.append(addPackage(reader->getPackage()));
+        // Aggiungo il pacchetto alla lista dei pacchetti
+        packageList.append(reader->getPackage());
     }
 }
 
@@ -141,7 +144,10 @@ void MainWindow::newPackage(){
         package->create();
 
         // Aggiungo il pacchetto al gestore
-        addPackage(package);
+        tabs.append(addPackage(package));
+
+        // Aggiungo il pacchetto alla lista
+        packageList.append(package);
     }
 
     // Aggiorno il titolo
@@ -153,6 +159,10 @@ void MainWindow::newPackage(){
 MainWindow::~MainWindow()
 {
     delete ui;
+    // Rimuovo tutti i pacchetti
+    for(Natural x = 0; x < packageList.count(); x++){
+        delete packageList[x];
+    }
 }
 
 void MainWindow::on_actionNuova_finestra_triggered()
@@ -263,5 +273,52 @@ void MainWindow::on_actionSchede_a_sinistra_triggered()
     }
     else{
         ui->widgetManager->setTabPosition(QTabWidget::North);
+    }
+}
+
+int MainWindow::getPackageIndex(Natural tabIndex){
+    // Tab corrente
+    Tab *curTab = nullptr;
+    // Numero di pagine home trovate
+    Natural homeFound = 0;
+    // Numero di pacchetti trovati
+    int packagesFound = -1;
+    // Scorro tutti i tab
+    for(Natural x = 0; x <= tabIndex; x++){
+        if(mk(tabs.count()) > x){
+            // Ottengo il tab con quell' indice
+            curTab = tabs[x];
+
+            if(curTab != nullptr){
+                if(curTab->getInfo() == "<home>"){
+                    homeFound ++;
+                }
+                else{
+                    packagesFound ++;
+                }
+            }
+        }
+    }
+
+    // Controllo che esista un elemento con quell' indice
+    if(mk(packageList.count()) > packagesFound && packagesFound >= 0){
+        return packagesFound;
+    }
+    return -1;
+}
+
+void MainWindow::on_widgetManager_currentChanged(int index)
+{
+    // Ottengo l'indice del pacchetto corrente
+    int ind;
+    ind = getPackageIndex(mk(index));
+
+    // Controllo se si tratta di un pacchetto
+    if(ind >= 0){
+        // Pacchetto corrente
+        Package *cur = packageList[ind];
+        // Ottengo il pacchetto relativo al tab corrente
+        qInfo() << "Pacchetto cambiato: " << packageList[ind]->getName() << endl;
+        statusBar->setCurrentPackagePath(cur->getCompletePath());
     }
 }

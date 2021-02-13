@@ -10,12 +10,13 @@
 #include <QTreeWidget>
 
 #include "../packages/package.h"
+#include "tab.h"
 
 namespace Ui {
 class PackageTab;
 }
 
-class PackageTab : public QWidget
+class PackageTab : public QWidget, public Tab
 {
     Q_OBJECT
 

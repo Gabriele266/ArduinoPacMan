@@ -7,6 +7,10 @@ PackageTab::PackageTab(Package *package, QWidget *parent) :
 {
     ui->setupUi(this);
     this->package = package;
+
+    // Imposto le informazioni per riconoscere il tab
+    setName("Package");
+    setInfo("<package>");
 }
 
 void PackageTab::setTags(QString tags){

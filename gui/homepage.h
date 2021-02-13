@@ -5,12 +5,13 @@
 #include <QString>
 
 #include "threads/fileloader.h"
+#include "tab.h"
 
 namespace Ui {
 class HomePage;
 }
 
-class HomePage : public QWidget
+class HomePage : public QWidget, public Tab
 {
     Q_OBJECT
 

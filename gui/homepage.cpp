@@ -25,6 +25,10 @@ HomePage::HomePage(QStringList *recentFiles, QWidget *parent) :
     loader->setFilePath(formatPathForOs(getCurrentPath(), QStringList("info.html")));
     // Avvio il caricamento
     loader->start();
+
+    // Imposto le informazioni per riconoscere il tab
+    setName("Home");
+    setInfo("<home>");
 }
 
 HomePage::~HomePage()
