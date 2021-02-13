@@ -72,10 +72,19 @@ void MainWindow::openPackage(){
         while(reader->isRunning()){
             // Attendo
         }
-        // Aggiungo il pacchetto
-        tabs.append(addPackage(reader->getPackage()));
-        // Aggiungo il pacchetto alla lista dei pacchetti
-        packageList.append(reader->getPackage());
+        Package* pack = reader->getPackage();
+
+        // Controllo che il pacchetto sia stato letto correttamente
+        if(pack != nullptr){
+            // Aggiungo il pacchetto
+            tabs.append(addPackage(pack));
+            // Aggiungo il pacchetto alla lista dei pacchetti
+            packageList.append(pack);
+            qInfo() << "Pacchetto caricato con successo: " << pack->getName() << endl;
+        }
+        else{
+            qInfo() << "Errore nella apertura del pacchetto. " << endl;
+        }
     }
 }
 

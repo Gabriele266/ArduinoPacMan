@@ -16,6 +16,8 @@ void PackageReader::run(){
 
         // Imposto il nome del pacchetto
         package->setName(package_name);
+        // Imposto il percorso
+        package->setSavePath(getParentDir(path));
 
         // Formatto il percorso del file di pacchetto
         QString pack_file = formatPathForOs(path, QStringList(package_name + ".pak"));
@@ -32,7 +34,7 @@ void PackageReader::run(){
             document.setContent(&package_file);
 
             // elemento root
-            QDomElement root = document.firstChildElement();
+            QDomElement root = document.documentElement();
 
             // Prendo la descrizione del pacchetto
             QDomElement description = root.firstChildElement("description");
@@ -52,6 +54,8 @@ void PackageReader::run(){
             QDomElement sources = root.firstChildElement("sources");
             package->setSourcesPath(sources.attribute("path"));
             package->setMainSourcePath(sources.attribute("main_file"));
+
+            package_file.close();
         }
     }
 }

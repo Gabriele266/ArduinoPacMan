@@ -25,6 +25,7 @@ PackageTab* PackageManager::addPackage(Package *pack){
         auto *loader = new SourcesLoader();
         loader->setDestination(tab->getFileBrowser());
         loader->setSearchPath(pack->getSourcesPath());
+        qInfo() << "Carico sorgenti per il percorso " << pack->getSourcesPath() << endl;
         loader->setPackage(pack);
 
         // Avvio il thread

@@ -119,6 +119,18 @@ static QChar getOSSeparator(){
     return separator_for_os;
 }
 
+/// Restituisce il percorso che contiene la cartella specificata
+static QString getParentDir(QString& path){
+    // Copia della stringa
+    QString result = path;
+    QChar s = getOSSeparator();
+    // Ottengo l'indice dell' ultimo / o \ del percorso
+    int index = path.lastIndexOf(s);
+
+    result.truncate(index);
+    return result;
+}
+
 /// Controlla che la stringa string non esista nella lista list
 /// restituisce true se la situazione è verificata
 static bool notExists(QString string, QStringList list){
