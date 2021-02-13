@@ -43,7 +43,7 @@ static void writeDefaultSettings(Settings *application_settings){
     g->setName("paths");
     g->addKey(new Key("libsearchpath", "$CURPATH$/libsrc.src"));
     g->addKey(new Key("default-package-path", "$OSHOME$/ArduinoPacManPackages/"));
-    g->addKey(new Key("default-package-sources", "$OSHOME$/Sources/"));
+    g->addKey(new Key("default-sources-path", "$OSHOME$/Sources/"));
     g->addKey(new Key("base-package-name", "NewPackage"));
 
     global_settings->addGroup(g);
