@@ -57,8 +57,18 @@ void MainWindow::onOpenPackageRequired(){
 }
 
 void MainWindow::openPackage(){
-    // Chiedo una directory in cui cercare il pacchetto
-    QString dir = QFileDialog::getExistingDirectory(this, "Selezionare la cartella del pacchetto");
+    // Cartella in cui aprire il file browser
+    QString file_browser_base_path = resolvePath(settings.getKeyValue("paths", "default-package-path"));
+
+    // Controllo se esiste un valore
+    if(file_browser_base_path == ""){
+        // Uso il percorso home del sistema operativo
+        file_browser_base_path = getHomePath();
+    }
+
+    qInfo() << "Apro browser " << file_browser_base_path << endl;
+    // Chiedo una directory in cui cercare il pacchetto partendo dal percorso giusto
+    QString dir = QFileDialog::getExistingDirectory(this, "Selezionare la cartella del pacchetto", file_browser_base_path);
 
     // Controllo che l'utente abbia accettato
     if(dir != ""){
@@ -72,6 +82,7 @@ void MainWindow::openPackage(){
         while(reader->isRunning()){
             // Attendo
         }
+        // Pacchetto letto
         Package* pack = reader->getPackage();
 
         // Controllo che il pacchetto sia stato letto correttamente

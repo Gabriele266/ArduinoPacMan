@@ -241,7 +241,18 @@ QString NewPackageDialog::getDescription(){
 
 void NewPackageDialog::on_sfoglia_clicked()
 {
-    QString dir = QFileDialog::getExistingDirectory(this, "Scegliere il percorso dei sorgenti");
+    // Percorso da usare per il dialogo
+    QString pt = ui->sourcesPath->text();
+    // Directory scelta dall' utente
+    QString dir;
+    // Controllo se l'utente ha già impostato un percorso
+    if(pt == ""){
+        // Apro il browser dei file nella cartella di default per i sorgenti
+        pt = settings->getKeyValue("paths", "default-sources-path");
+    }
+
+    // Apro il browser file nel percorso giusto
+    dir = QFileDialog::getExistingDirectory(this, "Scegliere il percorso dei sorgenti", pt);
 
     if(dir != ""){
         ui->sourcesPath->setText(dir);
@@ -252,6 +263,7 @@ void NewPackageDialog::on_sfoglia_clicked()
         // Percorso di un possibile file base
         QString base = formatPathForOs(dir, QStringList(div.last() + ".ino"));
 
+        // Controllo se il file esiste effettivamente
         if(QFile::exists(base)){
             ui->mainFile->setText(base);
         }
