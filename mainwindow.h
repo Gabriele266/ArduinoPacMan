@@ -1,14 +1,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-class HomePage;
-class PackageManager;
-
 #include <QMainWindow>
 #include <QDebug>
 #include <QTextStream>
 #include <QLabel>
-
 
 // Dialoghi addizionali
 #include "gui/generalstatusbar.h"
@@ -23,6 +19,7 @@ class PackageManager;
 // Altri dialoghi
 #include "newpackagedialog.h"
 #include "searchpathmanager.h"
+#include "packageinfo.h"
 
 #include "utils/settings_manager.cpp"
 
@@ -34,8 +31,6 @@ class PackageManager;
 #include "threads/srcdependencylister.h"
 
 #include "file_types/libsearchpathlist.h"
-
-#include "packageinfo.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
