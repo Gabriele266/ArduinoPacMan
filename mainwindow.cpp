@@ -7,8 +7,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    setTabWidget(ui->widgetManager);
-
     ui->widgetManager->clear();
     // Avvio la lettura delle impostazioni dal disco
     settings.setFilePath(formatPathForOs(QDir::currentPath(), QStringList("settings/settings.stc")));
@@ -33,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
     // Aggiorno il titolo
     updateTitleInfo();
 
+    // Mostro la scheda home
     showHomePage();
 }
 
@@ -88,10 +87,14 @@ void MainWindow::openPackage(){
         // Controllo che il pacchetto sia stato letto correttamente
         if(pack != nullptr){
             // Aggiungo il pacchetto
-            tabs.append(addPackage(pack));
-            // Aggiungo il pacchetto alla lista dei pacchetti
-            packageList.append(pack);
-            qInfo() << "Pacchetto caricato con successo: " << pack->getName() << endl;
+            auto p = addPackageToView(pack);
+            // Controllo che sia stato aggiunto
+            if(p != nullptr){
+                tabs.append(p);
+                // Aggiungo il pacchetto alla lista dei pacchetti
+                packageList.append(pack);
+                qInfo() << "Pacchetto caricato con successo: " << pack->getName() << endl;
+            }
         }
         else{
             qInfo() << "Errore nella apertura del pacchetto. " << endl;
@@ -102,29 +105,25 @@ void MainWindow::openPackage(){
 void MainWindow::updateTitleInfo(){
     // Titolo base
     QString title = QString("ArduinoPacMan %1 ").arg(ARDUINO_PACMAN_VERSION.toString());
-    // Controllo se ci sono dei pacchetti aggiunti
-    if(hasPackages()){
-        // Determino se il tab corrente è un pacchetto
-        if(isCurrentPackage()){
-            // Scrivo il nome del pacchetto
-            title += "| ";
-            title += getCurrentPackage()->getName();
-        }
+    // Determino se il tab corrente è un pacchetto
+    if(currentTabIsPackage()){
+        // Scrivo il nome del pacchetto
+        title += "| ";
+        title += getCurrentPackage()->getName();
     }
+    else{
+        title += "| Scheda home";
+    }
+    // Imposto il titolo alla finestra
     setWindowTitle(title);
-}
-
-void MainWindow::onPackageManagerTabChange(unsigned int newTab){
-    updateTitleInfo();
-    updateStatusBar();
 }
 
 void MainWindow::updateStatusBar(){
     // Scrivo il numero di pacchetti aperti
-    statusBar->setPackagesCount(getPackagesCount());
+    statusBar->setPackagesCount(packageList.count());
 
-    // Controllo se ci sono pacchetti presenti
-    if(isCurrentPackage()){
+    // Controllo se il tab corrente è un pacchetto
+    if(currentTabIsPackage()){
         // Imposto il percorso del pacchetto corrente
         statusBar->setCurrentPackagePath(getCurrentPackage()->getSavePath());
         statusBar->setLibraryCount(getCurrentPackage()->getLibraryCount());
@@ -133,6 +132,13 @@ void MainWindow::updateStatusBar(){
         statusBar->setCurrentPackagePath("Scheda home");
         statusBar->setLibraryCount(0);
     }
+}
+
+bool MainWindow::currentTabIsPackage(){
+    if(getCurrentPackage() != nullptr){
+        return true;
+    }
+    return false;
 }
 
 void MainWindow::newPackage(){
@@ -163,17 +169,53 @@ void MainWindow::newPackage(){
         qInfo() << " descrizione " << dialog->getDescription() << endl;
         package->create();
 
-        // Aggiungo il pacchetto al gestore
-        tabs.append(addPackage(package));
-
         // Aggiungo il pacchetto alla lista
         packageList.append(package);
+
+        // Aggiungo il pacchetto al gestore
+        tabs.append(addPackageToView(package));
     }
 
     // Aggiorno il titolo
     updateTitleInfo();
     // Aggiorno la barra di stato
     updateStatusBar();
+}
+
+Tab* MainWindow::addPackageToView(Package *pack){
+    // Controllo che non sia un puntatore nullo
+    if(pack != nullptr){
+        // Imposto l'indice del pacchetto
+        pack->addTag(QString::number(packageList.count()));
+
+        // Mostro il pacchetto
+        PackageTab *tab = new PackageTab(pack);
+        // Imposto i tag del tab
+        tab->setTags("<package>");
+        // Aggiungo
+        ui->widgetManager->addTab(tab, pack->getName());
+
+        // Carico i suoi sorgenti
+        auto *loader = new SourcesLoader();
+        loader->setDestination(tab->getFileBrowser());
+        loader->setSearchPath(pack->getSourcesPath());
+        qInfo() << "Carico sorgenti per il percorso " << pack->getSourcesPath() << endl;
+        loader->setPackage(pack);
+
+        // Avvio il thread
+        loader->start(QThread::HighPriority);
+
+        // Avvio il caricamento dei sorgenti per il pacchetto
+        SrcDependencyLister *lister = new SrcDependencyLister();
+        // Imposto il pacchetto
+        lister->setPackage(pack);
+        // Imposto il widget
+        lister->setWidget(tab->getDependencyBrowser());
+        lister->start();
+
+        return tab;
+    }
+    return nullptr;
 }
 
 void MainWindow::on_actionNuova_finestra_triggered()
@@ -319,19 +361,11 @@ int MainWindow::getPackageIndex(Natural tabIndex){
 }
 
 void MainWindow::on_widgetManager_currentChanged(int index)
-{
-    // Ottengo l'indice del pacchetto corrente
-    int ind;
-    ind = getPackageIndex(mk(index));
-
-    // Controllo se si tratta di un pacchetto
-    if(ind >= 0){
-        // Pacchetto corrente
-        Package *cur = packageList[ind];
-        // Ottengo il pacchetto relativo al tab corrente
-        qInfo() << "Pacchetto cambiato: " << packageList[ind]->getName() << endl;
-        statusBar->setCurrentPackagePath(cur->getCompletePath());
-    }
+{   
+    // Aggiorno la barra di stato
+    updateStatusBar();
+    // Aggiorno il titolo
+    updateTitleInfo();
 }
 
 Package* MainWindow::getCurrentPackage(){

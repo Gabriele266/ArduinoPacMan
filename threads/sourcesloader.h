@@ -17,7 +17,6 @@
 #include "packages/source.h"
 #include "packages/package.h"
 #include "utils/macros.h"
-#include "gui/packagemanager.h"
 
 /// Rappresenta un thread di caricamento sorgenti
 class SourcesLoader : public QThread

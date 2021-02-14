@@ -16,7 +16,6 @@ SOURCES += \
 	file_types/settings.cpp \
     gui/generalstatusbar.cpp \
 	gui/homepage.cpp \
-    gui/packagemanager.cpp \
     gui/packagetab.cpp \
 	gui/tab.cpp \
 	newsearchpath.cpp \
@@ -54,7 +53,6 @@ HEADERS += \
 	file_types/settings.h \
     gui/generalstatusbar.h \
 	gui/homepage.h \
-    gui/packagemanager.h \
     gui/packagetab.h \
 	gui/tab.h \
 	newsearchpath.h \
@@ -84,7 +82,6 @@ HEADERS += \
 FORMS += \
     gui/generalstatusbar.ui \
     gui/homepage.ui \
-    gui/packagemanager.ui \
     gui/packagetab.ui \
     mainwindow.ui \
     newpackagedialog.ui \
