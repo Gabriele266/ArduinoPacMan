@@ -32,6 +32,12 @@
         <property name="currentIndex">
          <number>0</number>
         </property>
+        <property name="tabsClosable">
+         <bool>true</bool>
+        </property>
+        <property name="movable">
+         <bool>true</bool>
+        </property>
         <widget class="QWidget" name="tab">
          <attribute name="title">
           <string>Tab 1</string>
@@ -118,8 +124,13 @@
     <property name="title">
      <string>Visualizza</string>
     </property>
-    <addaction name="actionScheda_home"/>
     <addaction name="actionSchede_a_sinistra"/>
+    <addaction name="actionScheda_home"/>
+    <addaction name="actionChiudi_tutte_le_schede_aperte"/>
+    <addaction name="actionChiudi_tutte_le_altre_schede"/>
+    <addaction name="actionSposta_scheda_all_inizio"/>
+    <addaction name="actionSposta_scheda_alla_fine"/>
+    <addaction name="actionChiudi_scheda"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuGestione"/>
@@ -329,6 +340,36 @@
   <action name="actionPropriet_pacchetto">
    <property name="text">
     <string>Proprietà pacchetto</string>
+   </property>
+  </action>
+  <action name="actionChiudi_tutte_le_schede_aperte">
+   <property name="text">
+    <string>Chiudi tutte le schede aperte</string>
+   </property>
+  </action>
+  <action name="actionChiudi_tutte_le_altre_schede">
+   <property name="text">
+    <string>Chiudi tutte le altre schede</string>
+   </property>
+  </action>
+  <action name="actionChiudi_scheda">
+   <property name="text">
+    <string>Chiudi scheda</string>
+   </property>
+  </action>
+  <action name="actionNuova_scheda_vuota">
+   <property name="text">
+    <string>Nuova scheda vuota</string>
+   </property>
+  </action>
+  <action name="actionSposta_scheda_all_inizio">
+   <property name="text">
+    <string>Sposta scheda all' inizio</string>
+   </property>
+  </action>
+  <action name="actionSposta_scheda_alla_fine">
+   <property name="text">
+    <string>Sposta scheda alla fine</string>
    </property>
   </action>
  </widget>

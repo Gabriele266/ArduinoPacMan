@@ -400,3 +400,46 @@ void MainWindow::on_actionPropriet_pacchetto_triggered()
         QMessageBox::critical(this, "Errore", "Per visualizzare le proprietà di un pacchetto è necessario prima selezionarne uno nel controllo multi-tab o aprirne uno nuovo. ");
     }
 }
+
+Package* MainWindow::getPackageFromTabIndex(Natural tabIndex){
+    // Ottengo il numero del pacchetto
+    int num = getPackageIndex(tabIndex);
+    if(num > 0){
+        // Controllo se esiste un pacchetto con quell' indice
+        if(packageList.count() > num){
+            return packageList[num];
+        }
+        qInfo() << "Errore: numero di pacchetto rintracciato a partire dall' indice tab " << tabIndex << " ma non corrisponde a nessun pacchetto in memoria. " << endl;
+        return nullptr;
+    }
+    return nullptr;
+}
+
+void MainWindow::on_widgetManager_tabCloseRequested(int index)
+{
+    removeTab(index);
+}
+
+void MainWindow::removeTab(Natural tabIndex){
+    // Ottengo l'indice del pacchetto
+    int pack = getPackageIndex(tabIndex);
+    if(pack >= 0 && pack < packageList.count()){
+        // Tolgo il pacchetto dalla memoria
+        packageList.removeAt(pack);
+    }
+    // Rimuovo il tab
+    ui->widgetManager->removeTab(tabIndex);
+}
+
+void MainWindow::on_actionChiudi_tutte_le_schede_aperte_triggered()
+{
+    int dim = ui->widgetManager->count();
+    qInfo() << "Numero schede: " << dim << endl;
+    for(int x = 0; x < dim; x++){
+        removeTab(x);
+    }
+    // Aggiorno il titolo
+    updateTitleInfo();
+    // Aggiorno la barra di stato
+    updateStatusBar();
+}

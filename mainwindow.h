@@ -73,6 +73,10 @@ private slots:
     void on_widgetManager_currentChanged(int index);
 
     void on_actionPropriet_pacchetto_triggered();
+    void on_widgetManager_tabCloseRequested(int index);
+
+    void on_actionChiudi_tutte_le_schede_aperte_triggered();
+
 private:
     Ui::MainWindow *ui;
 
@@ -104,6 +108,9 @@ protected:
     /// Restituisce l'indice del pacchetto corrente
     int getPackageIndex(Natural tabIndex);
 
+    /// Restituisce il pacchetto con quell' indice di tab
+    Package* getPackageFromTabIndex(Natural tabIndex);
+
     /// Aggiorna le informazioni del titolo in base al tab corrente
     void updateTitleInfo();
 
@@ -118,6 +125,9 @@ protected:
 
     /// Aggiunge un pacchetto alla vista
     Tab* addPackageToView(Package *package);
+
+    /// Rimuove un tab
+    void removeTab(Natural tabIndex);
 };
 
 #endif // MAINWINDOW_H
