@@ -12,6 +12,8 @@
         <file>Properties.png</file>
         <file>Structure.png</file>
         <file>save.png</file>
+        <file>Package.png</file>
+        <file>Library.png</file>
     </qresource>
     <qresource prefix="/icons/browsing">
         <file>file_icon.png</file>
