@@ -11,6 +11,7 @@
         <file>ProgramIcon.png</file>
         <file>Properties.png</file>
         <file>Structure.png</file>
+        <file>save.png</file>
     </qresource>
     <qresource prefix="/icons/browsing">
         <file>file_icon.png</file>

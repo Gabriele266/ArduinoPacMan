@@ -164,6 +164,10 @@
    </property>
   </action>
   <action name="actionSalva">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/icons/program/save.png</normaloff>:/icons/program/save.png</iconset>
+   </property>
    <property name="text">
     <string>Salva</string>
    </property>
@@ -172,6 +176,10 @@
    </property>
   </action>
   <action name="actionSalva_con_nome">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/icons/program/save.png</normaloff>:/icons/program/save.png</iconset>
+   </property>
    <property name="text">
     <string>Salva con nome</string>
    </property>
