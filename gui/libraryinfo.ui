@@ -46,7 +46,11 @@
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="libraryName"/>
+              <widget class="QLineEdit" name="libraryName">
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
@@ -60,7 +64,11 @@
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="libraryPath"/>
+              <widget class="QLineEdit" name="libraryPath">
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
@@ -90,7 +98,11 @@
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="libraryCreationDate"/>
+              <widget class="QLineEdit" name="libraryCreationDate">
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
@@ -104,7 +116,11 @@
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="libraryLastModify"/>
+              <widget class="QLineEdit" name="libraryLastModify">
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
@@ -134,7 +150,11 @@
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="libraryTags"/>
+              <widget class="QLineEdit" name="libraryTags">
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
@@ -232,7 +252,11 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="documentationPath"/>
+                 <widget class="QLineEdit" name="documentationPath">
+                  <property name="readOnly">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
                 </item>
                </layout>
               </item>
@@ -262,7 +286,11 @@
                  </spacer>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="examplesPath"/>
+                 <widget class="QLineEdit" name="examplesPath">
+                  <property name="readOnly">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
                 </item>
                </layout>
               </item>
@@ -276,7 +304,11 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="keywordsPath"/>
+                 <widget class="QLineEdit" name="keywordsPath">
+                  <property name="readOnly">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
                 </item>
                </layout>
               </item>
