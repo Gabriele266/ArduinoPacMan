@@ -96,6 +96,9 @@
           <height>300</height>
          </size>
         </property>
+        <property name="contextMenuPolicy">
+         <enum>Qt::CustomContextMenu</enum>
+        </property>
         <column>
          <property name="text">
           <string>Dipendenza</string>
@@ -472,6 +475,67 @@
    </property>
    <property name="toolTip">
     <string>Visualizza tag</string>
+   </property>
+  </action>
+  <action name="actionApri_file_dipendenza">
+   <property name="text">
+    <string>Apri sorgente</string>
+   </property>
+   <property name="toolTip">
+    <string>Apre il file che richiede questa libreria</string>
+   </property>
+  </action>
+  <action name="actionMostra_libreria">
+   <property name="text">
+    <string>Mostra libreria</string>
+   </property>
+   <property name="toolTip">
+    <string>Mostra la libreria che soddisfa questa dipendenza</string>
+   </property>
+  </action>
+  <action name="actionMostra_informazioni">
+   <property name="text">
+    <string>Mostra informazioni</string>
+   </property>
+   <property name="toolTip">
+    <string>Mostra le informazioni della dipendenza</string>
+   </property>
+  </action>
+  <action name="actionVisualizzazione_compatta">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Visualizzazione compatta</string>
+   </property>
+   <property name="toolTip">
+    <string>Imposta la modalità di visualizzazione delle dipendenze</string>
+   </property>
+  </action>
+  <action name="actionNascondi_versioni">
+   <property name="text">
+    <string>Nascondi versioni</string>
+   </property>
+  </action>
+  <action name="actionApri_file_sorgente_in_ambiente">
+   <property name="text">
+    <string>Apri file sorgente in ambiente</string>
+   </property>
+  </action>
+  <action name="actionIgnora_dipendenza">
+   <property name="text">
+    <string>Ignora dipendenza</string>
+   </property>
+   <property name="toolTip">
+    <string>Imposta la dipendenza come da ignorare</string>
+   </property>
+  </action>
+  <action name="actionAbilita_dipendenza">
+   <property name="text">
+    <string>Abilita dipendenza</string>
+   </property>
+   <property name="toolTip">
+    <string>Abilita il controllo per la dipendenza</string>
    </property>
   </action>
  </widget>

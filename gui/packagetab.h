@@ -51,6 +51,8 @@ private slots:
 
     void on_fileBrowser_customContextMenuRequested(const QPoint &pos);
 
+    void on_dependencyBrowser_customContextMenuRequested(const QPoint &pos);
+
 private:
     Ui::PackageTab *ui;
     // Pacchetto che rappresenta il tab
@@ -63,6 +65,8 @@ private:
     QMenu *librariesContextMenu = nullptr;
     // Menu contestuale per la visualizzazione file
     QMenu *filesContextMenu = nullptr;
+    // Menu contestuale per la visualizzazione dipendenze
+    QMenu *dependencyContextMenu = nullptr;
 };
 
 #endif // PACKAGETAB_H

@@ -53,6 +53,19 @@ PackageTab::PackageTab(Package *package, QWidget *parent) :
     filesContextMenu->addSeparator();
     filesContextMenu->addAction(ui->actionElimina);
     filesContextMenu->addAction(ui->actionElimina_contenuto);
+
+    // Formatto il menu contestuale per la visualizzazione dipendenze
+    dependencyContextMenu = new QMenu(this);
+    dependencyContextMenu->addAction(ui->actionMostra_informazioni);
+    dependencyContextMenu->addAction(ui->actionMostra_libreria);
+    dependencyContextMenu->addSeparator();
+    dependencyContextMenu->addAction(ui->actionApri_file_dipendenza);
+    dependencyContextMenu->addAction(ui->actionApri_file_sorgente_in_ambiente);
+    dependencyContextMenu->addSeparator();
+    dependencyContextMenu->addAction(ui->actionIgnora_dipendenza);
+    dependencyContextMenu->addAction(ui->actionAbilita_dipendenza);
+    dependencyContextMenu->addSeparator();
+    dependencyContextMenu->addAction(ui->actionVisualizzazione_compatta);
 }
 
 void PackageTab::setTags(QString tags){
@@ -94,4 +107,9 @@ void PackageTab::on_libraryBrowser_customContextMenuRequested(const QPoint &pos)
 void PackageTab::on_fileBrowser_customContextMenuRequested(const QPoint &pos)
 {
     filesContextMenu->popup(ui->fileBrowser->mapToGlobal(pos));
+}
+
+void PackageTab::on_dependencyBrowser_customContextMenuRequested(const QPoint &pos)
+{
+    dependencyContextMenu->popup(ui->dependencyBrowser->mapToGlobal(pos));
 }
