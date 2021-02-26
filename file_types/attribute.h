@@ -11,8 +11,6 @@
 
 #include "utils/macros.h"
 
-
-
 /// Rappresenta un attributo in una chiave
 class Attribute
 {

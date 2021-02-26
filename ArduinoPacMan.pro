@@ -16,6 +16,7 @@ SOURCES += \
 	file_types/settings.cpp \
     gui/generalstatusbar.cpp \
 	gui/homepage.cpp \
+	gui/libraryinfo.cpp \
     gui/packagetab.cpp \
 	gui/tab.cpp \
 	newsearchpath.cpp \
@@ -52,6 +53,7 @@ HEADERS += \
 	file_types/libsearchpathlist.h \
 	file_types/settings.h \
     gui/generalstatusbar.h \
+	gui/libraryinfo.h \
 	gui/homepage.h \
     gui/packagetab.h \
 	gui/tab.h \
@@ -80,6 +82,7 @@ HEADERS += \
 	utils/macros.h
 
 FORMS += \
+	gui/libraryinfo.ui \
     gui/generalstatusbar.ui \
     gui/homepage.ui \
     gui/packagetab.ui \

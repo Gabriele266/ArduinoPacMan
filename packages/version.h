@@ -29,6 +29,7 @@ public:
     /// Inizializza la versione a 0.0.0
     Version();
 
+
     /// Permette di inizializzare una versione dando 3 valori iniziali
     /// \arg m numero della versione maggiore
     /// \arg s numero della sottoversione

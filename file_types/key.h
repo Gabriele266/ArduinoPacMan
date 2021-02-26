@@ -28,7 +28,6 @@ public:
     Key(QString name, QString value);
     Key(QString name, QString value, AttributeList attributes);
 
-
     GETTER_SETTERC(QString, name, Name,
                    Imposta il nome della chiave,
                    Restituisce il nome della chiave)
