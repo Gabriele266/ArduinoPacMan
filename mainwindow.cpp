@@ -213,6 +213,20 @@ Tab* MainWindow::addPackageToView(Package *pack){
         lister->setWidget(tab->getDependencyBrowser());
         lister->start();
 
+        // Avvio il caricamento dei percorsi dal file
+        loadSearchPathFromFile();
+
+        foundLibraries.clear();
+
+        // Avvio i vari thread per il caricamento delle informazioni per le librerie
+        for(Natural x = 0; x < mk(librariesSearchPath.getListCount()); x++){
+            // Creo il thread
+            LibrariesLoader *loader = new LibrariesLoader();
+            loader->setDestination(tab->getFoundLibrariesManager());
+            loader->setLibrariesDestination(&foundLibraries);
+            loader->setSearchPath(librariesSearchPath.getPath(x));
+            loader->start();
+        }
         return tab;
     }
     return nullptr;
@@ -256,11 +270,7 @@ void MainWindow::modificaPercorsoRicerca(Natural index, QString old_val, QString
     qInfo() << "Valore " << new_val << " nuovo per " << old_val << " con indice " << index << endl;
 }
 
-void MainWindow::on_actionPercorsi_ricerca_librerie_triggered()
-{
-    // Pulisco la lista degli elementi
-    librariesSearchPath.clear();
-
+void MainWindow::loadSearchPathFromFile(){
     // Avvio il caricamento dei percorsi di ricerca dal percorso specificato nelle impostazioni
     SearchPathListReader *reader = new SearchPathListReader();
     // Formatto il percorso su cui leggere o scrivere le informazioni
@@ -275,9 +285,16 @@ void MainWindow::on_actionPercorsi_ricerca_librerie_triggered()
     // Avvio il thread
     reader->start();
     // Attendo che termini
-    while(reader->isRunning()){
+    while(reader->isRunning()){}
+}
 
-    }
+void MainWindow::on_actionPercorsi_ricerca_librerie_triggered()
+{
+    // Pulisco la lista degli elementi
+    librariesSearchPath.clear();
+
+    // Avvio il caricamento dei percorsi dal file
+    loadSearchPathFromFile();
 
     // Creo la finestra
     SearchPathManager *man = new SearchPathManager();

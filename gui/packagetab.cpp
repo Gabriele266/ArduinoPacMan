@@ -38,3 +38,7 @@ PackageTab::~PackageTab()
 {
     delete ui;
 }
+
+QTreeWidget* PackageTab::getFoundLibrariesManager(){
+    return ui->libraryBrowser;
+}

@@ -29,6 +29,7 @@
 #include "threads/packagereader.h"
 #include "threads/sourcesloader.h"
 #include "threads/srcdependencylister.h"
+#include "threads/librariesloader.h"
 
 #include "file_types/libsearchpathlist.h"
 
@@ -86,6 +87,12 @@ private:
     // Lista dei percorsi di ricerca delle librerie
     LibSearchPathList librariesSearchPath;
 
+    // Lista con le librerie trovate nei percorsi di ricerca
+    QList<Library*> foundLibraries;
+
+    // Indica lo stato di validazione della lista delle librerie
+    bool foundLibValidationState = true;
+
     // Impostazioni della applicazione
     Settings settings;
 
@@ -128,6 +135,9 @@ protected:
 
     /// Rimuove un tab
     void removeTab(Natural tabIndex);
+
+    /// Carica i percorsi di ricerca dal file corretto
+    void loadSearchPathFromFile();
 };
 
 #endif // MAINWINDOW_H

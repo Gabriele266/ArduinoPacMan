@@ -45,7 +45,7 @@ void LibrariesLoader::run(){
                 item->setText(0, entries[x]);
                 item->setText(1, "Libreria");
                 item->setText(2, complete.path());
-
+                item->setIcon(0, QIcon(":/icons/program/Library.png"));
                 destination->addTopLevelItem(item);
             }
         }

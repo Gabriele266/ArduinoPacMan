@@ -42,6 +42,9 @@ public:
     /// Restituisce un puntatore al browser delle dipendenze
     QTreeWidget* getDependencyBrowser();
 
+    /// Restituisce l'indirizzo del gestore delle librerie trovate
+    QTreeWidget* getFoundLibrariesManager();
+
 private:
     Ui::PackageTab *ui;
     // Pacchetto che rappresenta il tab
