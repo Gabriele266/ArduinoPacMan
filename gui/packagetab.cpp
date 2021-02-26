@@ -27,6 +27,32 @@ PackageTab::PackageTab(Package *package, QWidget *parent) :
     librariesContextMenu->addAction(ui->actionApri_documentazione);
     librariesContextMenu->addAction(ui->actionApri_esempi);
     librariesContextMenu->addAction(ui->actionApri_keywords);
+
+    // Formatto il menu contestuale per la visualizzazione file
+    filesContextMenu = new QMenu(this);
+    filesContextMenu->addAction(ui->actionInformazioni);
+    filesContextMenu->addAction(ui->actionLista_tag);
+    filesContextMenu->addAction(ui->actionImposta_flag);
+    filesContextMenu->addSeparator();
+    filesContextMenu->addAction(ui->actionAggiorna_vista);
+    filesContextMenu->addSeparator();
+    filesContextMenu->addAction(ui->actionApri_in_visualizzatore);
+    filesContextMenu->addAction(ui->actionApri_con_applicazione_di_sistema);
+    filesContextMenu->addAction(ui->actionApri_in_terminale);
+    filesContextMenu->addSeparator();
+    filesContextMenu->addAction(ui->actionCopia);
+    filesContextMenu->addAction(ui->actionCopia_contenuto_in_appunti);
+    filesContextMenu->addAction(ui->actionCopia_contenuto);
+    filesContextMenu->addSeparator();
+    filesContextMenu->addAction(ui->actionIncolla);
+    filesContextMenu->addAction(ui->actionIncolla_all_interno);
+    filesContextMenu->addAction(ui->actionSposta);
+    filesContextMenu->addSeparator();
+    filesContextMenu->addAction(ui->actionImporta);
+    filesContextMenu->addAction(ui->actionEsporta);
+    filesContextMenu->addSeparator();
+    filesContextMenu->addAction(ui->actionElimina);
+    filesContextMenu->addAction(ui->actionElimina_contenuto);
 }
 
 void PackageTab::setTags(QString tags){
@@ -63,4 +89,9 @@ void PackageTab::on_libraryBrowser_customContextMenuRequested(const QPoint &pos)
 {
     // Mostro il menu
     librariesContextMenu->popup(ui->libraryBrowser->mapToGlobal(pos));
+}
+
+void PackageTab::on_fileBrowser_customContextMenuRequested(const QPoint &pos)
+{
+    filesContextMenu->popup(ui->fileBrowser->mapToGlobal(pos));
 }

@@ -64,6 +64,9 @@
           <height>100</height>
          </size>
         </property>
+        <property name="contextMenuPolicy">
+         <enum>Qt::CustomContextMenu</enum>
+        </property>
         <column>
          <property name="text">
           <string>Elemento</string>
@@ -136,6 +139,9 @@
           <width>100</width>
           <height>100</height>
          </size>
+        </property>
+        <property name="contextMenuPolicy">
+         <enum>Qt::CustomContextMenu</enum>
         </property>
         <column>
          <property name="text">
@@ -363,6 +369,109 @@
   <action name="actionApri_documentazione">
    <property name="text">
     <string>Apri documentazione</string>
+   </property>
+  </action>
+  <action name="actionInformazioni">
+   <property name="text">
+    <string>Informazioni</string>
+   </property>
+  </action>
+  <action name="actionCopia_percorso">
+   <property name="text">
+    <string>Copia percorso</string>
+   </property>
+  </action>
+  <action name="actionApri_in_visualizzatore">
+   <property name="text">
+    <string>Apri in visualizzatore</string>
+   </property>
+  </action>
+  <action name="actionApri_con_applicazione_di_sistema">
+   <property name="text">
+    <string>Apri con applicazione di sistema</string>
+   </property>
+  </action>
+  <action name="actionImposta_flag">
+   <property name="text">
+    <string>Imposta flag</string>
+   </property>
+  </action>
+  <action name="actionApri_in_terminale">
+   <property name="text">
+    <string>Apri in terminale</string>
+   </property>
+  </action>
+  <action name="actionImposta_come_file_principale">
+   <property name="text">
+    <string>Imposta come file principale</string>
+   </property>
+  </action>
+  <action name="actionEscludi_dal_pacchetto">
+   <property name="text">
+    <string>Escludi dal pacchetto</string>
+   </property>
+  </action>
+  <action name="actionSposta">
+   <property name="text">
+    <string>Sposta</string>
+   </property>
+  </action>
+  <action name="actionIncolla">
+   <property name="text">
+    <string>Incolla</string>
+   </property>
+  </action>
+  <action name="actionIncolla_all_interno">
+   <property name="text">
+    <string>Incolla all' interno</string>
+   </property>
+  </action>
+  <action name="actionEsporta">
+   <property name="text">
+    <string>Esporta</string>
+   </property>
+  </action>
+  <action name="actionImporta">
+   <property name="text">
+    <string>Importa</string>
+   </property>
+  </action>
+  <action name="actionAggiorna_vista">
+   <property name="text">
+    <string>Aggiorna vista</string>
+   </property>
+  </action>
+  <action name="actionElimina">
+   <property name="text">
+    <string>Elimina</string>
+   </property>
+  </action>
+  <action name="actionElimina_contenuto">
+   <property name="text">
+    <string>Elimina contenuto</string>
+   </property>
+  </action>
+  <action name="actionCopia">
+   <property name="text">
+    <string>Copia</string>
+   </property>
+  </action>
+  <action name="actionCopia_contenuto_in_appunti">
+   <property name="text">
+    <string>Copia contenuto in appunti</string>
+   </property>
+  </action>
+  <action name="actionCopia_contenuto">
+   <property name="text">
+    <string>Copia contenuto...</string>
+   </property>
+  </action>
+  <action name="actionLista_tag">
+   <property name="text">
+    <string>Visualizza flag</string>
+   </property>
+   <property name="toolTip">
+    <string>Visualizza tag</string>
    </property>
   </action>
  </widget>
