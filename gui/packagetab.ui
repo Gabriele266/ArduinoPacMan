@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1236</width>
-    <height>553</height>
+    <width>1254</width>
+    <height>608</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -168,6 +168,9 @@
           <width>100</width>
           <height>100</height>
          </size>
+        </property>
+        <property name="contextMenuPolicy">
+         <enum>Qt::CustomContextMenu</enum>
         </property>
         <column>
          <property name="text">
@@ -536,6 +539,55 @@
    </property>
    <property name="toolTip">
     <string>Abilita il controllo per la dipendenza</string>
+   </property>
+  </action>
+  <action name="actionInformazioniLibreria">
+   <property name="text">
+    <string>Informazioni</string>
+   </property>
+  </action>
+  <action name="actionApri_percorso_libreria">
+   <property name="text">
+    <string>Apri percorso</string>
+   </property>
+   <property name="toolTip">
+    <string>Apre il percorso in cui si trova la libreria</string>
+   </property>
+  </action>
+  <action name="actionApri_libreria_terminale">
+   <property name="text">
+    <string>Apri in terminale</string>
+   </property>
+   <property name="toolTip">
+    <string>Apre il percorso della libreria nel terminale di sistema</string>
+   </property>
+  </action>
+  <action name="actionRimuoviLibreria">
+   <property name="text">
+    <string>Rimuovi</string>
+   </property>
+   <property name="toolTip">
+    <string>Rimuove la libreria dal pacchetto</string>
+   </property>
+  </action>
+  <action name="actionApriLibInVisualizzatore">
+   <property name="text">
+    <string>Apri in visualizzatore</string>
+   </property>
+  </action>
+  <action name="actionApri_documentazione_lib">
+   <property name="text">
+    <string>Apri documentazione</string>
+   </property>
+  </action>
+  <action name="actionApri_esempi_lib">
+   <property name="text">
+    <string>Apri esempi</string>
+   </property>
+  </action>
+  <action name="actionApri_keywords_lib">
+   <property name="text">
+    <string>Apri keywords</string>
    </property>
   </action>
  </widget>

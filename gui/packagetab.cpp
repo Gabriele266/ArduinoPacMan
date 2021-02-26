@@ -66,6 +66,21 @@ PackageTab::PackageTab(Package *package, QWidget *parent) :
     dependencyContextMenu->addAction(ui->actionAbilita_dipendenza);
     dependencyContextMenu->addSeparator();
     dependencyContextMenu->addAction(ui->actionVisualizzazione_compatta);
+
+    // Formatto il menu contestuale per la visualizzazione delle librerie aggiunte
+    addedLibrariesContextMenu = new QMenu(this);
+    addedLibrariesContextMenu->addAction(ui->actionInformazioniLibreria);
+    addedLibrariesContextMenu->addSeparator();
+    addedLibrariesContextMenu->addAction(ui->actionApri_percorso_libreria);
+    addedLibrariesContextMenu->addAction(ui->actionApriLibInVisualizzatore);
+    addedLibrariesContextMenu->addAction(ui->actionApri_libreria_terminale);
+    addedLibrariesContextMenu->addSeparator();
+
+    addedLibrariesContextMenu->addAction(ui->actionApri_esempi_lib);
+    addedLibrariesContextMenu->addAction(ui->actionApri_keywords_lib);
+    addedLibrariesContextMenu->addAction(ui->actionApri_documentazione_lib);
+    addedLibrariesContextMenu->addSeparator();
+    addedLibrariesContextMenu->addAction(ui->actionRimuoviLibreria);
 }
 
 void PackageTab::setTags(QString tags){
@@ -112,4 +127,9 @@ void PackageTab::on_fileBrowser_customContextMenuRequested(const QPoint &pos)
 void PackageTab::on_dependencyBrowser_customContextMenuRequested(const QPoint &pos)
 {
     dependencyContextMenu->popup(ui->dependencyBrowser->mapToGlobal(pos));
+}
+
+void PackageTab::on_packageLibraryViewer_customContextMenuRequested(const QPoint &pos)
+{
+    addedLibrariesContextMenu->popup(ui->packageLibraryViewer->mapToGlobal(pos));
 }
