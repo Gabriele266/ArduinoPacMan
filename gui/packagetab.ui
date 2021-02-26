@@ -310,6 +310,61 @@
     </widget>
    </item>
   </layout>
+  <action name="actionApri_percorso">
+   <property name="text">
+    <string>Apri percorso</string>
+   </property>
+  </action>
+  <action name="actionInformazioni_libreria">
+   <property name="text">
+    <string>Informazioni libreria</string>
+   </property>
+  </action>
+  <action name="actionAggiungi_al_pacchetto">
+   <property name="text">
+    <string>Aggiungi al pacchetto</string>
+   </property>
+  </action>
+  <action name="actionMostra_in_visualizzatore">
+   <property name="text">
+    <string>Mostra in visualizzatore</string>
+   </property>
+  </action>
+  <action name="actionNascondi">
+   <property name="text">
+    <string>Nascondi dalla vista</string>
+   </property>
+  </action>
+  <action name="actionIgnora">
+   <property name="text">
+    <string>Ignora</string>
+   </property>
+  </action>
+  <action name="actionApri_esempi">
+   <property name="text">
+    <string>Apri esempi</string>
+   </property>
+  </action>
+  <action name="actionApri_keywords">
+   <property name="text">
+    <string>Apri keywords</string>
+   </property>
+  </action>
+  <action name="actionApri_nel_terminale">
+   <property name="text">
+    <string>Apri nel terminale</string>
+   </property>
+  </action>
+  <action name="actionImposta_informazioni">
+   <property name="text">
+    <string>Imposta informazioni</string>
+   </property>
+  </action>
+  <action name="actionApri_documentazione">
+   <property name="text">
+    <string>Apri documentazione</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

@@ -11,6 +11,22 @@ PackageTab::PackageTab(Package *package, QWidget *parent) :
     // Imposto le informazioni per riconoscere il tab
     setName("Package");
     setInfo("<package>");
+
+    // Formatto il menu contestuale per le librerie
+    librariesContextMenu = new QMenu(this);
+    librariesContextMenu->addAction(ui->actionInformazioni_libreria);
+    librariesContextMenu->addAction(ui->actionMostra_in_visualizzatore);
+    librariesContextMenu->addSeparator();
+    librariesContextMenu->addAction(ui->actionAggiungi_al_pacchetto);
+    librariesContextMenu->addAction(ui->actionNascondi);
+    librariesContextMenu->addAction(ui->actionIgnora);
+    librariesContextMenu->addSeparator();
+    librariesContextMenu->addAction(ui->actionApri_percorso);
+    librariesContextMenu->addAction(ui->actionApri_nel_terminale);
+    librariesContextMenu->addSeparator();
+    librariesContextMenu->addAction(ui->actionApri_documentazione);
+    librariesContextMenu->addAction(ui->actionApri_esempi);
+    librariesContextMenu->addAction(ui->actionApri_keywords);
 }
 
 void PackageTab::setTags(QString tags){
@@ -41,4 +57,10 @@ PackageTab::~PackageTab()
 
 QTreeWidget* PackageTab::getFoundLibrariesManager(){
     return ui->libraryBrowser;
+}
+
+void PackageTab::on_libraryBrowser_customContextMenuRequested(const QPoint &pos)
+{
+    // Mostro il menu
+    librariesContextMenu->popup(ui->libraryBrowser->mapToGlobal(pos));
 }

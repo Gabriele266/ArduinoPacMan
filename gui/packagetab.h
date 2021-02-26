@@ -8,6 +8,7 @@
 #include <QWidget>
 #include <QString>
 #include <QTreeWidget>
+#include <QMenu>
 
 #include "../packages/package.h"
 #include "tab.h"
@@ -45,6 +46,9 @@ public:
     /// Restituisce l'indirizzo del gestore delle librerie trovate
     QTreeWidget* getFoundLibrariesManager();
 
+private slots:
+    void on_libraryBrowser_customContextMenuRequested(const QPoint &pos);
+
 private:
     Ui::PackageTab *ui;
     // Pacchetto che rappresenta il tab
@@ -53,6 +57,8 @@ private:
     QString tag;
     // Indica se il tab è visualizzato o no
     bool opened = true;
+    // Menu contestuale per le librerie
+    QMenu *librariesContextMenu = nullptr;
 };
 
 #endif // PACKAGETAB_H
