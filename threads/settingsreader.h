@@ -12,10 +12,10 @@
 #include <QDir>
 #include <QThread>
 
-#include "file_types/settings.h"
-#include "file_types/attribute.h"
-#include "file_types/group.h"
-#include "file_types/key.h"
+#include "settings/settings.h"
+#include "settings/attribute.h"
+#include "settings/group.h"
+#include "settings/key.h"
 
 #include "packages/natural.h"
 

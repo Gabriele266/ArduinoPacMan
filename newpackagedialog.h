@@ -9,8 +9,8 @@
 #include <QFileDialog>
 
 #include "utils/utils.cpp"
-#include "file_types/settings.h"
-#include "file_types/key.h"
+#include "settings/settings.h"
+#include "settings/key.h"
 
 namespace Ui {
 class NewPackageDialog;

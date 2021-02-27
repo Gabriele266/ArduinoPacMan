@@ -2,9 +2,9 @@
 #include "packages/natural.h"
 
 #include <QApplication>
-#include "file_types/group.h"
-#include "file_types/key.h"
-#include "file_types/settings.h"
+#include "settings/group.h"
+#include "settings/key.h"
+#include "settings/settings.h"
 #include "packages/source.h"
 
 #include "threads/settingswriter.h"

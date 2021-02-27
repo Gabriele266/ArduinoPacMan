@@ -8,9 +8,9 @@
 #include <QString>
 #include <QStringList>
 #include "threads/settingswriter.h"
-#include "file_types/settings.h"
-#include "file_types/group.h"
-#include "file_types/key.h"
+#include "settings/settings.h"
+#include "settings/group.h"
+#include "settings/key.h"
 #include "threads/settingsreader.h"
 
 /// Scrive le impostazioni di default del programma in un percorso legacy

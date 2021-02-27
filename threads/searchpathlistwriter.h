@@ -11,7 +11,7 @@
 #include <QDir>
 #include <QTextStream>
 
-#include "../file_types/libsearchpathlist.h"
+#include "../settings/libsearchpathlist.h"
 #include "../packages/natural.h"
 #include "../utils/utils.cpp"
 

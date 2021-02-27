@@ -161,21 +161,21 @@
            <item>
             <layout class="QVBoxLayout" name="verticalLayout">
              <item>
-              <widget class="QCheckBox" name="checkBox_2">
+              <widget class="QCheckBox" name="libraryHasKeywords">
                <property name="text">
                 <string>Keywords</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QCheckBox" name="checkBox">
+              <widget class="QCheckBox" name="libraryHasDocumentation">
                <property name="text">
                 <string>Documentazione</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QCheckBox" name="checkBox_3">
+              <widget class="QCheckBox" name="libraryHasExamples">
                <property name="text">
                 <string>Esempi</string>
                </property>

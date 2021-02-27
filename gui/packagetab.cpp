@@ -133,3 +133,11 @@ void PackageTab::on_packageLibraryViewer_customContextMenuRequested(const QPoint
 {
     addedLibrariesContextMenu->popup(ui->packageLibraryViewer->mapToGlobal(pos));
 }
+
+void PackageTab::on_actionInformazioni_triggered()
+{
+    // Prendo la libreria indicata dal elemento corrente
+    Natural cur_item_index = ui->libraryBrowser->currentIndex().row();
+
+//    auto *info = new LibraryInfo();
+}

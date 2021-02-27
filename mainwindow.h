@@ -31,7 +31,7 @@
 #include "threads/srcdependencylister.h"
 #include "threads/librariesloader.h"
 
-#include "file_types/libsearchpathlist.h"
+#include "settings/libsearchpathlist.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

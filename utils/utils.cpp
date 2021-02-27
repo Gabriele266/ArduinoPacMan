@@ -103,6 +103,24 @@ static QStringList removeRedundant(QStringList list){
     return result;
 }
 
+/**
+ * @brief boolToString Converte il valore booleano in una stringa applicando una politica precisa.
+ * @param value Valore da convertire in stringa
+ * @param yesNoorTrueFalse specifica se utilizzare una notazione di tipo Si/No o Vero/Falso
+ * @return La stringa formattata
+ */
+static QString boolToString(bool value, bool yesNoorTrueFalse){
+    if(yesNoorTrueFalse){
+        // Applico la politica yes/no
+        if(value) return "Yes";
+        else return "No";
+    }
+    else{
+        if(value) return "True";
+        else return "False";
+    }
+}
+
 static QChar getOSSeparator(){
     // Versione del sistema operativo ospite
     auto version = QOperatingSystemVersion::current();

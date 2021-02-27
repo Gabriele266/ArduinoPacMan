@@ -7,7 +7,7 @@
 #define SETTINGSWRITER_H
 
 #include <QThread>
-#include "file_types/settings.h"
+#include "settings/settings.h"
 #include <QFile>
 #include <QTextStream>
 #include <QDir>

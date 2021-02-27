@@ -11,7 +11,7 @@
 #include <QDir>
 #include <QThread>
 
-#include "../file_types/libsearchpathlist.h"
+#include "../settings/libsearchpathlist.h"
 #include "../utils/utils.cpp"
 
 /// Rappresenta un thread per la scrittura di una lista di percorsi di ricerca

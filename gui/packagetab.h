@@ -11,6 +11,7 @@
 #include <QMenu>
 
 #include "../packages/package.h"
+#include "libraryinfo.h"
 #include "tab.h"
 
 namespace Ui {
@@ -55,10 +56,14 @@ private slots:
 
     void on_packageLibraryViewer_customContextMenuRequested(const QPoint &pos);
 
+    void on_actionInformazioni_triggered();
+
 private:
     Ui::PackageTab *ui;
     // Pacchetto che rappresenta il tab
     Package *package;
+    // Lista delle librerie a cui può accedere
+    Library *libraries;
     // Tag associato al tab
     QString tag;
     // Indica se il tab è visualizzato o no

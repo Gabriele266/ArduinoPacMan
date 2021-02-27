@@ -10,7 +10,7 @@
 
 #include "packages/package.h"
 #include "packages/natural.h"
-#include "file_types/settings.h"
+#include "settings/settings.h"
 
 namespace Ui {
 class PackageInfo;
