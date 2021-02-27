@@ -31,7 +31,7 @@ SOURCES += \
 	packages/package.cpp \
 	packages/source.cpp \
     pacman_info.h \
-	searchpathmanager.cpp \
+	gui/searchpathmanager.cpp \
 	threads/fileloader.cpp \
 	threads/librariesloader.cpp \
 	threads/packagereader.cpp \
@@ -68,7 +68,7 @@ HEADERS += \
 	packages/package.h \
 	packages/source.h \
 	packages/version.h \
-	searchpathmanager.h \
+	gui/searchpathmanager.h \
 	threads/fileloader.h \
 	threads/librariesloader.h \
 	threads/packagereader.h \
@@ -91,7 +91,7 @@ FORMS += \
     mainwindow.ui \
 	gui/newsearchpath.ui \
 	gui/packageinfo.ui \
-    searchpathmanager.ui
+	gui/searchpathmanager.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

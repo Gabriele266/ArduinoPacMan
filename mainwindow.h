@@ -18,8 +18,8 @@
 
 // Altri dialoghi
 #include "gui/newpackagedialog.h"
-#include "searchpathmanager.h"
-#include "packageinfo.h"
+#include "gui/searchpathmanager.h"
+#include "gui/packageinfo.h"
 
 #include "utils/settings_manager.cpp"
 
