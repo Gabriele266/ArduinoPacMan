@@ -14,7 +14,7 @@
 
 #include "library.h"
 #include "pacman_info.h"
-#include "../utils/utils.cpp"
+#include "../utils/utils.h"
 #include "attributeditem.h"
 #include "utils/macros.h"
 #include "dependency.h"

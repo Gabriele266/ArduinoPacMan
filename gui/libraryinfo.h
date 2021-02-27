@@ -7,7 +7,7 @@
 
 #include "packages/library.h"
 #include "settings/settings.h"
-#include "utils/utils.cpp"
+#include "utils/utils.h"
 #include "utils/macros.h"
 #include "utils/costants.h"
 

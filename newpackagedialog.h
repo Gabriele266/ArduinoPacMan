@@ -8,7 +8,7 @@
 #include <QChar>
 #include <QFileDialog>
 
-#include "utils/utils.cpp"
+#include "utils/utils.h"
 #include "settings/settings.h"
 #include "settings/key.h"
 

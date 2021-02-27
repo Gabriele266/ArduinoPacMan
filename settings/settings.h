@@ -15,7 +15,7 @@
 
 #include "packages/attributeditem.h"
 #include "utils/macros.h"
-#include "utils/utils.cpp"
+#include "utils/utils.h"
 
 #include "key.h"
 #include "group.h"

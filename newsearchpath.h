@@ -5,7 +5,7 @@
 #include <QDir>
 #include <QFileDialog>
 
-#include "utils/utils.cpp"
+#include "utils/utils.h"
 
 namespace Ui {
 class NewSearchPath;

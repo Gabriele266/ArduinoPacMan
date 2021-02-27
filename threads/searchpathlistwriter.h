@@ -13,7 +13,7 @@
 
 #include "../settings/libsearchpathlist.h"
 #include "../packages/natural.h"
-#include "../utils/utils.cpp"
+#include "../utils/utils.h"
 
 /// Rappresenta lo stato di uscita della operazione di scrittura sul file
 enum LibWritingEnd{

@@ -12,7 +12,7 @@
 #include <QTextBrowser>
 
 #include "utils/macros.h"
-#include "utils/utils.cpp"
+#include "utils/utils.h"
 #include "utils/costants.h"
 
 /// Rappresenta un thread di caricamento di un file

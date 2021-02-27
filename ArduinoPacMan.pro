@@ -79,7 +79,8 @@ HEADERS += \
 	threads/sourcesloader.h \
 	threads/srcdependencylister.h \
 	utils/costants.h \
-	utils/macros.h
+	utils/macros.h \
+	utils/utils.h
 
 FORMS += \
 	gui/libraryinfo.ui \

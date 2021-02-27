@@ -14,7 +14,7 @@
 #include <QTreeWidgetItem>
 #include <QList>
 
-#include "../utils/utils.cpp"
+#include "../utils/utils.h"
 #include "../packages/library.h"
 
 /// Rappresenta un caricatore di librerie su thread separato

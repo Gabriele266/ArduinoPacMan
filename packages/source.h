@@ -11,7 +11,7 @@
 #include "dependency.h"
 #include "natural.h"
 #include "../utils/macros.h"
-#include "../utils/utils.cpp"
+#include "../utils/utils.h"
 #include "../utils/costants.h"
 
 /// Rappresenta un tipo di sorgente

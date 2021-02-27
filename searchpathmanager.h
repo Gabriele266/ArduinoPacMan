@@ -7,7 +7,7 @@
 
 #include "packages/natural.h"
 #include "newsearchpath.h"
-#include "utils/utils.cpp"
+#include "utils/utils.h"
 
 namespace Ui {
 class SearchPathManager;

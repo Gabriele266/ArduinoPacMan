@@ -13,7 +13,7 @@
 #include <QTreeWidget>
 #include <QMessageBox>
 
-#include "utils/utils.cpp"
+#include "utils/utils.h"
 #include "packages/source.h"
 #include "packages/package.h"
 #include "utils/macros.h"

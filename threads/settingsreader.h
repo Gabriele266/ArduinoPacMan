@@ -20,7 +20,7 @@
 #include "packages/natural.h"
 
 #include "utils/macros.h"
-#include "utils/utils.cpp"
+#include "utils/utils.h"
 
 /// Rappresenta un thread per la lettura delle impostazioni dal disco
 class SettingsReader : public QThread

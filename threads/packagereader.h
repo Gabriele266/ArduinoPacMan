@@ -16,7 +16,7 @@
 #include <QDomNode>
 
 #include "packages/package.h"
-#include "utils/utils.cpp"
+#include "utils/utils.h"
 #include "utils/macros.h"
 
 /// Rappresenta un thread di lettura di un pacchetto dal file system

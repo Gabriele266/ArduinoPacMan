@@ -17,7 +17,7 @@
 #include <QMap>
 
 #include "packages/natural.h"
-#include "utils/utils.cpp"
+#include "utils/utils.h"
 #include "attribute.h"
 
 /// Rappresenta una chiave

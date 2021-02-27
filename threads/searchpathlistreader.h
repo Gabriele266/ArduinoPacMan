@@ -12,7 +12,7 @@
 #include <QThread>
 
 #include "../settings/libsearchpathlist.h"
-#include "../utils/utils.cpp"
+#include "../utils/utils.h"
 
 /// Rappresenta un thread per la scrittura di una lista di percorsi di ricerca
 class SearchPathListReader : public QThread
