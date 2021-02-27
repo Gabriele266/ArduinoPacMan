@@ -86,17 +86,27 @@ void MainWindow::openPackage(){
 
         // Controllo che il pacchetto sia stato letto correttamente
         if(pack != nullptr){
-            // Aggiungo il pacchetto
-            auto p = addPackageToView(pack);
-            // Controllo che sia stato aggiunto
-            if(p != nullptr){
-                tabs.append(p);
-                // Aggiungo il pacchetto alla lista dei pacchetti
-                packageList.append(pack);
-                qInfo() << "Pacchetto caricato con successo: " << pack->getName() << endl;
+            // Controllo che non esista già nella vista
+            if(!isOpenedPackage(pack)){
+                // Aggiungo il pacchetto
+                auto p = addPackageToView(pack);
+                // Controllo che sia stato aggiunto
+                if(p != nullptr){
+                    tabs.append(p);
+                    // Aggiungo il pacchetto alla lista dei pacchetti
+                    packageList.append(pack);
+                    qInfo() << "Pacchetto caricato con successo: " << pack->getName() << endl;
+                }
+            }
+            else{
+                // Mostro un warning
+                QMessageBox::warning(this, "Attenzione", "Il pacchetto che si è cercato di aprire è già aperto. ");
+                qInfo() << pack->getName() << " tentativo di aprirlo due volte. " << endl;
             }
         }
         else{
+            // Mostro errori
+            QMessageBox::critical(this, "Errore", "Impossibile aprire il pacchetto. ");
             qInfo() << "Errore nella apertura del pacchetto. " << endl;
         }
     }
@@ -193,57 +203,49 @@ bool MainWindow::isOpenedPackage(Package *package){
 Tab* MainWindow::addPackageToView(Package *pack){
     // Controllo che non sia un puntatore nullo
     if(pack != nullptr){
-        // Controllo che il pacchetto non sia già aperto
-        if(!isOpenedPackage(pack)){
-            // Imposto l'indice del pacchetto
-            pack->addTag(QString::number(packageList.count()));
+        // Imposto l'indice del pacchetto
+        pack->addTag(QString::number(packageList.count()));
 
-            // Mostro il pacchetto
-            PackageTab *tab = new PackageTab(pack);
-            // Imposto i tag del tab
-            tab->setTags("<package>");
-            // Aggiungo
-            ui->widgetManager->addTab(tab, pack->getName());
+        // Mostro il pacchetto
+        PackageTab *tab = new PackageTab(pack);
+        // Imposto i tag del tab
+        tab->setTags("<package>");
+        // Aggiungo
+        ui->widgetManager->addTab(tab, pack->getName());
 
-            // Carico i suoi sorgenti
-            auto *loader = new SourcesLoader();
-            loader->setDestination(tab->getFileBrowser());
-            loader->setSearchPath(pack->getSourcesPath());
-            qInfo() << "Carico sorgenti per il percorso " << pack->getSourcesPath() << endl;
-            loader->setPackage(pack);
+        // Carico i suoi sorgenti
+        auto *loader = new SourcesLoader();
+        loader->setDestination(tab->getFileBrowser());
+        loader->setSearchPath(pack->getSourcesPath());
+        qInfo() << "Carico sorgenti per il percorso " << pack->getSourcesPath() << endl;
+        loader->setPackage(pack);
 
-            // Avvio il thread
-            loader->start(QThread::HighPriority);
+        // Avvio il thread
+        loader->start(QThread::HighPriority);
 
-            // Avvio il caricamento dei sorgenti per il pacchetto
-            SrcDependencyLister *lister = new SrcDependencyLister();
-            // Imposto il pacchetto
-            lister->setPackage(pack);
-            // Imposto il widget
-            lister->setWidget(tab->getDependencyBrowser());
-            lister->start();
+        // Avvio il caricamento dei sorgenti per il pacchetto
+        SrcDependencyLister *lister = new SrcDependencyLister();
+        // Imposto il pacchetto
+        lister->setPackage(pack);
+        // Imposto il widget
+        lister->setWidget(tab->getDependencyBrowser());
+        lister->start();
 
-            // Avvio il caricamento dei percorsi dal file
-            loadSearchPathFromFile();
+        // Avvio il caricamento dei percorsi dal file
+        loadSearchPathFromFile();
 
-            foundLibraries.clear();
+        foundLibraries.clear();
 
-            // Avvio i vari thread per il caricamento delle informazioni per le librerie
-            for(Natural x = 0; x < mk(librariesSearchPath.getListCount()); x++){
-                // Creo il thread
-                LibrariesLoader *loader = new LibrariesLoader();
-                loader->setDestination(tab->getFoundLibrariesManager());
-                loader->setLibrariesDestination(&foundLibraries);
-                loader->setSearchPath(librariesSearchPath.getPath(x));
-                loader->start();
-            }
-            return tab;
+        // Avvio i vari thread per il caricamento delle informazioni per le librerie
+        for(Natural x = 0; x < mk(librariesSearchPath.getListCount()); x++){
+            // Creo il thread
+            LibrariesLoader *loader = new LibrariesLoader();
+            loader->setDestination(tab->getFoundLibrariesManager());
+            loader->setLibrariesDestination(&foundLibraries);
+            loader->setSearchPath(librariesSearchPath.getPath(x));
+            loader->start();
         }
-        else{
-            // Mostro un warning
-            QMessageBox::warning(this, "Attenzione", "Il pacchetto che si è tentato di aprire è già aperto in Arduino PacMan. ");
-            return nullptr;
-        }
+        return tab;
     }
     return nullptr;
 }
