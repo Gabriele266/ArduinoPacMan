@@ -203,49 +203,69 @@ bool MainWindow::isOpenedPackage(Package *package){
 Tab* MainWindow::addPackageToView(Package *pack){
     // Controllo che non sia un puntatore nullo
     if(pack != nullptr){
-        // Imposto l'indice del pacchetto
-        pack->addTag(QString::number(packageList.count()));
+        // Controllo che abbia un nome e un percorso
+        if(pack->getName() != "" && pack->getCompletePath() != ""){
+            // Imposto l'indice del pacchetto
+            pack->addTag(QString::number(packageList.count()));
+            // Mostro il pacchetto
+            PackageTab *tab = new PackageTab(pack);
+            // Imposto i tag del tab
+            tab->setTags("<package>");
+            // Aggiungo
+            ui->widgetManager->addTab(tab, pack->getName());
 
-        // Mostro il pacchetto
-        PackageTab *tab = new PackageTab(pack);
-        // Imposto i tag del tab
-        tab->setTags("<package>");
-        // Aggiungo
-        ui->widgetManager->addTab(tab, pack->getName());
+            // Controllo che il pacchetto abbia dei sorgenti
+            if(pack->getSourcesPath() != "" && QDir(pack->getSourcesPath()).exists()){
+                // Controllo che abbia un file principale
+                if(pack->getMainSourcePath() != "" && QFile::exists(pack->getMainSourcePath())){
+                    // Carico i suoi sorgenti
+                    auto *loader = new SourcesLoader();
+                    loader->setDestination(tab->getFileBrowser());
+                    loader->setSearchPath(pack->getSourcesPath());
+                    qInfo() << "Carico sorgenti per il percorso " << pack->getSourcesPath() << endl;
+                    loader->setPackage(pack);
 
-        // Carico i suoi sorgenti
-        auto *loader = new SourcesLoader();
-        loader->setDestination(tab->getFileBrowser());
-        loader->setSearchPath(pack->getSourcesPath());
-        qInfo() << "Carico sorgenti per il percorso " << pack->getSourcesPath() << endl;
-        loader->setPackage(pack);
+                    // Avvio il thread
+                    loader->start(QThread::HighPriority);
 
-        // Avvio il thread
-        loader->start(QThread::HighPriority);
+                    // Avvio il caricamento dei sorgenti per il pacchetto
+                    SrcDependencyLister *lister = new SrcDependencyLister();
+                    // Imposto il pacchetto
+                    lister->setPackage(pack);
+                    // Imposto il widget
+                    lister->setWidget(tab->getDependencyBrowser());
+                    lister->start();
+                }
+                else{
+                    QMessageBox::warning(this, "Attenzione", "Il pacchetto che si è tentato di aprire non ha un file sorgente principale o, se è stato impostato, il file non esiste sul disco. ");
+                    qInfo() << "Pacchetto " << pack->getName() << " senza file principale corretto. " << endl;
+                }
+            }
+            else{
+                QMessageBox::warning(this, "Attenzione", "Il pacchetto che si è tentato di aprire non ha dei sorgenti associati. Non verranno caricate dipendenze fino a quando non saranno impostati. ");
+                qInfo() << "Pacchetto " << pack->getName() << " senza sorgenti" << endl;
+            }
 
-        // Avvio il caricamento dei sorgenti per il pacchetto
-        SrcDependencyLister *lister = new SrcDependencyLister();
-        // Imposto il pacchetto
-        lister->setPackage(pack);
-        // Imposto il widget
-        lister->setWidget(tab->getDependencyBrowser());
-        lister->start();
+            // Avvio il caricamento dei percorsi dal file
+            loadSearchPathFromFile();
 
-        // Avvio il caricamento dei percorsi dal file
-        loadSearchPathFromFile();
+            // Tolgo tutti gli elementi
+            foundLibraries.clear();
 
-        foundLibraries.clear();
-
-        // Avvio i vari thread per il caricamento delle informazioni per le librerie
-        for(Natural x = 0; x < mk(librariesSearchPath.getListCount()); x++){
-            // Creo il thread
-            LibrariesLoader *loader = new LibrariesLoader();
-            loader->setDestination(tab->getFoundLibrariesManager());
-            loader->setLibrariesDestination(&foundLibraries);
-            loader->setSearchPath(librariesSearchPath.getPath(x));
-            loader->start();
+            // Avvio i vari thread per il caricamento delle informazioni per le librerie
+            for(Natural x = 0; x < mk(librariesSearchPath.getListCount()); x++){
+                // Creo il thread
+                LibrariesLoader *loader = new LibrariesLoader();
+                loader->setDestination(tab->getFoundLibrariesManager());
+                loader->setLibrariesDestination(&foundLibraries);
+                loader->setSearchPath(librariesSearchPath.getPath(x));
+                loader->start();
+            }
+            return tab;
         }
-        return tab;
+        else{
+            QMessageBox::critical(this, "Errore", "Errore durante l'apertura del pacchetto. Non è stato possibile leggerlo correttamente o non si trattava di un pacchetto formattato correttamente. ");
+        }
     }
     return nullptr;
 }
