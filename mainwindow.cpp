@@ -214,10 +214,15 @@ Tab* MainWindow::addPackageToView(Package *pack){
             // Aggiungo
             ui->widgetManager->addTab(tab, pack->getName());
 
+            // Percorso dei sorgenti
+            QString sources_path = pack->getSourcesPath();
+            // File sorgente principale
+            QString main_file_path = pack->getMainSourcePath();
+
             // Controllo che il pacchetto abbia dei sorgenti
-            if(pack->getSourcesPath() != "" && QDir(pack->getSourcesPath()).exists()){
+            if(sources_path != "" && QDir(sources_path).exists()){
                 // Controllo che abbia un file principale
-                if(pack->getMainSourcePath() != "" && QFile::exists(pack->getMainSourcePath())){
+                if(main_file_path != "" && QFile::exists(main_file_path)){
                     // Carico i suoi sorgenti
                     auto *loader = new SourcesLoader();
                     loader->setDestination(tab->getFileBrowser());
@@ -228,13 +233,20 @@ Tab* MainWindow::addPackageToView(Package *pack){
                     // Avvio il thread
                     loader->start(QThread::HighPriority);
 
-                    // Avvio il caricamento dei sorgenti per il pacchetto
-                    SrcDependencyLister *lister = new SrcDependencyLister();
-                    // Imposto il pacchetto
-                    lister->setPackage(pack);
-                    // Imposto il widget
-                    lister->setWidget(tab->getDependencyBrowser());
-                    lister->start();
+                    // Controllo che il file impostato come sorgente principale sia effettivamente un sorgente
+                    if(Source::fileIsSource(main_file_path)){
+                        // Avvio il caricamento dei sorgenti per il pacchetto
+                        auto *lister = new SrcDependencyLister();
+                        // Imposto il pacchetto
+                        lister->setPackage(pack);
+                        // Imposto il widget
+                        lister->setWidget(tab->getDependencyBrowser());
+                        lister->start();
+                    }
+                    else{
+                        // Non si tratta di un vero sorgente supportato
+                        QMessageBox::critical(this, "Errore", "Il file impostato come sorgente principale ha come estensione \n" + getFileExtension(main_file_path) + " che non rappresenta un file sorgente supportato. \nNon e' possibile caricare le dipendenze da questo file. ");
+                    }
                 }
                 else{
                     QMessageBox::warning(this, "Attenzione", "Il pacchetto che si è tentato di aprire non ha un file sorgente principale o, se è stato impostato, il file non esiste sul disco. ");
@@ -255,7 +267,7 @@ Tab* MainWindow::addPackageToView(Package *pack){
             // Avvio i vari thread per il caricamento delle informazioni per le librerie
             for(Natural x = 0; x < mk(librariesSearchPath.getListCount()); x++){
                 // Creo il thread
-                LibrariesLoader *loader = new LibrariesLoader();
+                auto *loader = new LibrariesLoader();
                 loader->setDestination(tab->getFoundLibrariesManager());
                 loader->setLibrariesDestination(&foundLibraries);
                 loader->setSearchPath(librariesSearchPath.getPath(x));
@@ -273,7 +285,7 @@ Tab* MainWindow::addPackageToView(Package *pack){
 void MainWindow::on_actionNuova_finestra_triggered()
 {
     // Creo una nuova finestra
-    MainWindow *mainWin = new MainWindow();
+    auto *mainWin = new MainWindow();
     mainWin->show();
 }
 
