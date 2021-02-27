@@ -20,7 +20,7 @@ SOURCES += \
     gui/packagetab.cpp \
 	gui/tab.cpp \
 	gui/newpackagedialog.cpp \
-	newsearchpath.cpp \
+	gui/newsearchpath.cpp \
 	packageinfo.cpp \
 	packages/attributeditem.cpp \
 	packages/dependency.cpp \
@@ -58,7 +58,7 @@ HEADERS += \
     gui/packagetab.h \
 	gui/tab.h \
 	gui/newpackagedialog.h \
-	newsearchpath.h \
+	gui/newsearchpath.h \
 	packageinfo.h \
 	packages/attributeditem.h \
 	packages/dependency.h \
@@ -89,7 +89,7 @@ FORMS += \
     gui/packagetab.ui \
 	gui/newpackagedialog.ui \
     mainwindow.ui \
-    newsearchpath.ui \
+	gui/newsearchpath.ui \
     packageinfo.ui \
     searchpathmanager.ui
 
