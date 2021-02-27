@@ -169,6 +169,17 @@ QString resolvePath(QString startPath){
     return result;
 }
 
+QString getFileExtension(QString file){
+    QStringList split = file.split('.');
+    // Controllo se il file ha una estensione
+    if(split.count() > 0){
+        return split.last();
+    }
+    else{
+        return "";
+    }
+}
+
 Natural mk(int num){
     return Natural::make(num, ElideUnderZero);
 }

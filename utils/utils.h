@@ -105,6 +105,14 @@ QString getCurrentPath();
 QString resolvePath(QString startPath);
 
 /**
+ * @brief getFileExtension restituisce l'estensione del file rappresentato dalla stringa (può anche non essere effettiva
+ * mente un file presente su disco. Se il file indicato non ha una estensione verrà restituita una stringa vuota
+ * @param file Il nome del file
+ * @return L'estensione del file
+ */
+QString getFileExtension(QString file);
+
+/**
  * @brief mk crea un numero naturale applicando una politica elideunderzero
  * @param num il numero intero da convertire
  * @return il numero convertito
