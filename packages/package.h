@@ -69,6 +69,13 @@ public:
     /// \return true se esiste
     bool existsLibrary(QString name);
 
+    /**
+     * @brief equals Determina se il pacchetto corrente ha lo stesso percorso, lo stesso nome di un altro pacchetto
+     * @param package Il pacchetto con cui effettuare il controllo
+     * @return true se sono simili
+     */
+    bool equals(Package *package);
+
     /// Determina se esiste una libreria con quel percorso
     /// \arg path percorso della libreria, incluso il nome
     /// \return true se esiste

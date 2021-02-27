@@ -138,6 +138,13 @@ protected:
 
     /// Carica i percorsi di ricerca dal file corretto
     void loadSearchPathFromFile();
+
+    /**
+     * @brief isOpenedPackage determina se il pacchetto passato è già aperto nell' ambiente
+     * @param package Pacchetto da controllare
+     * @return true se è già aperto
+     */
+    bool isOpenedPackage(Package *package);
 };
 
 #endif // MAINWINDOW_H

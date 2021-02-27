@@ -46,6 +46,17 @@ bool Package::existsLibraryWithPath(QString path){
     return false;
 }
 
+bool Package::equals(Package *package){
+    if(getName() == package->getName()){
+        if(path == package->getSavePath()){
+            if(main_file == package->getMainSourcePath()){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 Source* Package::getMainSource(){
     for(Natural x = 0; x < mk(sources_list.count()); x++){
         QString y = sources_list[x]->getCompleteFile();
