@@ -1,4 +1,0 @@
-icons-size = 50x50
-icon-background = null
-icon-foreground = black
-icon-content-color = yellow
