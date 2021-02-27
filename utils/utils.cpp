@@ -5,28 +5,9 @@
 #ifndef UTILITES_CPP
 #define UTILITES_CPP
 
-#include <QString>
-#include <QChar>
-#include <QList>
-#include <QStringList>
-#include <QSysInfo>
-#include <QOperatingSystemVersion>
-#include <QDebug>
-#include <QDir>
+#include "utils.h"
 
-#include "packages/natural.h"
-
-/// Rappresenta un carattere di a capo
-#define endl "\n"
-
-/// Rappresenta un file riga in html
-#define html_endl "<br>"
-
-/// Controlla che la stringa string non contenga nessuno dei caratteri specificati
-/// \arg string la stringa da controllare
-/// \arg not_allowed_chars Lista di caratteri non consentiti
-/// \arg error_char Un puntatore alla stringa in cui mettere il carattere che ha dato errore
-static bool compare(QString string, QList<QChar> not_allowed_chars, QString *error_char){
+bool compare(QString string, QList<QChar> not_allowed_chars, QString *error_char){
     // Ottengo il numero di caratteri della stringa
     unsigned int string_size = string.count();
     // Ottengo il numero di caratteri non consentiti
@@ -47,9 +28,7 @@ static bool compare(QString string, QList<QChar> not_allowed_chars, QString *err
     return true;
 }
 
-/// Formatta il percorso concatenando il percorso base e i percorsi addizionali utilizzando
-/// il separatore nativo del sistema operativo
-static QString formatPathForOs(QString base, QStringList additions){
+QString formatPathForOs(QString base, QStringList additions){
     // Versione del sistema operativo ospite
     auto version = QOperatingSystemVersion::current();
     // Carattere da usare come separatore
@@ -62,7 +41,6 @@ static QString formatPathForOs(QString base, QStringList additions){
         // Utilizzo separatori windows
         separator_for_os = '\\';
         not_acceptable_separator = '/';
-
     }
     else{
         separator_for_os = '/';
@@ -82,8 +60,7 @@ static QString formatPathForOs(QString base, QStringList additions){
     return path;
 }
 
-/// Determina se la stringa str è presente almeno una volta nella lista list
-static bool isAnyOfList(QString str, QStringList list){
+bool isAnyOfList(QString str, QStringList list){
     for(Natural x = 0; x < Natural::make(list.count(), ElideUnderZero); x++){
         if(str == list[x]){
             return true;
@@ -92,8 +69,7 @@ static bool isAnyOfList(QString str, QStringList list){
     return false;
 }
 
-/// Rimuove tutti gli elementi che indicano percorsi ridondanti
-static QStringList removeRedundant(QStringList list){
+QStringList removeRedundant(QStringList list){
     QStringList result;
     for(int x = 0; x < list.count(); x++){
         if(list[x] != ".." && list[x] != "."){
@@ -103,13 +79,7 @@ static QStringList removeRedundant(QStringList list){
     return result;
 }
 
-/**
- * @brief boolToString Converte il valore booleano in una stringa applicando una politica precisa.
- * @param value Valore da convertire in stringa
- * @param yesNoorTrueFalse specifica se utilizzare una notazione di tipo Si/No o Vero/Falso
- * @return La stringa formattata
- */
-static QString boolToString(bool value, bool yesNoorTrueFalse){
+QString boolToString(bool value, bool yesNoorTrueFalse){
     if(yesNoorTrueFalse){
         // Applico la politica yes/no
         if(value) return "Yes";
@@ -121,7 +91,7 @@ static QString boolToString(bool value, bool yesNoorTrueFalse){
     }
 }
 
-static QChar getOSSeparator(){
+QChar getOSSeparator(){
     // Versione del sistema operativo ospite
     auto version = QOperatingSystemVersion::current();
     // Carattere da usare come separatore
@@ -137,8 +107,7 @@ static QChar getOSSeparator(){
     return separator_for_os;
 }
 
-/// Restituisce il percorso che contiene la cartella specificata
-static QString getParentDir(QString& path){
+QString getParentDir(QString& path){
     // Copia della stringa
     QString result = path;
     QChar s = getOSSeparator();
@@ -149,9 +118,7 @@ static QString getParentDir(QString& path){
     return result;
 }
 
-/// Controlla che la stringa string non esista nella lista list
-/// restituisce true se la situazione è verificata
-static bool notExists(QString string, QStringList list){
+bool notExists(QString string, QStringList list){
     for(int x = 0; x < list.count(); x++){
         if(list[x] == string){
             return false;
@@ -160,10 +127,7 @@ static bool notExists(QString string, QStringList list){
     return true;
 }
 
-/// Restituisce il percorso della home del sistema operativo
-/// su linux /home/$username
-/// su windows C:\Users\$Username
-static QString getHomePath(){
+QString getHomePath(){
     auto os_vers = QOperatingSystemVersion::currentType();
 
     // Prendo il nome utente corrente
@@ -181,12 +145,11 @@ static QString getHomePath(){
     }
 }
 
-static QString getCurrentPath(){
+QString getCurrentPath(){
     return QDir::currentPath();
 }
 
-/// Risolve un percorso che contiene collegamenti simbolici come ~.
-static QString resolvePath(QString startPath){
+QString resolvePath(QString startPath){
     // variabile con il risultato delle operazioni
     QString result = startPath;
 
@@ -206,8 +169,7 @@ static QString resolvePath(QString startPath){
     return result;
 }
 
-/// Applica una politica di gestione a un numero intero e restituisce il numero naturale
-static Natural mk(int num){
+Natural mk(int num){
     return Natural::make(num, ElideUnderZero);
 }
 
