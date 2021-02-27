@@ -17,7 +17,7 @@
 #include "packages/library.h"
 
 // Altri dialoghi
-#include "newpackagedialog.h"
+#include "gui/newpackagedialog.h"
 #include "searchpathmanager.h"
 #include "packageinfo.h"
 
