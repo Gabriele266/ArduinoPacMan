@@ -141,8 +141,11 @@ bool Library::init(){
                 }
             }
 
-            // Controllo se ha degli esempi
-            QDir examples = complete_path + "examples";
+            // Formatto il percorso degli esempi
+            QDir examples = formatPathForOs(complete_path, QStringList("examples"));
+            qInfo() << "Percorso esempi: " << examples << endl;
+
+            // Controllo se esiste
             if(examples.exists()){
                 examples_dir = true;
 

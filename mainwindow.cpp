@@ -448,7 +448,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
     // Rimuovo tutti i pacchetti
-    for(Natural x = 0; x < packageList.count(); x++){
+    for(Natural x = 0; x < mk(packageList.count()); x++){
         delete packageList[x];
     }
 }

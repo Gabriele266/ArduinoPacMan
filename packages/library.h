@@ -18,6 +18,7 @@
 #include "version.h"
 #include "attributeditem.h"
 #include "utils/macros.h"
+#include "utils/utils.h"
 
 /// Rappresenta una libreria
 class Library : public AttributedItem
