@@ -28,6 +28,17 @@ bool Package::existsLibrary(unsigned int index){
     return false;
 }
 
+bool Package::existsLibrary(Library *lib){
+    for(Natural x = 0; x < mk(libraries.count()); x++){
+        Library *cur = libraries[x];
+
+        if(cur->getName() == lib->getName() && cur->getPath() == lib->getPath() && cur->getDescription() == lib->getDescription()){
+            return true;
+        }
+    }
+    return false;
+}
+
 bool Package::existsLibrary(QString name){
     for(int x = 0; x < libraries.count(); x++){
         if(libraries[x]->getName() == name){

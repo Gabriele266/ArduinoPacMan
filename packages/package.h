@@ -70,6 +70,13 @@ public:
     bool existsLibrary(QString name);
 
     /**
+     * @brief existsLibrary Checks if the library is already in the package or not
+     * @param lib The library to search
+     * @return true if it exists
+     */
+    bool existsLibrary(Library *lib);
+
+    /**
      * @brief equals Determina se il pacchetto corrente ha lo stesso percorso, lo stesso nome di un altro pacchetto
      * @param package Il pacchetto con cui effettuare il controllo
      * @return true se sono simili
