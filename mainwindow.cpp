@@ -348,9 +348,6 @@ void MainWindow::loadLibraryList(){
 
 void MainWindow::on_actionPercorsi_ricerca_librerie_triggered()
 {
-    // Pulisco la lista degli elementi
-    librariesSearchPath.clear();
-
     // Creo la finestra
     SearchPathManager *man = new SearchPathManager();
 
