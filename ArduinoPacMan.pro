@@ -32,6 +32,7 @@ SOURCES += \
 	packages/source.cpp \
     pacman_info.h \
 	gui/searchpathmanager.cpp \
+	themes/theme.cpp \
 	threads/fileloader.cpp \
 	threads/librariesloader.cpp \
 	threads/packagereader.cpp \
@@ -69,6 +70,7 @@ HEADERS += \
 	packages/source.h \
 	packages/version.h \
 	gui/searchpathmanager.h \
+	themes/theme.h \
 	threads/fileloader.h \
 	threads/librariesloader.h \
 	threads/packagereader.h \
