@@ -13,6 +13,8 @@
 #include <QOperatingSystemVersion>
 #include <QDebug>
 #include <QDir>
+#include <QColor>
+#include <QRgb>
 
 #include "packages/natural.h"
 
@@ -118,5 +120,19 @@ QString getFileExtension(QString file);
  * @return il numero convertito
  */
 Natural mk(int num);
+
+/**
+ * @brief colorToHtml converts the color to the html representation
+ * @param color The color to convert
+ * @return the converted string
+ */
+QString colorToHtml(QColor &color);
+
+/**
+ * @brief htmlToColor Converts an html color string into a QColor color.
+ * @param htmlCode The string to convert
+ * @return The converted color
+ */
+QColor htmlToColor(QString &htmlCode);
 
 #endif // UTILS_H

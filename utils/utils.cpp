@@ -184,4 +184,38 @@ Natural mk(int num){
     return Natural::make(num, ElideUnderZero);
 }
 
+QString colorToHtml(QColor &color){
+    QString buf = "#";
+    buf += QString::number(color.red(), 16);
+    buf += QString::number(color.green(), 16);
+    buf += QString::number(color.blue(), 16);
+
+    return buf;
+}
+
+QColor htmlToColor(QString &htmlCode){
+    QColor color;
+    QString c = htmlCode.remove("#");
+
+    // Conversion status
+    bool ok;
+
+    // Check dimensions
+    if(c.length() == 6){
+        // Convert hex to decimals
+        QString r = QChar(c[0]) + c[1];
+        color.setRed(r.toInt(&ok, 16));
+
+        QString g = QChar(c[2]) + c[3];
+        color.setGreen(g.toInt(&ok, 16));
+
+        QString b = QChar(c[4]) + c[5];
+        color.setBlue(b.toInt(&ok, 16));
+
+        return color;
+    }
+    return QColor();
+
+}
+
 #endif
