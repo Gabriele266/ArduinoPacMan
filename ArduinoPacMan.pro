@@ -9,6 +9,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+	packages/nameditem.cpp \
 	settings/attribute.cpp \
 	settings/group.cpp \
 	settings/key.cpp \
@@ -48,6 +49,7 @@ SOURCES += \
 	packages/version.cpp
 
 HEADERS += \
+	packages/nameditem.h \
 	settings/attribute.h \
 	settings/group.h \
 	settings/key.h \
