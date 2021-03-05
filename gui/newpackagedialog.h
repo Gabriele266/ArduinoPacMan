@@ -1,3 +1,8 @@
+/*
+ * Cavallo Gabriele
+ * Dialog for creating new packages in ArduinoPacMan
+ * */
+
 #ifndef NEWPACKAGEDIALOG_H
 #define NEWPACKAGEDIALOG_H
 
@@ -24,36 +29,44 @@ public:
     explicit NewPackageDialog(Settings *settings = nullptr, QWidget *parent = nullptr);
     ~NewPackageDialog();
 
-    /// Restituisce il nome del pacchetto
+    /**
+     * @brief getPackageName returns the name of the package
+     * @return
+     */
     QString getPackageName();
 
-    /// Restituisce il percorso del pacchetto
+    /**
+     * @brief getPackagePath returns the path of the package
+     * @return
+     */
     QString getPackagePath();
 
-    /// Restituisce il percorso di tutti i sorgenti del pacchetto
+    /**
+     * @brief getSourcesPath Returns the path of the sources for the package
+     * @return
+     */
     QString getSourcesPath();
 
-    /// Restituisce il file principale del pacchetto
+    /**
+     * @brief getMainFilePath Returns the main source file path
+     * @return
+     */
     QString getMainFilePath();
 
-    /// Restituisce la descrizione del pacchetto
+    /**
+     * @brief getDescription Returns the description of the package
+     * @return
+     */
     QString getDescription();
 
 private slots:
 
-
     void on_packageName_textChanged(const QString &arg1);
-
     void on_pushButton_clicked();
-
     void on_packagePath_textChanged(const QString &arg1);
-
     void on_sfoglia_clicked();
-
     void on_change_clicked();
-
     void on_buttonBox_accepted();
-
     void on_mainFile_textChanged(const QString &arg1);
 
 private:
@@ -62,29 +75,27 @@ private:
     QList<QChar> no_chars;
     // Box messaggio di errore
     QMessageBox *error_box = new QMessageBox(this);
+
     // Indica se è possibile continuare
     bool possible = false;
-
     // Indica che nel nome sono presenti errori
     bool name_errors = true;
     // Indica che nel percorso sono presenti errori
     bool path_errors = true;
 
-    /// Cerca di disabilitare la possibilità di andare avanti
+    // Puntatore al pulsante per andare avanti
+    QPushButton *continue_button = nullptr;
+
+    // Impostazioni della applicazione
+    Settings *settings = nullptr;
+
+protected:
     void disableContinueWithPathError();
-
     void disableContinueWithNameError();
-
     void disableContinueWithSourcesError();
 
     /// Cerca di abilitare la possibilità di andare avanti
     void enableContinue();
-
-    // Puntatore al pulsante per andare avanti
-    QPushButton *continue_button;
-
-    // Impostazioni della applicazione
-    Settings *settings = nullptr;
 };
 
 #endif // NEWPACKAGEDIALOG_H
