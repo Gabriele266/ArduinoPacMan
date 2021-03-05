@@ -47,6 +47,12 @@ public:
     /// Restituisce l'indirizzo del gestore delle librerie trovate
     QTreeWidget* getFoundLibrariesManager();
 
+    /**
+     * @brief addLibraryToList Adds the library to the library list in the widget
+     * @param library
+     */
+    void addLibraryToList(Library *library);
+
 private slots:
     void on_libraryBrowser_customContextMenuRequested(const QPoint &pos);
 
@@ -58,12 +64,14 @@ private slots:
 
     void on_actionInformazioni_triggered();
 
+    void on_actionAggiungi_al_pacchetto_triggered();
+
 private:
     Ui::PackageTab *ui;
     // Pacchetto che rappresenta il tab
     Package *package;
     // Lista delle librerie a cui può accedere
-    Library *libraries;
+    QList<Library*> libraries;
     // Tag associato al tab
     QString tag;
     // Indica se il tab è visualizzato o no
@@ -76,6 +84,19 @@ private:
     QMenu *dependencyContextMenu = nullptr;
     // Menu contestuale per la visualizzazione delle librerie aggiunte
     QMenu *addedLibrariesContextMenu = nullptr;
+
+protected:
+    /**
+     * @brief addLibraryToPackage adds the library to the package
+     * @param lib Library to add
+     */
+    void addLibraryToPackage(Library *lib);
+
+    /**
+     * @brief formatLibraryWidget Formats a widget to display the library informations
+     * @param lib The library of the informations.
+     */
+    QTreeWidgetItem* formatLibraryWidget(Library *lib);
 };
 
 #endif // PACKAGETAB_H

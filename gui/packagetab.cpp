@@ -138,6 +138,50 @@ void PackageTab::on_actionInformazioni_triggered()
 {
     // Prendo la libreria indicata dal elemento corrente
     Natural cur_item_index = ui->libraryBrowser->currentIndex().row();
+}
 
-//    auto *info = new LibraryInfo();
+void PackageTab::addLibraryToPackage(Library *lib){
+    // Check if package already has this library
+    if(!package->existsLibrary(lib)){
+        // Add the library to the list
+        package->addLibrary(lib);
+        // Create a widget to display it
+        ui->packageLibraryViewer->addTopLevelItem(formatLibraryWidget(lib));
+    }
+    else{
+        QMessageBox::warning(this, "Attenzione", "La libreria selezionata è già stata aggiunta al pacchetto. ");
+    }
+}
+
+void PackageTab::addLibraryToList(Library *library){
+    if(library != nullptr){
+        // Add library to list
+        libraries.append(library);
+        // Create the widget to display it
+        // Add the item
+        ui->libraryBrowser->addTopLevelItem(formatLibraryWidget(library));
+    }
+}
+
+QTreeWidgetItem* PackageTab::formatLibraryWidget(Library *lib){
+    if(lib != nullptr){
+        auto *item = new QTreeWidgetItem();
+        item->setText(0, lib->getName());
+        item->setText(1, "Libreria");
+        item->setText(2, lib->getPath());
+        item->setIcon(0, QIcon(":/icons/program/Library.png"));
+        return item;
+    }
+    return nullptr;
+}
+
+void PackageTab::on_actionAggiungi_al_pacchetto_triggered()
+{
+    // Ottengo la libreria corrente
+    int cur = ui->libraryBrowser->currentIndex().row();
+
+    if(cur >= 0 && cur <= libraries.count()){
+        // Add the library to the package
+        addLibraryToPackage(libraries.at(cur));
+    }
 }
