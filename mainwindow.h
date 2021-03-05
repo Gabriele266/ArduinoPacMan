@@ -79,6 +79,14 @@ private slots:
 
     void on_actionChiudi_tutte_le_schede_aperte_triggered();
 
+    /// Carica i percorsi di ricerca dal file corretto
+    void loadSearchPathFromFile();
+
+    /**
+     * @brief loadLibraryList starts the search of the libraries in the search paths.
+     */
+    void loadLibraryList();
+
 private:
     Ui::MainWindow *ui;
 
@@ -136,9 +144,6 @@ protected:
 
     /// Rimuove un tab
     void removeTab(Natural tabIndex);
-
-    /// Carica i percorsi di ricerca dal file corretto
-    void loadSearchPathFromFile();
 
     /**
      * @brief isOpenedPackage determina se il pacchetto passato è già aperto nell' ambiente

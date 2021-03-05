@@ -18,6 +18,9 @@ MainWindow::MainWindow(QWidget *parent)
         SettingsReader *settingsReader = new SettingsReader();
         settingsReader->setSettingsObject(&settings);
         settingsReader->start();
+
+        // Connetto i thread
+        QObject::connect(settingsReader, &SettingsReader::finished, this, &MainWindow::loadSearchPathFromFile);
     }
     else{
         qInfo() << "File di impostazioni non trovato, avvio la scrittura sul disco. " << endl;
@@ -33,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Mostro la scheda home
     showHomePage();
+
 }
 
 void MainWindow::showHomePage(){
@@ -258,21 +262,11 @@ Tab* MainWindow::addPackageToView(Package *pack){
                 qInfo() << "Pacchetto " << pack->getName() << " senza sorgenti" << endl;
             }
 
-            // Avvio il caricamento dei percorsi dal file
-            loadSearchPathFromFile();
-
-            // Tolgo tutti gli elementi
-            foundLibraries.clear();
-
-            // Avvio i vari thread per il caricamento delle informazioni per le librerie
-            for(Natural x = 0; x < mk(librariesSearchPath.getListCount()); x++){
-                // Creo il thread
-                auto *loader = new LibrariesLoader();
-                loader->setDestination(tab->getFoundLibrariesManager());
-                loader->setLibrariesDestination(&foundLibraries);
-                loader->setSearchPath(librariesSearchPath.getPath(x));
-                loader->start();
+            // Add the found libraries to the object view
+            for(Natural x = 0; x < mk(foundLibraries.count()); x++){
+                tab->addLibraryToList(foundLibraries[x]);
             }
+
             return tab;
         }
         else{
@@ -334,17 +328,28 @@ void MainWindow::loadSearchPathFromFile(){
 
     // Avvio il thread
     reader->start();
-    // Attendo che termini
-    while(reader->isRunning()){}
+
+    // Connect the events
+    QObject::connect(reader, &SearchPathListReader::finished, this, &MainWindow::loadLibraryList);
+
+    qInfo() << "Caricati percorsi ricerca librerie. " << endl;
+}
+
+void MainWindow::loadLibraryList(){
+    // Avvio i vari thread per il caricamento delle informazioni per le librerie
+    for(Natural x = 0; x < mk(librariesSearchPath.getListCount()); x++){
+        // Creo il thread
+        auto *loader = new LibrariesLoader();
+        loader->setLibrariesDestination(&foundLibraries);
+        loader->setSearchPath(librariesSearchPath.getPath(x));
+        loader->start();
+    }
 }
 
 void MainWindow::on_actionPercorsi_ricerca_librerie_triggered()
 {
     // Pulisco la lista degli elementi
     librariesSearchPath.clear();
-
-    // Avvio il caricamento dei percorsi dal file
-    loadSearchPathFromFile();
 
     // Creo la finestra
     SearchPathManager *man = new SearchPathManager();

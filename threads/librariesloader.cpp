@@ -5,10 +5,6 @@ LibrariesLoader::LibrariesLoader()
 
 }
 
-void LibrariesLoader::setDestination(QTreeWidget *dest){
-    destination = dest;
-}
-
 void LibrariesLoader::setSearchPath(QString path){
     this->path = path;
 }
@@ -38,15 +34,8 @@ void LibrariesLoader::run(){
                 lib->setCompletePath(complete.path());
                 // Inizializzo la libreria
                 lib->init();
-                // La aggiungo all' array
+                // La aggiungo alla lista
                 libraries->append(lib);
-                // Aggiungo un elemento per la libreria nell albero
-                auto *item = new QTreeWidgetItem();
-                item->setText(0, entries[x]);
-                item->setText(1, "Libreria");
-                item->setText(2, complete.path());
-                item->setIcon(0, QIcon(":/icons/program/Library.png"));
-                destination->addTopLevelItem(item);
             }
         }
     }
