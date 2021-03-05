@@ -193,7 +193,7 @@ QString colorToHtml(QColor &color){
     return buf;
 }
 
-QColor htmlToColor(QString &htmlCode){
+QColor htmlToColor(QString htmlCode){
     QColor color;
     QString c = htmlCode.remove("#");
 
