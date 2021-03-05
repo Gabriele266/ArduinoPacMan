@@ -2,35 +2,76 @@
 
 FileLoader::FileLoader()
 {
+    file_path = "";
+}
 
+FileLoader::FileLoader(QString& file){
+    file_path = file;
 }
 
 void FileLoader::run(){
-    if(browser != nullptr){
-        // Creo il file
+    if(file_path != ""){
+        // Create the file object
         QFile file(file_path);
-        QString buffer = "";
 
-        // Cerco di aprirlo
-        if(file.open(QIODevice::ReadOnly)){
-            // Creo uno stream di testo
-            QTextStream str(&file);
+        // Reset the buffer
+        buffer = "";
 
-            // Valore della riga corrente
-            QString curLine;
+        // Check existance
+        if(file.exists()){
+            // Try to open it
+            if(file.open(QIODevice::ReadOnly)){
+                // Create a text stream
+                QTextStream str(&file);
 
-            while(!str.atEnd()){
-                // Leggo una riga
-                curLine = str.readLine();
-                buffer += curLine;
+                // Create a variable for the current line
+                QString curLine;
+
+                while(!str.atEnd()){
+                    // Read a line
+                    curLine = str.readLine();
+                    buffer += curLine;
+                }
+                // Close the file and exit
+                file.close();
+                exit_state = Success;
             }
-            file.close();
-            browser->setHtml(buffer);
-            qInfo() << "Caricamento del file " << file_path << " completato. " << endl;
+            else{
+                exit_state = FileOpenError;
+                error_string = file.errorString();
+            }
         }
         else{
-            qInfo() << "Impossibile leggere il file: " << file.errorString() << endl;
-            qInfo() << "File ricercato: " << file_path << endl;
+            exit_state = FileNotFound;
         }
+    }
+    else{
+        exit_state = FileNotSpecified;
+    }
+}
+
+bool FileLoader::wasSuccessful(){
+    if(exit_state == Success && error_string == ""){
+        return true;
+    }
+    return false;
+}
+
+QString FileLoader::exitStateToString(FileLoaderExit exit){
+    switch(exit){
+    case Success:
+        return "Success";
+    case FileNotFound:
+        return "FileNotFound";
+    case FileNotSpecified:
+        return "FileNotSpecified";
+    case FileOpenError:
+        return "FileOpenError";
+    case AccessDenied:
+        return "AccessDenied";
+    case NotStarted:
+        return "NotStarted";
+    default:
+        return "Error";
     }
 }

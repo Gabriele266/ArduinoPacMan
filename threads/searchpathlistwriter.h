@@ -21,7 +21,7 @@ enum LibWritingEnd{
     FileAccessError,
     PassedPathNotExisting,
     LibrarySearchPathEmpty,
-    Success
+    WriteSuccess
 };
 
 /// Rappresenta un thread per scrivere una lista di percorsi di ricerca su un file

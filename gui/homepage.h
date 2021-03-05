@@ -3,8 +3,10 @@
 
 #include <QWidget>
 #include <QString>
+#include <QMessageBox>
 
 #include "threads/fileloader.h"
+#include "utils/utils.h"
 #include "tab.h"
 
 namespace Ui {
