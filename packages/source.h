@@ -13,18 +13,7 @@
 #include "../utils/macros.h"
 #include "../utils/utils.h"
 #include "../utils/costants.h"
-
-/// Rappresenta un tipo di sorgente
-enum SourceType{
-    /// File di implementazione (.cpp)
-    ImplementationFile,
-    /// File header (.h)
-    HeaderFile,
-    /// Scketch di arduino (.ino)
-    ArduinoSketch,
-    /// Estensione sconosciuta
-    Unknown
-};
+#include "sourceinfo.h"
 
 /// Fornisce metodi di gestione dei file sorgenti
 class Source
@@ -79,12 +68,6 @@ public:
 
     /// Restituisce il numero delle dipendenze che devono ancora essere raggiunte
     Natural getTotalUnmetDependencies();
-
-    /// Determina se questo file è un sorgente di codice o qualcos' altro
-    static bool fileIsSource(QString file);
-
-    /// Restituisce una stringa per rappresentare il tipo di sorgente
-    static QString sourceTypeToString(SourceType type);
 
     /// Determina se questo sorgente necessita della libreria name per funzionare
     bool needsLibrary(QString name);

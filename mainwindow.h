@@ -15,6 +15,7 @@
 // Costrutti logici
 #include "packages/package.h"
 #include "packages/library.h"
+#include "packages/sourceinfo.h"
 
 // Altri dialoghi
 #include "gui/newpackagedialog.h"

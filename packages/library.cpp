@@ -76,11 +76,8 @@ bool loadSources(QString base_path, QStringList *sources_list){
     if(dir.exists()){
         // Avvio la ricerca di tutti i file presenti nella cartella
         for(int x = 0; x < files.count(); x ++){
-            // Creo un oggetto file
-            QFileInfo inf;
-            inf.setFile(files[x]);
-
-            if(inf.suffix() == "cpp" || inf.suffix() == "h" || inf.suffix() == "hpp" || inf.suffix() == "c"){
+            // Check if file is source
+            if(SourceInfo::fileIsSource(files[x])){
                 // Si tratta di un sorgente
                 sources_list->append(files[x]);
             }

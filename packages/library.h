@@ -20,6 +20,8 @@
 #include "utils/macros.h"
 #include "utils/utils.h"
 
+#include "packages/sourceinfo.h"
+
 /// Rappresenta una libreria
 class Library : public AttributedItem
 {

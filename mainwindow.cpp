@@ -234,7 +234,7 @@ Tab* MainWindow::addPackageToView(Package *pack){
                     loader->start(QThread::HighPriority);
 
                     // Controllo che il file impostato come sorgente principale sia effettivamente un sorgente
-                    if(Source::fileIsSource(main_file_path)){
+                    if(SourceInfo::fileIsSource(main_file_path)){
                         // Avvio il caricamento dei sorgenti per il pacchetto
                         auto *lister = new SrcDependencyLister();
                         // Imposto il pacchetto

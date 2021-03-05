@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
 	packages/nameditem.cpp \
+	packages/sourceinfo.cpp \
 	settings/attribute.cpp \
 	settings/group.cpp \
 	settings/key.cpp \
@@ -50,6 +51,7 @@ SOURCES += \
 
 HEADERS += \
 	packages/nameditem.h \
+	packages/sourceinfo.h \
 	settings/attribute.h \
 	settings/group.h \
 	settings/key.h \

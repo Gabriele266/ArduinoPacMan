@@ -18,32 +18,8 @@ Source::Source(QString f){
         file_suffix = info.suffix();
         file = f;
 
-        if(file_suffix == "h"){
-            type = HeaderFile;
-        }
-        else if(file_suffix == "cpp" || file_suffix == "c"){
-            type = ImplementationFile;
-        }
-        else if(file_suffix == "ino"){
-            type = ArduinoSketch;
-        }
-        else{
-            qInfo() << "Trovato file non riconosciuto: " << file << endl;
-            type = Unknown;
-        }
-    }
-}
-
-QString Source::sourceTypeToString(SourceType type){
-    switch(type){
-    case HeaderFile:
-        return "Header";
-    case ImplementationFile:
-        return "Implementation";
-    case ArduinoSketch:
-        return "Arduino Sketch";
-    default:
-        return "No source";
+        // Get the type
+        type = SourceInfo::fileToSourceType(f);
     }
 }
 
@@ -86,16 +62,6 @@ Natural Source::getTotalUnmetDependencies(){
     return total;
 }
 
-bool Source::fileIsSource(QString file){
-    // Informazioni sul file
-    QFileInfo inf(file);
-    // Estensione
-    QString suff = inf.suffix();
-
-    // Controllo se è presente nella lista
-    return isAnyOfList(suff, sources_extensions);
-}
-
 bool Source::isSource(){
     if(getSourceType() != Unknown){
         return true;
@@ -119,18 +85,7 @@ void Source::setCompleteFile(QString f){
         file_suffix = info.suffix();
         file = f;
 
-        if(file_suffix == "h"){
-            type = HeaderFile;
-        }
-        else if(file_suffix == "cpp" || file_suffix == "c"){
-            type = ImplementationFile;
-        }
-        else if(file_suffix == "ino"){
-            type = ArduinoSketch;
-        }
-        else{
-            qInfo() << "Trovato file non riconosciuto: " << file << endl;
-            type = Unknown;
-        }
+        // Get the source type
+        type = SourceInfo::fileToSourceType(f);
     }
 }
