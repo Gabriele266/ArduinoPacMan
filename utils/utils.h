@@ -133,6 +133,6 @@ QString colorToHtml(QColor &color);
  * @param htmlCode The string to convert
  * @return The converted color
  */
-QColor htmlToColor(QString &htmlCode);
+QColor htmlToColor(QString htmlCode);
 
 #endif // UTILS_H
