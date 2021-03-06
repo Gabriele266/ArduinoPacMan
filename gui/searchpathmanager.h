@@ -49,6 +49,8 @@ private slots:
     void on_editCurrent_clicked();
     void on_showInBrowser_clicked();
 
+    void on_openInTerminal_clicked();
+
 signals:
     /**
      * @brief pathAdded Called when the user adds a new search path

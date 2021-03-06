@@ -174,3 +174,37 @@ void SearchPathManager::on_showInBrowser_clicked()
         }
     }
 }
+
+void SearchPathManager::on_openInTerminal_clicked()
+{
+    // Ottengo la versione del sistema operativo corrente
+    auto os = QOperatingSystemVersion::currentType();
+
+    // Name of the key to search
+    QString key_name = "";
+
+    switch(os){
+    case QOperatingSystemVersion::Windows:
+        key_name = "open-in-terminal-windows";
+        break;
+    case QOperatingSystemVersion::MacOS:
+        key_name = "open-in-terminal-macos";
+        break;
+    default:
+        key_name = "open-in-terminal-linux";
+        break;
+    }
+
+    // Get the key
+    QString c = settings->getKeyValue("os-selective", key_name);
+
+    if(c != ""){
+        int cur = ui->pathList->currentIndex().row();
+
+        if(cur >= 0){
+            QString i = c + "\"" + ui->pathList->item(cur)->text() + "\"";
+
+            system(i.toLocal8Bit().data());
+        }
+    }
+}
