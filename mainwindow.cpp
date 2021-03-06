@@ -519,11 +519,14 @@ void MainWindow::on_actionChiudi_tutte_le_schede_aperte_triggered()
     int dim = ui->widgetManager->count();
 
     for(int x = 0; x < dim; x++){
+        // Calculate the index of the package
+        int index = getPackageIndex(x);
         // Check if the tab with this index is a package manager
-        if(getPackageIndex(x) >= 0){
+        if(index >= 0){
             // Remove the package from the list
-            packageList.removeAt(getPackageIndex(x));
+            packageList.removeAt(index);
         }
+        tabs.removeAt(x);
     }
     // Clear all the items
     ui->widgetManager->clear();
@@ -605,7 +608,26 @@ void MainWindow::on_actionEsci_triggered()
     this->close();
 }
 
-void MainWindow::on_actionSposta_scheda_alla_fine_triggered()
+void MainWindow::on_actionChiudi_tutte_le_altre_schede_triggered()
 {
+    if(ui->widgetManager->currentIndex() >= 0){
+        // Get the current tab index
+        int curTab = mk(ui->widgetManager->currentIndex());
+        int tabCount = ui->widgetManager->count();
+        // Elaborate all the tabs
+        for(int x = 0; x < tabCount; x++){
+            if(x != curTab){
+                // Calculate the current tab package index
+                int index = getPackageIndex(x);
+                // Check if cur tab is package
+                if(index >= 0){
+                    packageList.removeAt(index);
+                }
+                tabs.removeAt(x);
+                // Remove the tab
+                ui->widgetManager->removeTab(x);
+            }
+        }
+    }
 
 }

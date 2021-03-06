@@ -79,7 +79,7 @@ private slots:
      */
     void loadLibraryList();
 
-    void on_actionSposta_scheda_alla_fine_triggered();
+    void on_actionChiudi_tutte_le_altre_schede_triggered();
 
 private:
     Ui::MainWindow *ui;
