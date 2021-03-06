@@ -55,8 +55,9 @@ static void writeDefaultSettings(Settings *application_settings){
     os_info->addKey(new Key("open-in-files-command-linux", "nautilus"));
     os_info->addKey(new Key("open-in-files-command-macos", ".."));
 
-    os_info->addKey(new Key("open-in-terminal-windows", "cmd /K %1"));
-    os_info->addKey(new Key("open-in-terminal-linux", "??"));
+    os_info->addKey(new Key("open-in-terminal-windows", "cmd /K"));
+    os_info->addKey(new Key("open-in-terminal-macos", ".."));
+    os_info->addKey(new Key("open-in-terminal-linux", "gnome-terminal --working-directory="));
 
     global_settings->addGroup(os_info);
 
