@@ -20,6 +20,7 @@ PackageTab::PackageTab(Package *package, QWidget *parent) :
     librariesContextMenu->addAction(ui->actionAggiungi_al_pacchetto);
     librariesContextMenu->addAction(ui->actionNascondi);
     librariesContextMenu->addAction(ui->actionIgnora);
+    librariesContextMenu->addAction(ui->actionNotALibrary);
     librariesContextMenu->addSeparator();
     librariesContextMenu->addAction(ui->actionApri_percorso);
     librariesContextMenu->addAction(ui->actionApri_nel_terminale);
@@ -183,5 +184,15 @@ void PackageTab::on_actionAggiungi_al_pacchetto_triggered()
     if(cur >= 0 && cur <= libraries.count()){
         // Add the library to the package
         addLibraryToPackage(libraries.at(cur));
+    }
+}
+
+void PackageTab::on_actionNotALibrary_triggered()
+{
+    // Get the current index
+    int cur = ui->libraryBrowser->currentIndex().row();
+    if(cur >= 0){
+        libraries.removeAt(cur);
+        delete ui->libraryBrowser->takeTopLevelItem(cur);
     }
 }

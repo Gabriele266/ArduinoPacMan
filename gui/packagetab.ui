@@ -190,7 +190,7 @@
        </widget>
       </widget>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <layout class="QVBoxLayout" name="buttonBox">
        <property name="sizeConstraint">
         <enum>QLayout::SetDefaultConstraint</enum>
@@ -588,6 +588,11 @@
   <action name="actionApri_keywords_lib">
    <property name="text">
     <string>Apri keywords</string>
+   </property>
+  </action>
+  <action name="actionNotALibrary">
+   <property name="text">
+    <string>Non è una libreria</string>
    </property>
   </action>
  </widget>
