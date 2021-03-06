@@ -133,3 +133,40 @@ void SearchPathManager::on_editCurrent_clicked()
         editItem(curIndex, pt.getSelectedPath());
     }
 }
+
+void SearchPathManager::on_showInBrowser_clicked()
+{
+    // Ottengo la versione del sistema operativo corrente
+    auto os = QOperatingSystemVersion::currentType();
+
+    // Name of the key to search
+    QString key_name = "";
+
+    switch(os){
+    case QOperatingSystemVersion::Windows:
+        key_name = "open-in-files-command-windows";
+        break;
+    case QOperatingSystemVersion::MacOS:
+        key_name = "open-in-files-command-macos";
+        break;
+    default:
+        key_name = "open-in-files-command-linux";
+        break;
+    }
+
+    // Get the os command
+    QString os_command = settings->getKeyValue("os-selective", key_name);
+
+    if(os_command != ""){
+        // Get the current item
+        int cur = ui->pathList->currentIndex().row();
+
+        if(cur >= 0){
+            // Get the item
+            QString i = os_command + " \"" + ui->pathList->item(cur)->text() + "\"";
+            qInfo() << "Command for open file explorer: " << i << endl;
+            // Launch the command
+            system(i.toLocal8Bit().data());
+        }
+    }
+}

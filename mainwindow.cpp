@@ -195,6 +195,7 @@ void MainWindow::newPackage(){
     // Aggiorno la barra di stato
     updateStatusBar();
 }
+
 bool MainWindow::isOpenedPackage(Package *package){
     for(int x = 0; x < packageList.count(); x++){
         if(package->equals(packageList[x])){
@@ -350,6 +351,7 @@ void MainWindow::on_actionPercorsi_ricerca_librerie_triggered()
 {
     // Creo la finestra
     SearchPathManager *man = new SearchPathManager();
+    man->setSettings(&settings);
 
     // Connetto il segnale di aggiunta di una nuova entry el metodo di gestione
     QObject::connect(man, &SearchPathManager::pathAdded, this, &MainWindow::aggiungiPercorsoRicercaTriggered);

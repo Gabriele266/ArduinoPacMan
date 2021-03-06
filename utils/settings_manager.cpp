@@ -51,8 +51,8 @@ static void writeDefaultSettings(Settings *application_settings){
     // Gruppo con le informazioni sul sistema operativo e le impostazioni dei comandi
     Group *os_info = new Group();
     os_info->setName("os-selective");
-    os_info->addKey(new Key("open-in-files-command-windows", "explorer %1"));
-    os_info->addKey(new Key("open-in-files-command-linux", "nautilus %1"));
+    os_info->addKey(new Key("open-in-files-command-windows", "explorer"));
+    os_info->addKey(new Key("open-in-files-command-linux", "nautilus"));
     os_info->addKey(new Key("open-in-files-command-macos", ".."));
 
     os_info->addKey(new Key("open-in-terminal-windows", "cmd /K %1"));
