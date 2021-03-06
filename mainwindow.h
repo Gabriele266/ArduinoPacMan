@@ -49,39 +49,29 @@ public:
 
 private slots:
     void on_actionNuova_finestra_triggered();
-
     void on_pushButton_clicked();
-
     void on_actionNuovo_pacchetto_triggered();
-
     void on_packageManager_currentChanged(int index);
-
     void on_actionPercorsi_ricerca_librerie_triggered();
-
     void aggiungiPercorsoRicercaTriggered(QString path);
-
     void rimuoviPercorsoRicerca(QString path);
-
     void modificaPercorsoRicerca(Natural index, QString old_val, QString new_val);
-
     void on_actionApri_pacchetto_triggered();
-
     void onNewPackageRequired();
-
     void onOpenPackageRequired();
-
     void on_actionScheda_home_triggered();
-
     void on_actionSchede_a_sinistra_triggered();
-
     void on_widgetManager_currentChanged(int index);
-
     void on_actionPropriet_pacchetto_triggered();
     void on_widgetManager_tabCloseRequested(int index);
-
     void on_actionChiudi_tutte_le_schede_aperte_triggered();
+    void on_actionApri_nel_terminale_triggered();
+    void on_actionApri_nel_gestore_dei_file_triggered();
+    void on_actionEsci_triggered();
 
-    /// Carica i percorsi di ricerca dal file corretto
+    /**
+     * @brief loadSearchPathFromFile loads the search path list from the file
+     */
     void loadSearchPathFromFile();
 
     /**
@@ -89,11 +79,7 @@ private slots:
      */
     void loadLibraryList();
 
-    void on_actionApri_nel_terminale_triggered();
-
-    void on_actionApri_nel_gestore_dei_file_triggered();
-
-    void on_actionEsci_triggered();
+    void on_actionSposta_scheda_alla_fine_triggered();
 
 private:
     Ui::MainWindow *ui;
@@ -120,37 +106,68 @@ private:
     QList<Tab*> tabs;
 
 protected:
-    // Gestisce la creazione di un nuovo pacchetto
+    /**
+     * @brief newPackage Manages the creation of a new package
+     */
     void newPackage();
 
-    /// Mostra la scheda home
+    /**
+     * @brief showHomePage Shows the home page tab on the tabManager
+     */
     void showHomePage();
 
-    /// Apre un nuovo pacchetto
+    /**
+     * @brief openPackage Handles the opening of the package
+     */
     void openPackage();
 
-    /// Restituisce l'indice del pacchetto corrente
+    /**
+     * @brief getPackageIndex Returns the index of the package that the tab index referres to
+     * @param tabIndex The index of the tab
+     * @return the index(if exists) of the package in the list packageList.
+     */
     int getPackageIndex(Natural tabIndex);
 
-    /// Restituisce il pacchetto con quell' indice di tab
+    /**
+     * @brief getPackageFromTabIndex Returns the package that the tab referred by his index represents
+     * @param tabIndex the tab index in the manager
+     * @return the package if the tab manages a package, nullptr otherwise
+     */
     Package* getPackageFromTabIndex(Natural tabIndex);
 
-    /// Aggiorna le informazioni del titolo in base al tab corrente
+    /**
+     * @brief updateTitleInfo updates the title informations based on the current tab
+     */
     void updateTitleInfo();
 
-    // Aggiorna la barra di stato
+    /**
+     * @brief updateStatusBar updates the status bar based on the current tab
+     */
     void updateStatusBar();
 
-    /// Restituisce il pacchetto corrente
+    /**
+     * @brief getCurrentPackage returns the current package opened in the tab manager
+     * @return the address of the package or, if the current tab does not refer to a package, nullptr
+     */
     Package* getCurrentPackage();
 
-    /// Determina se il tab corrente è di un pacchetto
+    /**
+     * @brief currentTabIsPackage checks if the current tab is a package manager or not
+     * @return true if it is
+     */
     bool currentTabIsPackage();
 
-    /// Aggiunge un pacchetto alla vista
+    /**
+     * @brief addPackageToView adds the package to the widget manager, initializes his tab and displays it
+     * @param package the package to add
+     * @return The tab created to display it (nullptr in case of errors)
+     */
     Tab* addPackageToView(Package *package);
 
-    /// Rimuove un tab
+    /**
+     * @brief removeTab removes the tab with the given index
+     * @param tabIndex the tab index
+     */
     void removeTab(Natural tabIndex);
 
     /**

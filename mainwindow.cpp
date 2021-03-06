@@ -517,10 +517,16 @@ void MainWindow::removeTab(Natural tabIndex){
 void MainWindow::on_actionChiudi_tutte_le_schede_aperte_triggered()
 {
     int dim = ui->widgetManager->count();
-    qInfo() << "Numero schede: " << dim << endl;
+
     for(int x = 0; x < dim; x++){
-        removeTab(x);
+        // Check if the tab with this index is a package manager
+        if(getPackageIndex(x) >= 0){
+            // Remove the package from the list
+            packageList.removeAt(getPackageIndex(x));
+        }
     }
+    // Clear all the items
+    ui->widgetManager->clear();
     // Aggiorno il titolo
     updateTitleInfo();
     // Aggiorno la barra di stato
@@ -597,4 +603,9 @@ void MainWindow::on_actionApri_nel_gestore_dei_file_triggered()
 void MainWindow::on_actionEsci_triggered()
 {
     this->close();
+}
+
+void MainWindow::on_actionSposta_scheda_alla_fine_triggered()
+{
+
 }

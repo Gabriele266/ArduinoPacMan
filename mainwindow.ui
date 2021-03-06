@@ -128,8 +128,6 @@
     <addaction name="actionScheda_home"/>
     <addaction name="actionChiudi_tutte_le_schede_aperte"/>
     <addaction name="actionChiudi_tutte_le_altre_schede"/>
-    <addaction name="actionSposta_scheda_all_inizio"/>
-    <addaction name="actionSposta_scheda_alla_fine"/>
     <addaction name="actionChiudi_scheda"/>
    </widget>
    <addaction name="menuFile"/>
@@ -363,21 +361,6 @@
   <action name="actionChiudi_scheda">
    <property name="text">
     <string>Chiudi scheda</string>
-   </property>
-  </action>
-  <action name="actionNuova_scheda_vuota">
-   <property name="text">
-    <string>Nuova scheda vuota</string>
-   </property>
-  </action>
-  <action name="actionSposta_scheda_all_inizio">
-   <property name="text">
-    <string>Sposta scheda all' inizio</string>
-   </property>
-  </action>
-  <action name="actionSposta_scheda_alla_fine">
-   <property name="text">
-    <string>Sposta scheda alla fine</string>
    </property>
   </action>
  </widget>
