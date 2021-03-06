@@ -23,7 +23,7 @@ Permette di unire, in un unico spazio, il codice sorgente del progetto, le libre
   Tutta la documentazione disponibile è presente nella cartella <b>documentation</b> della repository. Per informazioni su come effettuare la build del codice sorgente leggere il file <b>documentation/build.txt</b>.
 
 ## Licenza
-  Tutto il codice si trova sotto la licenza LGPL2.
+  Tutto il codice è open source, si è liberi di modificarlo, redistribuirlo e utilizzarlo per qualsiasi scopo.
   
 ## Contatti
   Per maggiori informazioni sul progetto, come fare donazioni o come contribuire codice scrivete alla mail <b>gabri.cabal@gmail.com</b>, includendo nell'oggetto la stringa ArduinoPacMan.
