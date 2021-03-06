@@ -6,7 +6,7 @@ ArduinoPacMan is written using Qt 5.15.2 using GCC as compiler. The qt build sys
 The c++ standard used is compatible with c++ 14. 
 Qt packages used: xml gui core
 
-To build this project clone the contents of the branch that you would compile, except the documentation folder. NOTE: all the other files are needed. 
+To build this project clone the contents of the branch that you would compile, except the documentation folder and the schemes folder. NOTE: all the other files are needed. 
 Build using Qt-creator. 
 
 ==== Other operations to do =====
