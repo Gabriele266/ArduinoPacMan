@@ -1,0 +1,28 @@
+<!DOCTYPE settings>
+<arduino-pacman-settings creation-date="sab feb 13 2021" description="Arduino pacman settings file for storing options. ">
+ <global-appearence info="">
+  <window-size value="500x500" um="pixel"/>
+  <show-mode-default value="normal"/>
+  <theme value="dark"/>
+  <dark-theme-path value="$CURRENT$/themes/dark_theme.qcc"/>
+  <light-theme-path value="$CURRENT$/themes/light_theme.qcc"/>
+ </global-appearence>
+ <global-startup info="">
+  <show-home-page value="true"/>
+  <open-recents value="false"/>
+ </global-startup>
+ <paths info="">
+  <libsearchpath value="$CURPATH$/libsrc.src"/>
+  <default-package-path value="$OSHOME$/MEGA/Informatica/Arduino/Progetti/ArduinoPacMan/ProveEsecuzioni/"/>
+  <default-sources-path value="$OSHOME$/Sources/"/>
+  <base-package-name value="NewPackage"/>
+ </paths>
+ <os-selective info="">
+  <open-in-files-windows value="explorer"/>
+  <open-in-files-linux value="nautilus"/>
+  <open-in-files-macos value=".."/>
+  <open-in-terminal-windows value="cmd /K"/>
+  <open-in-terminal-macos value=".."/>
+  <open-in-terminal-linux value="gnome-terminal --working-directory="/>
+ </os-selective>
+</arduino-pacman-settings>
