@@ -593,3 +593,8 @@ void MainWindow::on_actionApri_nel_gestore_dei_file_triggered()
         process->start();
     }
 }
+
+void MainWindow::on_actionEsci_triggered()
+{
+    this->close();
+}

@@ -93,6 +93,8 @@ private slots:
 
     void on_actionApri_nel_gestore_dei_file_triggered();
 
+    void on_actionEsci_triggered();
+
 private:
     Ui::MainWindow *ui;
 
