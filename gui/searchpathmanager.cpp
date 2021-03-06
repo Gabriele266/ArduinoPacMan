@@ -100,20 +100,24 @@ void SearchPathManager::on_removePath_clicked()
 {
     // Prendo l'indice dell' oggetto corrente
     int index = ui->pathList->currentIndex().row();
-    // Prendo il testo del vecchio elemento
-    QString old_item_text = ui->pathList->item(index)->text();
 
-    // Rimuovo l'elemento
-    entries.removeAt(index);
+    // Check if index exists
+    if(index >= 0){
+        // Prendo il testo del vecchio elemento
+        QString old_item_text = ui->pathList->item(index)->text();
 
-    // Aggiorno la vista
-    updateItemsView();
+        // Rimuovo l'elemento
+        entries.removeAt(index);
 
-    // Aggiorno il contatore degli elementi
-    updateItemsCounter();
+        // Aggiorno la vista
+        updateItemsView();
 
-    // Emetto il segnale
-    emit pathRemoved(old_item_text);
+        // Aggiorno il contatore degli elementi
+        updateItemsCounter();
+
+        // Emetto il segnale
+        emit pathRemoved(old_item_text);
+    }
 }
 
 void SearchPathManager::on_editCurrent_clicked()
