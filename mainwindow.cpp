@@ -51,7 +51,6 @@ void MainWindow::showHomePage(){
 }
 
 void MainWindow::onNewPackageRequired(){
-    qInfo() << "Nuovo pacchetto richiesto da un tab. " << endl;
     newPackage();
 }
 
@@ -141,10 +140,23 @@ void MainWindow::updateStatusBar(){
         // Imposto il percorso del pacchetto corrente
         statusBar->setCurrentPackagePath(getCurrentPackage()->getSavePath());
         statusBar->setLibraryCount(getCurrentPackage()->getLibraryCount());
+        // Show all the controls
+        statusBar->showLibrariesCount();
+        statusBar->showPackagesCount();
+        // Enable actions for packages
+        ui->menuPacchetto->setEnabled(true);
+        ui->actionApri_nel_gestore_dei_file->setEnabled(true);
+        ui->actionApri_nel_terminale->setEnabled(true);
     }
     else{
         statusBar->setCurrentPackagePath("Scheda home");
-        statusBar->setLibraryCount(0);
+        // Hide all the uncecessary controls
+        statusBar->hideLibrariesCount();
+        statusBar->hidePackagesCount();
+        // Disable actions for packages
+        ui->menuPacchetto->setEnabled(false);
+        ui->actionApri_nel_gestore_dei_file->setEnabled(false);
+        ui->actionApri_nel_terminale->setEnabled(false);
     }
 }
 
@@ -267,7 +279,9 @@ Tab* MainWindow::addPackageToView(Package *pack){
             for(Natural x = 0; x < mk(foundLibraries.count()); x++){
                 tab->addLibraryToList(foundLibraries[x]);
             }
-
+            // Update indicators
+            updateStatusBar();
+            updateTitleInfo();
             return tab;
         }
         else{
@@ -296,7 +310,6 @@ void MainWindow::on_actionNuovo_pacchetto_triggered()
 
 void MainWindow::aggiungiPercorsoRicercaTriggered(QString path){
     librariesSearchPath.addPath(path);
-    qInfo() << "Aggiunto percorso " << path << endl;
 }
 
 void MainWindow::on_packageManager_currentChanged(int index)
@@ -312,7 +325,6 @@ void MainWindow::rimuoviPercorsoRicerca(QString path){
 
 void MainWindow::modificaPercorsoRicerca(Natural index, QString old_val, QString new_val){
     librariesSearchPath.editElem(index, new_val);
-    qInfo() << "Valore " << new_val << " nuovo per " << old_val << " con indice " << index << endl;
 }
 
 void MainWindow::loadSearchPathFromFile(){
@@ -513,4 +525,71 @@ void MainWindow::on_actionChiudi_tutte_le_schede_aperte_triggered()
     updateTitleInfo();
     // Aggiorno la barra di stato
     updateStatusBar();
+}
+
+void MainWindow::on_actionApri_nel_terminale_triggered()
+{
+    // Current package
+    auto p = getCurrentPackage();
+    // Check if it's a valid package
+    if(p != nullptr){
+        // Ottengo la versione del sistema operativo corrente
+        auto os = QOperatingSystemVersion::currentType();
+
+        // Name of the key to search
+        QString key_name = "";
+
+        switch(os){
+        case QOperatingSystemVersion::Windows:
+            key_name = "open-in-terminal-windows";
+            break;
+        case QOperatingSystemVersion::MacOS:
+            key_name = "open-in-terminal-macos";
+            break;
+        default:
+            key_name = "open-in-terminal-linux";
+            break;
+        }
+
+        // Get the key
+        QString c = settings.getKeyValue("os-selective", key_name);
+
+        QString comm = c + "\"" + p->getCompletePath() + "\"";
+        system(comm.toLocal8Bit().data());
+    }
+}
+
+void MainWindow::on_actionApri_nel_gestore_dei_file_triggered()
+{
+    // Current package
+    auto p = getCurrentPackage();
+    // Check if it's a valid package
+    if(p != nullptr){
+        // Ottengo la versione del sistema operativo corrente
+        auto os = QOperatingSystemVersion::currentType();
+
+        // Name of the key to search
+        QString key_name = "";
+
+        switch(os){
+        case QOperatingSystemVersion::Windows:
+            key_name = "open-in-files-windows";
+            break;
+        case QOperatingSystemVersion::MacOS:
+            key_name = "open-in-files-macos";
+            break;
+        default:
+            key_name = "open-in-files-linux";
+            break;
+        }
+
+        // Get the key
+        QString c = settings.getKeyValue("os-selective", key_name);
+
+        // Start the process
+        QProcess *process = new QProcess();
+        process->setProgram(c);
+        process->setArguments(QStringList(p->getCompletePath()));
+        process->start();
+    }
 }

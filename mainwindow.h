@@ -5,6 +5,8 @@
 #include <QDebug>
 #include <QTextStream>
 #include <QLabel>
+#include <QtConcurrent/QtConcurrent>
+#include <QProcess>
 
 // Dialoghi addizionali
 #include "gui/generalstatusbar.h"
@@ -86,6 +88,10 @@ private slots:
      * @brief loadLibraryList starts the search of the libraries in the search paths.
      */
     void loadLibraryList();
+
+    void on_actionApri_nel_terminale_triggered();
+
+    void on_actionApri_nel_gestore_dei_file_triggered();
 
 private:
     Ui::MainWindow *ui;
