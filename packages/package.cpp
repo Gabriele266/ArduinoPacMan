@@ -48,6 +48,16 @@ bool Package::existsLibrary(QString name){
     return false;
 }
 
+bool Package::removeLibrary(Library *lib){
+    for(int x = 0; x < libraries.count(); x++){
+        if(lib == libraries[x]){
+            libraries.removeAt(x);
+            return true;
+        }
+    }
+    return false;
+}
+
 bool Package::existsLibraryWithPath(QString path){
     for(int x = 0; x < libraries.count(); x ++){
         if(libraries[x]->getCompletePath() == path){
