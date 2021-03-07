@@ -66,6 +66,8 @@ private slots:
 
     void on_actionAggiungi_al_pacchetto_triggered();
 
+    void on_actionNotALibrary_triggered();
+
 private:
     Ui::PackageTab *ui;
     // Pacchetto che rappresenta il tab

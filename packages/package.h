@@ -129,6 +129,14 @@ public:
 
     /// Restituisce la prima dipendenza per quella libreria cercandola il tutti i sorgenti
     Dependency* getDependency(QString library);
+
+    /**
+     * @brief removeLibrary Removes the library from the package
+     * @param lib Library to remove
+     * @return true if there was a library
+     */
+    bool removeLibrary(Library *lib);
+
 private:
     // Percorso di salvataggio del pacchetto
     QString path;
