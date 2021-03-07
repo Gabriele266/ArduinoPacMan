@@ -24,6 +24,9 @@ When you will have to share your project, you will can just download the package
   Arduino PacMan is written to be executed in the same way on Linux, Windows and MacOs. This is because it uses C++ and the Qt framework, that are cross platform. For additional informations of how to build code see the file <b>documentation/build.txt</b>
   If you have Windows, the oldest supported version is Windows 7.
 
+## Documentation
+  All the documentation of ArduinoPacMan is available as a series of html pages in the folder <b>documentation</b> <br>
+  It covers the project structure, the settings managing and the compiling of the source code. Specific informations about versions and libraries used by the project can be found in the file <b>documentation/build.txt</b>
 
 ## Licence
   All the code in this project is open source, feel free to modify it, fork it, and also, if you want, to commit changes to the main repository. All the code is licenced under the LGPLv3 license.
