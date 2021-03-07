@@ -145,6 +145,7 @@ void MainWindow::updateStatusBar(){
         statusBar->showPackagesCount();
         // Enable actions for packages
         ui->menuPacchetto->setEnabled(true);
+        ui->menuGestione->setEnabled(true);
         ui->actionApri_nel_gestore_dei_file->setEnabled(true);
         ui->actionApri_nel_terminale->setEnabled(true);
     }
@@ -155,6 +156,7 @@ void MainWindow::updateStatusBar(){
         statusBar->hidePackagesCount();
         // Disable actions for packages
         ui->menuPacchetto->setEnabled(false);
+        ui->menuGestione->setEnabled(false);
         ui->actionApri_nel_gestore_dei_file->setEnabled(false);
         ui->actionApri_nel_terminale->setEnabled(false);
     }
