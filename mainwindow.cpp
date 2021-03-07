@@ -520,6 +520,9 @@ void MainWindow::on_actionChiudi_tutte_le_schede_aperte_triggered()
 {
     int dim = ui->widgetManager->count();
 
+    // Number of removed items
+    int removed_items = 0;
+
     for(int x = 0; x < dim; x++){
         // Calculate the index of the package
         int index = getPackageIndex(x);
@@ -528,7 +531,9 @@ void MainWindow::on_actionChiudi_tutte_le_schede_aperte_triggered()
             // Remove the package from the list
             packageList.removeAt(index);
         }
-        tabs.removeAt(x);
+        tabs.removeAt(x - removed_items);
+
+        removed_items ++;
     }
     // Clear all the items
     ui->widgetManager->clear();
@@ -631,5 +636,22 @@ void MainWindow::on_actionChiudi_tutte_le_altre_schede_triggered()
             }
         }
     }
+}
+
+void MainWindow::reloadPackageTab(Natural tabIndex){
+    if(tabIndex <= ui->widgetManager->count()){
+        // The index of the package
+        int package = getPackageIndex(tabIndex);
+        // Get the package with that index
+        if(package >= 0){
+            // Remove the tab and re-add it
+            removeTab(tabIndex);
+            addPackageToView(packageList[package]);
+        }
+    }
+}
+
+void MainWindow::on_actionReloadPackage_triggered()
+{
 
 }
