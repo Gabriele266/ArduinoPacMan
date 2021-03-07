@@ -199,6 +199,13 @@ bool Natural::operator<=(Natural n){
     return false;
 }
 
+bool Natural::operator<=(int n){
+    if(val <= Natural::make(n, ElideUnderZero)){
+        return true;
+    }
+    return false;
+}
+
 // Questo operatore causa una perdita di segno al valore (verrà applicato il valore assoluto)
 void Natural::operator=(int r){
     val = Natural::abs(r);

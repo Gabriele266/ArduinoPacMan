@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<title>ArduinoPacMan documentation</title>
+	</head>
+	<body>
+		<h1>Introduction</h1>
+		<div>
+			<b>Arduino PacMan</b> is a simple tool that simplifies the activities of sharing <b>Arduino projects.</b> <br>
+			<central> Once you have done a project, with some sources and using some libraries, it will create for you a simple <br>
+				package, with the sources and the libraries used. It will also generate a installation script that will allow <br>
+				you to simply install the libraries in the local preferred path. The only thing that you'll have to do is to run the script. <br>
+				It will also take care about unpacking the sources into a directory. After this you'll have only to compile the code and... Upload!! <br>
+			</central>
+		</div>
+
+		<h1>Code informations</h1>
+		<div style="align-content: center;">
+			Arduino PacMan is written in c++ using the Qt Framework, under the open source licence. The build system used is qmake with gcc in Ubuntu 20.04.<br>
+			 The Qt version is 5.15.2 and the language standard is c++ 14. <br>
+			 The code is organized into some directories, according to the type of their contents.
+			 <ul>
+				<li><b>gui</b> Contains all the files related to Graphical widgets or Windows. There are all the forms except the main window, that is away from every folder. </li>
+				<li><b>packages</b> Contains all the constructs related to the managing of the packages. E.g. the Package class, that represents a package. </li>
+				<li><b>settings</b> Contains all the constructs related to the managing of the settings for ArduinoPacMan. </li>
+				<li><b>themes</b> Contains all the constructs used for the managing of the color themes and the themes files. </li>
+				<li><b>threads</b> Contains all the classes that represent the different thread launched and used by ArduinoPacMan. </li>
+				<li><b>utils</b> Contains a bunch of functions that are useful for the managing of the constructs. </li>
+				<li><b>icons</b> Contains all the icons of the project divided by type. </li>
+				<li><b>documentation</b> Contains this documentation. </li>
+			</ul>
+		</div>
+	</body>
+</html>

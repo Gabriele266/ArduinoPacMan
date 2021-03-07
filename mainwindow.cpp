@@ -145,6 +145,7 @@ void MainWindow::updateStatusBar(){
         statusBar->showPackagesCount();
         // Enable actions for packages
         ui->menuPacchetto->setEnabled(true);
+        ui->menuGestione->setEnabled(true);
         ui->actionApri_nel_gestore_dei_file->setEnabled(true);
         ui->actionApri_nel_terminale->setEnabled(true);
     }
@@ -155,6 +156,7 @@ void MainWindow::updateStatusBar(){
         statusBar->hidePackagesCount();
         // Disable actions for packages
         ui->menuPacchetto->setEnabled(false);
+        ui->menuGestione->setEnabled(false);
         ui->actionApri_nel_gestore_dei_file->setEnabled(false);
         ui->actionApri_nel_terminale->setEnabled(false);
     }
@@ -518,6 +520,9 @@ void MainWindow::on_actionChiudi_tutte_le_schede_aperte_triggered()
 {
     int dim = ui->widgetManager->count();
 
+    // Number of removed items
+    int removed_items = 0;
+
     for(int x = 0; x < dim; x++){
         // Calculate the index of the package
         int index = getPackageIndex(x);
@@ -526,7 +531,9 @@ void MainWindow::on_actionChiudi_tutte_le_schede_aperte_triggered()
             // Remove the package from the list
             packageList.removeAt(index);
         }
-        tabs.removeAt(x);
+        tabs.removeAt(x - removed_items);
+
+        removed_items ++;
     }
     // Clear all the items
     ui->widgetManager->clear();
@@ -629,5 +636,22 @@ void MainWindow::on_actionChiudi_tutte_le_altre_schede_triggered()
             }
         }
     }
+}
+
+void MainWindow::reloadPackageTab(Natural tabIndex){
+    if(tabIndex <= ui->widgetManager->count()){
+        // The index of the package
+        int package = getPackageIndex(tabIndex);
+        // Get the package with that index
+        if(package >= 0){
+            // Remove the tab and re-add it
+            removeTab(tabIndex);
+            addPackageToView(packageList[package]);
+        }
+    }
+}
+
+void MainWindow::on_actionReloadPackage_triggered()
+{
 
 }

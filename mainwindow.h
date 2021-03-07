@@ -81,6 +81,8 @@ private slots:
 
     void on_actionChiudi_tutte_le_altre_schede_triggered();
 
+    void on_actionReloadPackage_triggered();
+
 private:
     Ui::MainWindow *ui;
 
@@ -176,6 +178,12 @@ protected:
      * @return true se è già aperto
      */
     bool isOpenedPackage(Package *package);
+
+    /**
+     * @brief reloadPackageTab reloads the package managed from the tab at the given index
+     * @param tabIndex the index of the tab
+     */
+    void reloadPackageTab(Natural tabIndex);
 };
 
 #endif // MAINWINDOW_H

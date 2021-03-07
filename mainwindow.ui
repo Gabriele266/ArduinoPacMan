@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>927</width>
-    <height>601</height>
+    <width>1002</width>
+    <height>651</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -59,7 +59,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>927</width>
+     <width>1002</width>
      <height>22</height>
     </rect>
    </property>
@@ -102,6 +102,8 @@
     <addaction name="actionAmbiente"/>
     <addaction name="actionEsportazione"/>
     <addaction name="actionImportazione"/>
+    <addaction name="separator"/>
+    <addaction name="actionReloadLibraries"/>
    </widget>
    <widget class="QMenu" name="menuPacchetto">
     <property name="title">
@@ -119,6 +121,8 @@
     <addaction name="actionAbilita_versioni"/>
     <addaction name="separator"/>
     <addaction name="actionApri_file_di_progetto"/>
+    <addaction name="separator"/>
+    <addaction name="actionReloadPackage"/>
    </widget>
    <widget class="QMenu" name="menuVisualizza">
     <property name="title">
@@ -361,6 +365,16 @@
   <action name="actionChiudi_scheda">
    <property name="text">
     <string>Chiudi scheda</string>
+   </property>
+  </action>
+  <action name="actionReloadPackage">
+   <property name="text">
+    <string>Ricarica</string>
+   </property>
+  </action>
+  <action name="actionReloadLibraries">
+   <property name="text">
+    <string>Ricarica librerie</string>
    </property>
   </action>
  </widget>
