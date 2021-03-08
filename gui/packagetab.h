@@ -9,9 +9,10 @@
 #include <QString>
 #include <QTreeWidget>
 #include <QMenu>
+#include <QMessageBox>
 
 #include "../packages/package.h"
-#include "libraryinfo.h"
+#include "librarytab.h"
 #include "tab.h"
 
 namespace Ui {
@@ -53,6 +54,25 @@ public:
      */
     void addLibraryToList(Library *library);
 
+signals:
+    /**
+     * @brief tabAddRequired emitted when this widget needs to show another widget to the view
+     * @param tab the tab to show.
+     */
+    void libraryTabAdd(LibraryTab *tab);
+
+    /**
+     * @brief fileViewerTabAdd emitted when this widget requires the showing of a new tab
+     * @param fileToView the file we wish to display
+     */
+    void fileTabAdd(QString fileToView);
+
+    /**
+     * @brief dependencyTabAdd emitted when this widget requires the showing of a dependency in new tab
+     * @param dependency
+     */
+    void dependencyTabAdd(Dependency *dependency);
+
 private slots:
     void on_libraryBrowser_customContextMenuRequested(const QPoint &pos);
 
@@ -67,6 +87,10 @@ private slots:
     void on_actionAggiungi_al_pacchetto_triggered();
 
     void on_actionNotALibrary_triggered();
+
+    void on_actionInformazioniLibreria_triggered();
+
+    void on_actionInformazioni_libreria_triggered();
 
 private:
     Ui::PackageTab *ui;
@@ -99,6 +123,12 @@ protected:
      * @param lib The library of the informations.
      */
     QTreeWidgetItem* formatLibraryWidget(Library *lib);
+
+    /**
+     * @brief getSelectedLibraryFromList Returns the selected library from the libraries list
+     * @return the library object
+     */
+    Library* getSelectedLibraryFromList();
 };
 
 #endif // PACKAGETAB_H

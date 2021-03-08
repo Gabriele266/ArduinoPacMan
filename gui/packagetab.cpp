@@ -164,6 +164,18 @@ void PackageTab::addLibraryToList(Library *library){
     }
 }
 
+Library* PackageTab::getSelectedLibraryFromList(){
+    // Get the current index
+    int cur = ui->libraryBrowser->currentIndex().row();
+    // Get the library
+    if(cur >= 0 && cur <= libraries.count()){
+        return libraries.at(cur);
+    }
+    else{
+        return nullptr;
+    }
+}
+
 QTreeWidgetItem* PackageTab::formatLibraryWidget(Library *lib){
     if(lib != nullptr){
         auto *item = new QTreeWidgetItem();
@@ -178,12 +190,11 @@ QTreeWidgetItem* PackageTab::formatLibraryWidget(Library *lib){
 
 void PackageTab::on_actionAggiungi_al_pacchetto_triggered()
 {
-    // Ottengo la libreria corrente
-    int cur = ui->libraryBrowser->currentIndex().row();
-
-    if(cur >= 0 && cur <= libraries.count()){
+    // Get current library
+    auto l = getSelectedLibraryFromList();
+    if(l != nullptr){
         // Add the library to the package
-        addLibraryToPackage(libraries.at(cur));
+        addLibraryToPackage(l);
     }
 }
 
@@ -194,5 +205,25 @@ void PackageTab::on_actionNotALibrary_triggered()
     if(cur >= 0){
         libraries.removeAt(cur);
         delete ui->libraryBrowser->takeTopLevelItem(cur);
+    }
+}
+
+void PackageTab::on_actionInformazioniLibreria_triggered()
+{
+    // Null for now
+}
+
+void PackageTab::on_actionInformazioni_libreria_triggered()
+{
+    auto *tab = new LibraryTab();
+    auto l = getSelectedLibraryFromList();
+
+    if(l != nullptr){
+        // Set the tab library
+        tab->setLibrary(l);
+        // Set the package that owns it
+        tab->setPackage(package);
+        // Require new tab display
+        emit libraryTabAdd(tab);
     }
 }

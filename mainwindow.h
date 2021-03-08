@@ -68,6 +68,7 @@ private slots:
     void on_actionApri_nel_terminale_triggered();
     void on_actionApri_nel_gestore_dei_file_triggered();
     void on_actionEsci_triggered();
+    void on_library_tab_add_required(LibraryTab *tab);
 
     /**
      * @brief loadSearchPathFromFile loads the search path list from the file

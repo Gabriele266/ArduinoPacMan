@@ -219,6 +219,15 @@ bool MainWindow::isOpenedPackage(Package *package){
     return false;
 }
 
+void MainWindow::on_library_tab_add_required(LibraryTab *tab){
+    // Format the title of the tab
+    tab->formatTabTitle();
+    // Load the informations
+    tab->load();
+    // Add the tab to the widget
+    ui->widgetManager->addTab(tab, tab->getTabTitle());
+}
+
 Tab* MainWindow::addPackageToView(Package *pack){
     // Controllo che non sia un puntatore nullo
     if(pack != nullptr){
@@ -230,6 +239,8 @@ Tab* MainWindow::addPackageToView(Package *pack){
             PackageTab *tab = new PackageTab(pack);
             // Imposto i tag del tab
             tab->setTags("<package>");
+            // Connect the events
+            connect(tab, &PackageTab::libraryTabAdd, this, &MainWindow::on_library_tab_add_required);
             // Aggiungo
             ui->widgetManager->addTab(tab, pack->getName());
 

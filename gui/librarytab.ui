@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>LibraryInfo</class>
- <widget class="QDialog" name="LibraryInfo">
+ <class>LibraryTab</class>
+ <widget class="QWidget" name="LibraryTab">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>931</width>
-    <height>575</height>
+    <width>741</width>
+    <height>522</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Form</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_11">
    <item>
@@ -19,7 +19,7 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
-        <widget class="QLabel" name="label_10">
+        <widget class="QLabel" name="tabTitle">
          <property name="font">
           <font>
            <family>C059</family>
@@ -39,7 +39,7 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout">
              <item>
-              <widget class="QLabel" name="label">
+              <widget class="QLabel" name="label_2">
                <property name="text">
                 <string>Nome</string>
                </property>
@@ -57,7 +57,7 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_2">
              <item>
-              <widget class="QLabel" name="label_2">
+              <widget class="QLabel" name="label_3">
                <property name="text">
                 <string>Percorso</string>
                </property>
@@ -91,7 +91,7 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_3">
              <item>
-              <widget class="QLabel" name="label_3">
+              <widget class="QLabel" name="label_4">
                <property name="text">
                 <string>Data creazione</string>
                </property>
@@ -109,7 +109,7 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_4">
              <item>
-              <widget class="QLabel" name="label_4">
+              <widget class="QLabel" name="label_5">
                <property name="text">
                 <string>Ultima modifica</string>
                </property>
@@ -206,7 +206,7 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_5">
              <item>
-              <widget class="QLabel" name="label_5">
+              <widget class="QLabel" name="label_7">
                <property name="text">
                 <string>Descrizione</string>
                </property>
@@ -216,7 +216,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QTextBrowser" name="descriptionBrowser"/>
+              <widget class="QTextBrowser" name="libraryDescriptionBrowser"/>
              </item>
             </layout>
            </item>
@@ -245,14 +245,14 @@
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_7">
                 <item>
-                 <widget class="QLabel" name="label_7">
+                 <widget class="QLabel" name="label_8">
                   <property name="text">
                    <string>Documentazione</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="documentationPath">
+                 <widget class="QLineEdit" name="libraryDocumentationPath">
                   <property name="readOnly">
                    <bool>true</bool>
                   </property>
@@ -263,7 +263,7 @@
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_8">
                 <item>
-                 <widget class="QLabel" name="label_8">
+                 <widget class="QLabel" name="label_9">
                   <property name="text">
                    <string>Esempi</string>
                   </property>
@@ -286,7 +286,7 @@
                  </spacer>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="examplesPath">
+                 <widget class="QLineEdit" name="libraryExamplesPath">
                   <property name="readOnly">
                    <bool>true</bool>
                   </property>
@@ -297,14 +297,14 @@
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_9">
                 <item>
-                 <widget class="QLabel" name="label_9">
+                 <widget class="QLabel" name="label_11">
                   <property name="text">
                    <string>Keywords</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="keywordsPath">
+                 <widget class="QLineEdit" name="libraryKeywordsPath">
                   <property name="readOnly">
                    <bool>true</bool>
                   </property>
@@ -321,53 +321,10 @@
        </item>
       </layout>
      </item>
-     <item>
-      <widget class="QDialogButtonBox" name="buttonBox">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="standardButtons">
-        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-       </property>
-      </widget>
-     </item>
     </layout>
    </item>
   </layout>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>LibraryInfo</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>678</x>
-     <y>524</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>LibraryInfo</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>746</x>
-     <y>530</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

@@ -19,7 +19,6 @@ SOURCES += \
 	settings/settings.cpp \
     gui/generalstatusbar.cpp \
 	gui/homepage.cpp \
-	gui/libraryinfo.cpp \
     gui/packagetab.cpp \
 	gui/tab.cpp \
 	gui/newpackagedialog.cpp \
@@ -60,7 +59,6 @@ HEADERS += \
 	settings/libsearchpathlist.h \
 	settings/settings.h \
     gui/generalstatusbar.h \
-	gui/libraryinfo.h \
 	gui/homepage.h \
     gui/packagetab.h \
 	gui/tab.h \
@@ -91,7 +89,6 @@ HEADERS += \
 	utils/utils.h
 
 FORMS += \
-	gui/libraryinfo.ui \
     gui/generalstatusbar.ui \
     gui/homepage.ui \
 	gui/librarytab.ui \
