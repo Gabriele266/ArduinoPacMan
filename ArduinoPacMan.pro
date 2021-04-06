@@ -9,6 +9,8 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+	exceptions/filenotfoundexception.cpp \
+	exceptions/nullpointerexception.cpp \
 	gui/librarytab.cpp \
 	packages/nameditem.cpp \
 	packages/sourceinfo.cpp \
@@ -40,8 +42,8 @@ SOURCES += \
 	threads/packagereader.cpp \
 	threads/searchpathlistreader.cpp \
 	threads/searchpathlistwriter.cpp \
-	threads/settingsreader.cpp \
-	threads/settingswriter.cpp \
+	threads/settingsreaderasync.cpp \
+	threads/settingswriterasync.cpp \
 	threads/sourcesloader.cpp \
 	threads/srcdependencylister.cpp \
 	utils/settings_manager.cpp \
@@ -50,6 +52,8 @@ SOURCES += \
 	packages/version.cpp
 
 HEADERS += \
+	exceptions/filenotfoundexception.h \
+	exceptions/nullpointerexception.h \
 	gui/librarytab.h \
 	packages/nameditem.h \
 	packages/sourceinfo.h \
@@ -80,8 +84,8 @@ HEADERS += \
 	threads/packagereader.h \
 	threads/searchpathlistreader.h \
 	threads/searchpathlistwriter.h \
-	threads/settingsreader.h \
-	threads/settingswriter.h \
+	threads/settingsreaderasync.h \
+	threads/settingswriterasync.h \
 	threads/sourcesloader.h \
 	threads/srcdependencylister.h \
 	utils/costants.h \

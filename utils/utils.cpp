@@ -203,13 +203,13 @@ QColor htmlToColor(QString htmlCode){
     // Check dimensions
     if(c.length() == 6){
         // Convert hex to decimals
-        QString r = QChar(c[0]) + c[1];
+        QString r = QString(c[0]) + QString(c[1]);
         color.setRed(r.toInt(&ok, 16));
 
-        QString g = QChar(c[2]) + c[3];
+        QString g = QString(c[2]) + c[3];
         color.setGreen(g.toInt(&ok, 16));
 
-        QString b = QChar(c[4]) + c[5];
+        QString b = QString(c[4]) + c[5];
         color.setBlue(b.toInt(&ok, 16));
 
         return color;

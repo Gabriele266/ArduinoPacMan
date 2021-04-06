@@ -1,21 +1,28 @@
 <html>
 	<head>
 		<title>ArduinoPacMan documentation</title>
+		<style>
+			b{
+				color: lightblue
+			}
+		</style>
 	</head>
 	<body>
-		<h1>Introduction</h1>
+		<h1 style= "color: red; 
+		font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Introduction</h1>
 		<div>
 			<b>Arduino PacMan</b> is a simple tool that simplifies the activities of sharing <b>Arduino projects.</b> <br>
-			<central> Once you have done a project, with some sources and using some libraries, it will create for you a simple <br>
-				package, with the sources and the libraries used. It will also generate a installation script that will allow <br>
-				you to simply install the libraries in the local preferred path. The only thing that you'll have to do is to run the script. <br>
+			<central> Once you have done a project, with some <b>sources</b> and using some <b>libraries</b>, it will create for you a simple <br>
+				<b>package</b>, with the sources and the libraries used. It will also generate an <b>installation script</b> that will allow <br>
+				you to simply install the libraries in the local preferred path. <br>The only thing that you'll have to do is to <b>run the script</b>.
+				 <br>
 				It will also take care about unpacking the sources into a directory. After this you'll have only to compile the code and... Upload!! <br>
 			</central>
 		</div>
 
-		<h1>Code informations</h1>
+		<h1 style="color: red; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Code informations</h1>
 		<div style="align-content: center;">
-			Arduino PacMan is written in c++ using the Qt Framework, under the open source licence. The build system used is qmake with gcc in Ubuntu 20.04.<br>
+			<b>Arduino PacMan</b> is written in c++ using the Qt Framework, under the open source licence. The <b>build system</b> used is qmake with gcc in Ubuntu 20.04.<br>
 			 The Qt version is 5.15.2 and the language standard is c++ 14. <br>
 			 The code is organized into some directories, according to the type of their contents.
 			 <ul>
@@ -28,6 +35,26 @@
 				<li><b>icons</b> Contains all the icons of the project divided by type. </li>
 				<li><b>documentation</b> Contains this documentation. </li>
 			</ul>
+		</div>
+
+		<h1 style= "color: red; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Start point</h1>
+		<div>
+			The entry point of the application is the <b style="color: lightblue">main.cpp</b> file located in the home project directory.<br>
+			It cares of launching the main window, checking the themes and loading application informations. <br>
+			To learn more of the <b style="color: blue">theme managing system</b> check the file <a href="themes-managing.html" target="new">themes-managing</a> 
+			<br>
+			<h2 style="color: green">The main window</h2>
+			<div>
+				The main window is first window that is shown at the startup of the application. It is composed of 3 files: <br>
+				<ul>
+					<li><b>mainwindow.h</b> Contains the header of the window, with all the declarations of methods and </li>
+					<li><b>mainwindow.cpp</b> Contains the implementation of the the functions. </li>
+					<li><b>mainwindow.ui</b> Contains the mainwindow graphical design. </li>
+				</ul>
+				<br>
+				It's the only window that isn't located into the <b style="color: blue">gui</b> directory. This is because it should include all the other windows. 
+				It's composed of a series of menus, with some actions: th
+			</div>
 		</div>
 	</body>
 </html>

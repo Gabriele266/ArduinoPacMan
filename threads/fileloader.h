@@ -15,6 +15,8 @@
 #include "utils/utils.h"
 #include "utils/costants.h"
 
+#include "exceptions/filenotfoundexception.h"
+
 /**
  * @brief The FileLoaderExit enum represents the result of the file loading operations
  */

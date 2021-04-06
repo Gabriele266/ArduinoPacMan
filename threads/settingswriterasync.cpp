@@ -1,11 +1,11 @@
-#include "settingswriter.h"
+#include "settingswriterasync.h"
 
-SettingsWriter::SettingsWriter()
+SettingsWriterAsync::SettingsWriterAsync()
 {
-
+    settings = nullptr;
 }
 
-void SettingsWriter::run(){
+void SettingsWriterAsync::run(){
     if(settings != nullptr){
         // Percorso del file
         QString file_name = settings->getFilePath();
@@ -50,7 +50,6 @@ void SettingsWriter::run(){
                     }
                     root.appendChild(item);
                 }
-
             }
 
             // Scrivo sul file
@@ -63,11 +62,6 @@ void SettingsWriter::run(){
         else{
             // Mostro l'errore che è avvenuto
             qInfo() << f.errorString() << endl;
-            // Invio un messaggio di errore
-//            QMessageBox::critical(nullptr, "Errore", QString("Impossibile scrivere le impostazioni %1 nel file %2. Errore restituito: %3")
-//                                  .arg(settings->getName())
-//                                  .arg(settings->getFilePath())
-//                                       .arg(f.errorString()));
         }
     }
 }

@@ -1,11 +1,11 @@
-#include "settingsreader.h"
+#include "settingsreaderasync.h"
 
-SettingsReader::SettingsReader()
+SettingsReaderAsync::SettingsReaderAsync()
 {
-
+    settings = nullptr;
 }
 
-void SettingsReader::run(){
+void SettingsReaderAsync::run(){
     // Controllo che siano state messe delle impostazioni
     if(settings != nullptr){
         // File da cui leggere
@@ -59,14 +59,17 @@ void SettingsReader::run(){
                     // Aggiungo la chiave
                     gr->addKey(k);
                 }
-
                 // Aggiungo il gruppo alle impostazioni
                 settings->addGroup(gr);
             }
             f.close();
         }
         else{
-            qInfo() << "File richiesto non esistente per la lettura delle impostazioni. " << endl;
+            throw FileNotFoundException(settings->getFilePath(), " SettingsReaderAsync::run(). Reading settings. ");
         }
+    }
+    else{
+        // Throw nullpointerexception
+        throw NullPointerException("Settings", "SettingsReaderAsync::settings", __LINE__);
     }
 }

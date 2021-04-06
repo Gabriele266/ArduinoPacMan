@@ -7,11 +7,11 @@
 
 #include <QString>
 #include <QStringList>
-#include "threads/settingswriter.h"
+#include "threads/settingswriterasync.h"
 #include "settings/settings.h"
 #include "settings/group.h"
 #include "settings/key.h"
-#include "threads/settingsreader.h"
+#include "threads/settingsreaderasync.h"
 
 /// Scrive le impostazioni di default del programma in un percorso legacy
 static void writeDefaultSettings(Settings *application_settings){
@@ -64,7 +64,7 @@ static void writeDefaultSettings(Settings *application_settings){
     global_settings->setCreationDate(QDate::currentDate());
 
     // Avvio la scrittura delle impostazioni
-    SettingsWriter *writer = new SettingsWriter();
+    auto *writer = new SettingsWriterAsync();
     writer->setSettings(global_settings);
     writer->start();
 }
@@ -73,7 +73,7 @@ static void readDefaultSettings(Settings *application_settings){
     application_settings = new Settings();
     application_settings->setFilePath(formatPathForOs(QDir::currentPath(), QStringList("settings/settings.stc")));
 
-    SettingsReader *reader = new SettingsReader();
+    auto *reader = new SettingsReaderAsync();
     reader->setSettingsObject(application_settings);
     reader->start();
 

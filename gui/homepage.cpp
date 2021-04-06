@@ -19,31 +19,25 @@ HomePage::HomePage(QStringList *recentFiles, QWidget *parent) :
         ui->recentsView->addItem("Nessun file recente... Mi sa che dovrai crearne uno nuovo!!");
     }
 
-    // Carico il file
-    FileLoader *loader = new FileLoader();
-    loader->setFilePath(formatPathForOs(getCurrentPath(), QStringList("info.html")));
-    // Avvio il caricamento
-    loader->start();
+    try{
+        // Load the file
+        FileLoader *loader = new FileLoader();
+        loader->setFilePath(formatPathForOs(getCurrentPath(), QStringList("info.html")));
+        // Avvio il caricamento
+        loader->start();
 
-    // Check if it was successful
-    while(loader->isRunning()){
-    }
+        // Wait file loading
+        while(loader->isRunning()){}
 
-    if(loader->wasSuccessful()){
         // Get the buffer and set it to the content of the text browser
         ui->newsInfoBrowser->setHtml(loader->getFileBuffer());
-    }
-    else{
-        // Read the exit state
-        auto exit_state = loader->getExitState();
-        // Send notification
-        QMessageBox::critical(this, "Errore", "Errore nella apertura del file per le news di ArduinoPacMan \n. Testo dell' errore: " +
-                              loader->getErrorString() + " tipologia di eccezione: " + FileLoader::exitStateToString(exit_state) + "\n"
-        "File richiesto: " + loader->getFilePath());
-    }
 
-    // Delete the loader
-    delete loader;
+        // Delete the loader
+        delete loader;
+    }catch(FileNotFoundException &i){
+        qInfo() << i.toString();
+        QMessageBox::critical(this, "Error", i.toString());
+    }
 
     // Imposto le informazioni per riconoscere il tab
     setName("Home");

@@ -15,12 +15,12 @@ MainWindow::MainWindow(QWidget *parent)
         // Notifico che ho trovato le impostazioni
         qInfo() << "File di impostazioni esistente, avvio il caricamento. " << endl;
         // Avvio la lettura delle impostazioni
-        SettingsReader *settingsReader = new SettingsReader();
+        auto *settingsReader = new SettingsReaderAsync();
         settingsReader->setSettingsObject(&settings);
         settingsReader->start();
 
         // Connetto i thread
-        QObject::connect(settingsReader, &SettingsReader::finished, this, &MainWindow::loadSearchPathFromFile);
+        QObject::connect(settingsReader, &SettingsReaderAsync::finished, this, &MainWindow::loadSearchPathFromFile);
     }
     else{
         qInfo() << "File di impostazioni non trovato, avvio la scrittura sul disco. " << endl;
@@ -298,7 +298,7 @@ Tab* MainWindow::addPackageToView(Package *pack){
             return tab;
         }
         else{
-            QMessageBox::critical(this, "Errore", "Errore durante l'apertura del pacchetto. Non è stato possibile leggerlo correttamente o non si trattava di un pacchetto formattato correttamente. ");
+            QMessageBox::critical(this, "Errore", "Errore durante l'apertura del pacchetto. Non è stato possibile leggerlo correttamente o non si trattava di un pacchetto ArduinoPacMan. ");
         }
     }
     return nullptr;

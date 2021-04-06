@@ -39,10 +39,12 @@ void FileLoader::run(){
             else{
                 exit_state = FileOpenError;
                 error_string = file.errorString();
+                throw FileNotFoundException(file_path, "Loading file", __LINE__, __FILE__);
             }
         }
         else{
             exit_state = FileNotFound;
+            throw FileNotFoundException(file_path, "Loading file", __LINE__, __FILE__);
         }
     }
     else{

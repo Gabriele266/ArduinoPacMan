@@ -7,10 +7,11 @@
 #include "settings/settings.h"
 #include "packages/source.h"
 
-#include "threads/settingswriter.h"
+#include "threads/settingswriterasync.h"
 
 int main(int argc, char *argv[])
 {
+    // TODO: Implementare caricamento temi in main
     QApplication a(argc, argv);
 
     // Creo la finestra principale
