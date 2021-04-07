@@ -245,6 +245,8 @@ Tab* MainWindow::addPackageToView(Package *pack){
             connect(tab, &PackageTab::libraryTabAdd, this, &MainWindow::on_library_tab_add_required);
             // Aggiungo
             ui->widgetManager->addTab(tab, pack->getName());
+            // Set added tab as current tab
+            ui->widgetManager->setCurrentIndex(ui->widgetManager->count() - 1);
 
             // Percorso dei sorgenti
             QString sources_path = pack->getSourcesPath();
