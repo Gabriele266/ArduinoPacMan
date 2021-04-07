@@ -226,6 +226,8 @@ void MainWindow::on_library_tab_add_required(LibraryTab *tab){
     tab->load();
     // Add the tab to the widget
     ui->widgetManager->addTab(tab, tab->getTabTitle());
+    // Set current tab as last tab
+    ui->widgetManager->setCurrentIndex(ui->widgetManager->count() - 1);
 }
 
 Tab* MainWindow::addPackageToView(Package *pack){
